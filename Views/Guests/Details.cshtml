@@ -1,0 +1,42 @@
+﻿@model sheduler.Models.Guest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Guest</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Guest_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guest_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Guest_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guest_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Passcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Passcode)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Guestid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

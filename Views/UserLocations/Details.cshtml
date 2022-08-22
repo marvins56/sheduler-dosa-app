@@ -1,0 +1,67 @@
+﻿@model sheduler.Models.UserLocation
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/adminlayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserLocation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.From_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.To_Adddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To_Adddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estimated_Arrival_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estimated_Arrival_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Set_Off_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Set_Off_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AccessNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

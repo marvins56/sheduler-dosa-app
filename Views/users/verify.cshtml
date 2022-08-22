@@ -1,0 +1,138 @@
+﻿@model sheduler.Models.Student
+
+
+@{
+    ViewBag.Title = "verify";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>StudentAffairs DOSA</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/Auth/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/Auth/css/style.css">
+    <link rel="stylesheet" href="~/Content/loader.css">
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .sign-in {
+            background-image: url('/Template/assets/UCU-Libray.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-top: -150px;
+            overflow: hidden;
+        }
+
+        .container {
+            opacity: 0.8;
+            height: 800px;
+            background: #fff;
+        }
+
+        .signin-content {
+            padding: 200px 7px 2px 4px;
+        }
+    </style>
+
+</head>
+<body>
+
+    @if (TempData["success"] != null)
+    {
+        <script>
+     swal({
+        title: "SECURITY CODE!",
+  text: "@TempData["success"]",
+  icon: "success"
+        });</script>
+    }
+    else if (TempData["error"] != null)
+    {
+        <script>
+     swal({
+        title: "SECURITY CODE!",
+  text: "@TempData["error"]",
+         icon: "error"
+        });</script>
+    }
+    @if (Session["userid"] != null)
+    {
+        <div class="main" style="height:400px; margin-top:-50px">
+
+            @using (Html.BeginForm("verify", "Users", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <!-- Sing in  Form -->
+                <section class="sign-in">
+                    <div class="container">
+                        <div class="signin-content">
+                            <div class="signin-image">
+                                <figure><img src="~/Auth/images/signin-image.png" alt="sing up image"></figure>
+                                <a href="#" class="signup-image-link">Kindly check your email for the security code</a>
+                            </div>
+
+                            <div class="signin-form">
+                                <h2 class="form-title">SECURITY CODE</h2>
+                                <div class="register-form" id="register-form">
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <label>  <i class="fa-solid fa-key pl-2"></i></label>
+                                        @Html.EditorFor(model => model.Passcode, new { htmlAttributes = new { @class = "", Placehoder = "security code" } })
+                                        @Html.ValidationMessageFor(model => model.Passcode, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                    <div class="form-group form-button">
+                                        <input type="submit" name="signup" id="signup" class="btn btn-primary w-100" value="Validate" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            }
+
+        </div>
+    }
+    else
+    {
+        <script>
+     swal({
+        title: "SESSION ERROR",
+  text: "INVALID SESSIONS.",
+         icon: "warning"
+        });</script>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    <!-- JS -->
+    <script src="~/Auth/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Auth/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+

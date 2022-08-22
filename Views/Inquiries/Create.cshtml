@@ -1,0 +1,57 @@
+﻿@model sheduler.Models.Inquiry
+
+@{
+    ViewBag.Title = "make inqury";
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <div class="row">
+
+        <div class="col-md-6 mb-5">
+            <div class="card mb-6">
+                <h5 class="card-header">MAKE INQUIRY DIRECT TO DOSA</h5>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="card-body">
+                        <div class="form-floating">
+
+                            <textarea name="inquirry" class="form-control mb-2" id="floatingInput" placeholder="My Inquiry ..." rows="30" cols="30">  </textarea>
+
+                            @Html.ValidationMessageFor(model => model.inquirry, "", new { @class = "text-danger" })
+                            <label> Type your inquiry..</label>
+                            @*@Html.LabelFor(model => model.inquirry, htmlAttributes: new { @lass = "form-label" })*@
+                        
+                                <input type="submit" value="SUBMIT" class="btn btn-primary w-50" />
+                                <a href="@Url.Action("myInquiries","Inquiries" )" class="btn btn-primary">
+                                   My Inquiries
+                                </a>           
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <div class="card mb-4">
+                <h5 class="card-header">MAKE INQUIRY DIRECT TO DOSA</h5>
+             
+                    <div class="card-body">
+                        <div class="form-floating">
+
+                            We'll never share your details with anyone else.
+                            When the form is submitted, two keys are generated, one private and one public.
+                            The private key is stored locally, and the public key is sent to the server.
+                            The public key could be used to generate a client certificate to authenticate the user in the future.
+                        </div>
+                        </div>
+                    </div>
+             
+            </div>
+        </div>
+    </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

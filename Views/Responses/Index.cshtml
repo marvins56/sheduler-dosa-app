@@ -1,0 +1,81 @@
+﻿@model IEnumerable<sheduler.Models.Response>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/adminlayout.cshtml";
+}
+
+@if (TempData["responseexists"] != null)
+{
+    <script>
+     swal({
+        title: " RESPONSE EXISTS!",
+  text: "@TempData["responseexists"]",
+  icon: "error"
+        });</script>
+}
+else if (TempData["error"] != null)
+{
+    <script>
+     swal({
+        title: "UPDATE ERROR",
+  text: "@TempData["errorsaving"]",
+         icon: "error"
+        });</script>
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <!-- Hoverable Table rows -->
+    <div class="card">
+        <span class="card-header text-capitalize">
+            RESPONSE LIST
+            <a href="@Url.Action("Create","Responses")">
+                <span class="btn btn-primary " style="float:right"> RESPOND TO INQUIRY</span>
+            </a>
+
+        </span>
+
+        <div class="table-responsive text-nowrap">
+            <table class="table table-hover">
+                <thead>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Inquiry.inquirry)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Response1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DatetimeOfReply)
+                        </th>
+
+                        <th></th>
+                    </tr>
+
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Inquiry.inquirry)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Response1)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DatetimeOfReply)
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ResponseId }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ResponseId }) |
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

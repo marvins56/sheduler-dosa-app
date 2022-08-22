@@ -1,0 +1,147 @@
+﻿@model sheduler.Models.Student
+
+@{
+    ViewBag.Title = "lOGIN";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>StudentAffairs DOSA</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/Auth/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/Auth/css/style.css">
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/loader.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <style>
+        .signup {
+            background-image: url('/Template/assets/UCU-Libray.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-top: -50px;
+            overflow: hidden;
+        }
+
+        .container {
+            opacity: 0.8;
+            height: 800px;
+            background: #fff;
+        }
+
+        .signup-content {
+            padding: 200px 7px 2px 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    @if (TempData["logineror"] != null)
+    {
+        <script>
+     swal({
+        title: "ERROR!",
+  text: "@TempData["logineror"]",
+  icon: "error"
+        });</script>
+    }
+
+    @if (TempData["error"] != null)
+    {
+        <script>
+     swal({
+        title: "ERROR!",
+  text: "@TempData["error"]",
+  icon: "warning"
+        });</script>
+    }
+    <div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+        <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+            <div class="uil-default-css">
+                <div class="loader">Loading...</div>
+                <div id="loader"></div>
+            </div>
+            <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+        </div>
+        <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+    </div>
+    <div class="main" style="height:500px; margin-top:-100px;">
+
+
+        @using (Html.BeginForm("login", "Users", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <!-- Sign up form -->
+            <section class="signup">
+                <div class="container">
+                    <div class="signup-content">
+                        <div class="signup-form">
+                            <h2 class="form-title">SIGN IN</h2>
+
+                            <div class="register-form" id="register-form">
+                                <div class="form-group">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <label for="name"><i class="zmdi zmdi-account material-icons-name pl-2"></i></label>
+
+                                    @Html.EditorFor(model => model.AccessNumber, new { htmlAttributes = new { @class = "", Placeholder = "Access Number" } })
+                                    @Html.ValidationMessageFor(model => model.AccessNumber, "", new { @class = "text-danger" })
+                                </div>
+
+
+                                <div class="form-group form-button">
+                                    <input type="submit" name="signup" id="signup" class="btn btn-primary w-100" value="sign in" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="signin-image">
+                            <figure><img src="~/Auth/images/signin-image.png" alt="sing up image"></figure>
+                            <a href="@Url.Action("SelfRegister","Users")" class="signup-image-link">Create an account</a>
+                            <a href="@Url.Action("SelfRegister","Users")" class="signup-image-link">Continue As Guest</a>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        }
+
+    </div>
+
+    <!-- JS -->
+    <script src="~/Auth/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Auth/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        var showLoader = function (text) {
+            $('#resultLoading').show();
+            $('#resultLoading').find('.loader-text').html(text);
+        };
+
+        jQuery(document).ready(function () {
+            jQuery(window).on("beforeunload ", function () {
+                showLoader('Loading, please wait...');
+            });
+        });
+
+        $("#loader").fadeOut(1000);
+    </script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>
+

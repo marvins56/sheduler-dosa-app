@@ -1,0 +1,45 @@
+﻿@model IEnumerable<sheduler.Models.Guest>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Guest_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Guest_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Passcode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Guest_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Guest_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Passcode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Guestid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Guestid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Guestid })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,105 @@
+﻿@model sheduler.Models.semester
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/adminlayout.cshtml";
+}
+
+    <style>
+        body, .row {
+            text-align: center;
+        }
+
+        .modal-body {
+            display: inline-block;
+        }
+    </style>
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <div class="row mb-5">
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="card">
+                    <div class="card-header">CAMPUS SEMESTERS</div>
+                    <div class="card-body">
+
+                        <p class="card-text">
+                            Click button incase modal does not apear
+                        </p>
+                        <button type="button"
+                                class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalCenter">
+
+                            MAKE CHANGES TO SEMESTERS
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Vertically Centered Modal -->
+        <div class="col-lg-4 col-md-6">
+
+            <div class="mt-3">
+
+                <div class="modal fade in" id="modalCenter" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCenterTitle">#</h5>
+                                <button type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.sem_id)
+                                <div class="modal-body text-center" style="align-items:center;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card mb-4">
+                                                <h5 class="card-header">UCU CAMPUSES SEMESTERS</h5>
+                                                <div class="card-body demo-vertical-spacing demo-only-element">
+                                                    <small class="text-light fw-semibold d-block pt-3">
+                                                        @Html.LabelFor(model => model.Semester_taken, htmlAttributes: new { @class = "control-label " })
+                                                    </small>
+
+                                                    <div>
+                                                        @Html.EditorFor(model => model.Semester_taken, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Semester_taken, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <a href="@Url.Action("Index","semesters")" class="btn btn-outline-secondary">  Back</a>
+
+                                    <input type="submit" class="btn btn-primary" value="Save changes">
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#modalCenter').modal('show');
+            });
+        </script>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

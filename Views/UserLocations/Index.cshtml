@@ -1,0 +1,64 @@
+﻿@model IEnumerable<sheduler.Models.UserLocation>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/adminlayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.From_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.To_Adddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Distance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estimated_Arrival_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Set_Off_Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.From_Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.To_Adddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Distance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estimated_Arrival_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Set_Off_Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AccessNumber }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AccessNumber }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AccessNumber })
+        </td>
+    </tr>
+}
+
+</table>

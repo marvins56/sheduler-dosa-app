@@ -1,0 +1,42 @@
+﻿@model sheduler.Models.Inquiry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Inquiry</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inquirry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inquirry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dateposteed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dateposteed)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Inquirery_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

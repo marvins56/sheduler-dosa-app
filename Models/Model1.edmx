@@ -1,0 +1,752 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MyDosa_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Calender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="varchar(max)" Nullable="false" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Campus_Branches">
+          <Key>
+            <PropertyRef Name="campus_id" />
+          </Key>
+          <Property Name="campus_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Campus_branch" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Course_code" />
+          </Key>
+          <Property Name="Course_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="courseName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" />
+          <Property Name="ThemeColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsFullDay" Type="bit" Nullable="false" />
+          <Property Name="userid" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Guests">
+          <Key>
+            <PropertyRef Name="Guestid" />
+          </Key>
+          <Property Name="Guestid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Guest_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Guest_email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Passcode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Inquiries">
+          <Key>
+            <PropertyRef Name="Inquirery_id" />
+          </Key>
+          <Property Name="Inquirery_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="inquirry" Type="varchar(max)" Nullable="false" />
+          <Property Name="Dateposteed" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="Access_No" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="Access_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="visitDate" Type="datetime" />
+          <Property Name="IpAdrress" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeviceUsed" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeAccessed" Type="time" Precision="7" />
+          <Property Name="LastSeenTime" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Name="ResponseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Inquirery_id" Type="int" Nullable="false" />
+          <Property Name="Response" Type="varchar(max)" Nullable="false" />
+          <Property Name="DatetimeOfReply" Type="datetime" Nullable="false" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Role_id" />
+          </Key>
+          <Property Name="Role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role1" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="semesters">
+          <Key>
+            <PropertyRef Name="sem_id" />
+          </Key>
+          <Property Name="sem_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Semester_taken" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="AccessNumber" />
+          </Key>
+          <Property Name="AccessNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Course_code" Type="int" Nullable="false" />
+          <Property Name="sem_id" Type="int" Nullable="false" />
+          <Property Name="Year_Id" Type="int" Nullable="false" />
+          <Property Name="campus_id" Type="int" Nullable="false" />
+          <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Passcode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserLocations">
+          <Key>
+            <PropertyRef Name="AccessNumber" />
+          </Key>
+          <Property Name="AccessNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="From_Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="To_Adddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Distance" Type="int" />
+          <Property Name="Estimated_Arrival_time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Set_Off_Time" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Userroles">
+          <Key>
+            <PropertyRef Name="userroleid" />
+          </Key>
+          <Property Name="Roleid" Type="int" Nullable="false" />
+          <Property Name="AccessNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="userroleid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Years">
+          <Key>
+            <PropertyRef Name="Year_id" />
+          </Key>
+          <Property Name="Year_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="yearName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_campus_id">
+          <End Role="Campus_Branches" Type="Self.Campus_Branches" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus_Branches">
+              <PropertyRef Name="campus_id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="campus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseCode">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Course_code" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_response">
+          <End Role="Inquiries" Type="Self.Inquiries" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inquiries">
+              <PropertyRef Name="Inquirery_id" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="Inquirery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rolesz">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Userroles" Type="Self.Userroles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Role_id" />
+            </Principal>
+            <Dependent Role="Userroles">
+              <PropertyRef Name="Roleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sem_id">
+          <End Role="semesters" Type="Self.semesters" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="semesters">
+              <PropertyRef Name="sem_id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="sem_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLocation">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="UserLocations" Type="Self.UserLocations" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="AccessNumber" />
+            </Principal>
+            <Dependent Role="UserLocations">
+              <PropertyRef Name="AccessNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Userroles" Type="Self.Userroles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="AccessNumber" />
+            </Principal>
+            <Dependent Role="Userroles">
+              <PropertyRef Name="AccessNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Year_id">
+          <End Role="Years" Type="Self.Years" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Years">
+              <PropertyRef Name="Year_id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Year_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyDosa_dbModelStoreContainer">
+          <EntitySet Name="Calender" EntityType="Self.Calender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Campus_Branches" EntityType="Self.Campus_Branches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inquiries" EntityType="Self.Inquiries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="semesters" EntityType="Self.semesters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLocations" EntityType="Self.UserLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Userroles" EntityType="Self.Userroles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Years" EntityType="Self.Years" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_campus_id" Association="Self.FK_campus_id">
+            <End Role="Campus_Branches" EntitySet="Campus_Branches" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseCode" Association="Self.FK_CourseCode">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_response" Association="Self.FK_response">
+            <End Role="Inquiries" EntitySet="Inquiries" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rolesz" Association="Self.FK_rolesz">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Userroles" EntitySet="Userroles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sem_id" Association="Self.FK_sem_id">
+            <End Role="semesters" EntitySet="semesters" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLocation" Association="Self.FK_UserLocation">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="UserLocations" EntitySet="UserLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users" Association="Self.FK_users">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Userroles" EntitySet="Userroles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Year_id" Association="Self.FK_Year_id">
+            <End Role="Years" EntitySet="Years" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyDosa_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Calender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Campus_Branches">
+          <Key>
+            <PropertyRef Name="campus_id" />
+          </Key>
+          <Property Name="campus_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Campus_branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_campus_id" FromRole="Campus_Branches" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="Course_code" />
+          </Key>
+          <Property Name="Course_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="courseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_CourseCode" FromRole="Courses" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" />
+          <Property Name="ThemeColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsFullDay" Type="Boolean" Nullable="false" />
+          <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Guest">
+          <Key>
+            <PropertyRef Name="Guestid" />
+          </Key>
+          <Property Name="Guestid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Guest_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Guest_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Inquiry">
+          <Key>
+            <PropertyRef Name="Inquirery_id" />
+          </Key>
+          <Property Name="Inquirery_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inquirry" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dateposteed" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Responses" Relationship="Self.FK_response" FromRole="Inquiries" ToRole="Response" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="Access_No" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="Access_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="visitDate" Type="DateTime" Precision="3" />
+          <Property Name="IpAdrress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceUsed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeAccessed" Type="Time" Precision="7" />
+          <Property Name="LastSeenTime" Type="Time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Name="ResponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Inquirery_id" Type="Int32" Nullable="false" />
+          <Property Name="Response1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DatetimeOfReply" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="Inquiry" Relationship="Self.FK_response" FromRole="Response" ToRole="Inquiries" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Role_id" />
+          </Key>
+          <Property Name="Role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Userroles" Relationship="Self.FK_rolesz" FromRole="Roles" ToRole="Userroles" />
+        </EntityType>
+        <EntityType Name="semester">
+          <Key>
+            <PropertyRef Name="sem_id" />
+          </Key>
+          <Property Name="sem_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Semester_taken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_sem_id" FromRole="semesters" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="AccessNumber" />
+          </Key>
+          <Property Name="AccessNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Course_code" Type="Int32" Nullable="false" />
+          <Property Name="sem_id" Type="Int32" Nullable="false" />
+          <Property Name="Year_Id" Type="Int32" Nullable="false" />
+          <Property Name="campus_id" Type="Int32" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Campus_Branches" Relationship="Self.FK_campus_id" FromRole="Students" ToRole="Campus_Branches" />
+          <NavigationProperty Name="Cours" Relationship="Self.FK_CourseCode" FromRole="Students" ToRole="Courses" />
+          <NavigationProperty Name="semester" Relationship="Self.FK_sem_id" FromRole="Students" ToRole="semesters" />
+          <NavigationProperty Name="UserLocation" Relationship="Self.FK_UserLocation" FromRole="Students" ToRole="UserLocations" />
+          <NavigationProperty Name="Userroles" Relationship="Self.FK_users" FromRole="Students" ToRole="Userroles" />
+          <NavigationProperty Name="Year" Relationship="Self.FK_Year_id" FromRole="Students" ToRole="Years" />
+        </EntityType>
+        <EntityType Name="UserLocation">
+          <Key>
+            <PropertyRef Name="AccessNumber" />
+          </Key>
+          <Property Name="AccessNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="From_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="To_Adddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Distance" Type="Int32" />
+          <Property Name="Estimated_Arrival_time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Set_Off_Time" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_UserLocation" FromRole="UserLocations" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Userrole">
+          <Key>
+            <PropertyRef Name="userroleid" />
+          </Key>
+          <Property Name="Roleid" Type="Int32" Nullable="false" />
+          <Property Name="AccessNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userroleid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_rolesz" FromRole="Userroles" ToRole="Roles" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_users" FromRole="Userroles" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="Year_id" />
+          </Key>
+          <Property Name="Year_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="yearName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Year_id" FromRole="Years" ToRole="Students" />
+        </EntityType>
+        <Association Name="FK_campus_id">
+          <End Role="Campus_Branches" Type="Self.Campus_Branches" Multiplicity="1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus_Branches">
+              <PropertyRef Name="campus_id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="campus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseCode">
+          <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Course_code" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_response">
+          <End Role="Inquiries" Type="Self.Inquiry" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inquiries">
+              <PropertyRef Name="Inquirery_id" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="Inquirery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rolesz">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="Userroles" Type="Self.Userrole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Role_id" />
+            </Principal>
+            <Dependent Role="Userroles">
+              <PropertyRef Name="Roleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sem_id">
+          <End Role="semesters" Type="Self.semester" Multiplicity="1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="semesters">
+              <PropertyRef Name="sem_id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="sem_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLocation">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="UserLocations" Type="Self.UserLocation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="AccessNumber" />
+            </Principal>
+            <Dependent Role="UserLocations">
+              <PropertyRef Name="AccessNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="Userroles" Type="Self.Userrole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="AccessNumber" />
+            </Principal>
+            <Dependent Role="Userroles">
+              <PropertyRef Name="AccessNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Year_id">
+          <End Role="Years" Type="Self.Year" Multiplicity="1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Years">
+              <PropertyRef Name="Year_id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Year_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyDosa_dbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Calenders" EntityType="Self.Calender" />
+          <EntitySet Name="Campus_Branches" EntityType="Self.Campus_Branches" />
+          <EntitySet Name="Courses" EntityType="Self.Cours" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Guests" EntityType="Self.Guest" />
+          <EntitySet Name="Inquiries" EntityType="Self.Inquiry" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="Responses" EntityType="Self.Response" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="semesters" EntityType="Self.semester" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="UserLocations" EntityType="Self.UserLocation" />
+          <EntitySet Name="Userroles" EntityType="Self.Userrole" />
+          <EntitySet Name="Years" EntityType="Self.Year" />
+          <AssociationSet Name="FK_campus_id" Association="Self.FK_campus_id">
+            <End Role="Campus_Branches" EntitySet="Campus_Branches" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseCode" Association="Self.FK_CourseCode">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_response" Association="Self.FK_response">
+            <End Role="Inquiries" EntitySet="Inquiries" />
+            <End Role="Response" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rolesz" Association="Self.FK_rolesz">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Userroles" EntitySet="Userroles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sem_id" Association="Self.FK_sem_id">
+            <End Role="semesters" EntitySet="semesters" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLocation" Association="Self.FK_UserLocation">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="UserLocations" EntitySet="UserLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users" Association="Self.FK_users">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Userroles" EntitySet="Userroles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Year_id" Association="Self.FK_Year_id">
+            <End Role="Years" EntitySet="Years" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyDosa_dbModelStoreContainer" CdmEntityContainer="MyDosa_dbEntities1">
+          <EntitySetMapping Name="Calenders">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Calender">
+              <MappingFragment StoreEntitySet="Calender">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Campus_Branches">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Campus_Branches">
+              <MappingFragment StoreEntitySet="Campus_Branches">
+                <ScalarProperty Name="campus_id" ColumnName="campus_id" />
+                <ScalarProperty Name="Campus_branch" ColumnName="Campus_branch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Course_code" ColumnName="Course_code" />
+                <ScalarProperty Name="courseName" ColumnName="courseName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guests">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Guest">
+              <MappingFragment StoreEntitySet="Guests">
+                <ScalarProperty Name="Guestid" ColumnName="Guestid" />
+                <ScalarProperty Name="Guest_name" ColumnName="Guest_name" />
+                <ScalarProperty Name="Guest_email" ColumnName="Guest_email" />
+                <ScalarProperty Name="Passcode" ColumnName="Passcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inquiries">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Inquiry">
+              <MappingFragment StoreEntitySet="Inquiries">
+                <ScalarProperty Name="Inquirery_id" ColumnName="Inquirery_id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="inquirry" ColumnName="inquirry" />
+                <ScalarProperty Name="Dateposteed" ColumnName="Dateposteed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Log">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="Access_No" ColumnName="Access_No" />
+                <ScalarProperty Name="visitDate" ColumnName="visitDate" />
+                <ScalarProperty Name="IpAdrress" ColumnName="IpAdrress" />
+                <ScalarProperty Name="DeviceUsed" ColumnName="DeviceUsed" />
+                <ScalarProperty Name="TimeAccessed" ColumnName="TimeAccessed" />
+                <ScalarProperty Name="LastSeenTime" ColumnName="LastSeenTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responses">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Response">
+              <MappingFragment StoreEntitySet="Response">
+                <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
+                <ScalarProperty Name="Inquirery_id" ColumnName="Inquirery_id" />
+                <ScalarProperty Name="Response1" ColumnName="Response" />
+                <ScalarProperty Name="DatetimeOfReply" ColumnName="DatetimeOfReply" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+                <ScalarProperty Name="Role1" ColumnName="Role1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="semesters">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.semester">
+              <MappingFragment StoreEntitySet="semesters">
+                <ScalarProperty Name="sem_id" ColumnName="sem_id" />
+                <ScalarProperty Name="Semester_taken" ColumnName="Semester_taken" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="AccessNumber" ColumnName="AccessNumber" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Course_code" ColumnName="Course_code" />
+                <ScalarProperty Name="sem_id" ColumnName="sem_id" />
+                <ScalarProperty Name="Year_Id" ColumnName="Year_Id" />
+                <ScalarProperty Name="campus_id" ColumnName="campus_id" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Passcode" ColumnName="Passcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLocations">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.UserLocation">
+              <MappingFragment StoreEntitySet="UserLocations">
+                <ScalarProperty Name="AccessNumber" ColumnName="AccessNumber" />
+                <ScalarProperty Name="From_Address" ColumnName="From_Address" />
+                <ScalarProperty Name="To_Adddress" ColumnName="To_Adddress" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Estimated_Arrival_time" ColumnName="Estimated_Arrival_time" />
+                <ScalarProperty Name="Set_Off_Time" ColumnName="Set_Off_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Userroles">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Userrole">
+              <MappingFragment StoreEntitySet="Userroles">
+                <ScalarProperty Name="Roleid" ColumnName="Roleid" />
+                <ScalarProperty Name="AccessNo" ColumnName="AccessNo" />
+                <ScalarProperty Name="userroleid" ColumnName="userroleid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Years">
+            <EntityTypeMapping TypeName="MyDosa_dbModel.Year">
+              <MappingFragment StoreEntitySet="Years">
+                <ScalarProperty Name="Year_id" ColumnName="Year_id" />
+                <ScalarProperty Name="yearName" ColumnName="yearName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

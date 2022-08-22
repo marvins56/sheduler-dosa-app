@@ -1,0 +1,88 @@
+﻿@model sheduler.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/adminlayout.cshtml";
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <div class="modal fade in" id="modalScrollable" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalScrollableTitle"> @Html.DisplayFor(model => model.UserName)  DETILS</h5>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.UserName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Country)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Country)
+                        </dd>
+
+                    
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Campus_Branches.Campus_branch)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Campus_Branches.Campus_branch)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cours.courseName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Cours.courseName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.semester.Semester_taken)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.semester.Semester_taken)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Year.yearName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Year.yearName)
+                        </dd>
+                    </dl>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+        $(window).on('load', function () {
+            $('#modalScrollable').modal('show');
+        });
+</script>
