@@ -93,8 +93,8 @@ namespace sheduler.Controllers
             
                 using (MyDosa_dbEntities1 dc = new MyDosa_dbEntities1())
                 {
-                var id = dc.Events.Where(a => a.EventID == e.EventID).Select(a=>a.EventID);
-                if (id != null)
+                var id = dc.Events.Where(a => a.EventID == e.EventID).Select(a=>a.EventID).FirstOrDefault();
+                if (id > 0)
                 {
                     //Update the event
                     var v = dc.Events.Where(a => a.EventID == e.EventID).FirstOrDefault();
