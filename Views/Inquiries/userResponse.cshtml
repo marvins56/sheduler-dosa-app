@@ -5,41 +5,58 @@
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
 
-<h2>InquiryStatus</h2>
 
-<div>
-    <h4>Response</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Response1)
-           
-        </dt>
 
-        <dd>
+@{
+    if (Session["userid"] != null)
+    {
+        <div>
+            <h4>Response</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Response1)
 
-            @Html.DisplayFor(model => model.Response1)
-        </dd>
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DatetimeOfReply)
-        </dt>
+                <dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DatetimeOfReply)
-        </dd>
+                    @Html.DisplayFor(model => model.Response1)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Inquiry.UserId)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DatetimeOfReply)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Inquiry.UserId)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.DatetimeOfReply)
+                </dd>
 
-    </dl>
-</div>
-<p>
-    
-   
-</p>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Inquiry.UserId)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Inquiry.UserId)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+
+
+        </p>
+    }
+    else
+    {
+        <script>
+            swal({
+                title: "NOT AUTHORISED",
+                text: "ACCESSDE DENIED",
+                icon: "error"
+            });</script>
+
+    }
+}
+
+

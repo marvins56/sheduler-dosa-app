@@ -19,20 +19,20 @@ else
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Hoverable Table rows -->
         <div class="card">
-            <div class="table-responsive text-nowrap">
+            <div class="table-responsive text-wrap">
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.userid)
+                               STUDENT
                             </th>
 
                             <th>
                                 @Html.DisplayNameFor(model => model.Description)
                             </th>
-                            @*<th>
+                            <th>
                                     @Html.DisplayNameFor(model => model.Start)
-                                </th>*@
+                                </th>
                             @*<th>
                                     @Html.DisplayNameFor(model => model.End)
                                 </th>*@
@@ -48,17 +48,18 @@ else
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>
+                                <td style="width:10%;">
                                     @Html.DisplayFor(modelItem => item.userid)
                                 </td>
 
-                                <td class="w-25 col-sm-2">
+                                <td style="width:30%; word-wrap:break-word;">
+
                                     @Html.DisplayFor(modelItem => item.Description)
                                 </td>
                                 <td>
-                                        @Html.DisplayFor(modelItem => item.Start.Date)
-                                    </td>
-                              
+                                    @Html.DisplayFor(modelItem => item.Start.Date)
+                                </td>
+
 
                                 <td>
                                     @if (item.IsFullDay == true)

@@ -4,78 +4,95 @@
     ViewBag.Title = "Users";
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
-<div class="container-xxl flex-grow-1 container-p-y">
-    <!-- Hoverable Table rows -->
-    <div class="card">
-        <h5 class="card-header">USER DETAILS</h5>
-        <div class="table-responsive text-nowrap">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.AccessNumber)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.UserName)
-                        </th>                      
-                        <th>
-                            @Html.DisplayNameFor(model => model.Campus_Branches.Campus_branch)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Cours.courseName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.semester.Semester_taken)
-                        </th>
 
-                        <th>
-                            @Html.DisplayNameFor(model => model.Year.yearName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Country)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
+@{
+    if (Session["userid"] != null)
+    {
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Hoverable Table rows -->
+            <div class="card">
+                <h5 class="card-header">USER DETAILS</h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AccessNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Campus_Branches.Campus_branch)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cours.courseName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.semester.Semester_taken)
+                                </th>
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AccessNumber)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UserName)
-                            </td>                         
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Campus_Branches.Campus_branch)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Cours.courseName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.semester.Semester_taken)
-                            </td>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Year.yearName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Country)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Year.yearName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Country)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AccessNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Campus_Branches.Campus_branch)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cours.courseName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.semester.Semester_taken)
+                                    </td>
 
-                            </td>
-                        </tr>
-                    }
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Year.yearName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Country)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })
 
-                </tbody>
-            </table>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--/ Hoverable Table rows -->
         </div>
-    </div>
-    <!--/ Hoverable Table rows -->
-</div>
+
+    }
+    else
+    {
+        <script>
+            swal({
+                title: "NOT AUTHORISED",
+                text: "ACCESSDE DENIED",
+                icon: "error"
+            });</script>
+
+    }
+}
 
 

@@ -1,509 +1,527 @@
-﻿<div class="container-xxl flex-grow-1 container-p-y">
-    
-    <!-- Horizontal -->
-    <div class="row">
-        <!-- Bootstrap carousel -->
-        <div class="col-md mb-2">
-            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
-                    <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
-                    <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="~/Template/assets/img/elements/13.jpg" alt="First slide" />
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>First slide</h3>
-                            <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue pertinacia.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="~/Template/assets/img/elements/2.jpg" alt="Second slide" />
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Second slide</h3>
-                            <p>In numquam omittam sea.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="~/Template/assets/img/elements/18.jpg" alt="Third slide" />
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Third slide</h3>
-                            <p>Lorem ipsum dolor sit amet, virtute consequat ea qui, minim graeco mel no.</p>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </a>
-            </div>
-        </div>
-        <!-- Bootstrap crossfade carousel -->
-        <div class="col-md mb-2">
+﻿
 
-            <div id="carouselExample-cf"
-                 class="carousel carousel-dark slide carousel-fade"
-                 data-bs-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-bs-target="#carouselExample-cf" data-bs-slide-to="0" class="active"></li>
-                    <li data-bs-target="#carouselExample-cf" data-bs-slide-to="1"></li>
-                    <li data-bs-target="#carouselExample-cf" data-bs-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="~/Template/assets/img/elements/18.jpg" alt="First slide" />
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>First slide</h3>
-                            <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue pertinacia.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="~/Template/assets/img/elements/13.jpg" alt="Second slide" />
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Second slide</h3>
-                            <p>In numquam omittam sea.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="~/Template/assets/img/elements/2.jpg" alt="Third slide" />
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Third slide</h3>
-                            <p>Lorem ipsum dolor sit amet, virtute consequat ea qui, minim graeco mel no.</p>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExample-cf" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExample-cf" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="row mb-2">
-        <div class="col-md">
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4 ">
-                        <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
-                            <div class="card-body">
-                                @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                <i class="fa-solid fa-calendar-check fa-3x "></i>
-                                <p class="icon-name text-capitalize text-truncate mb-0">SCHEDULES</p>
+
+@{
+    if (Session["userid"] != null)
+    {
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <!-- Horizontal -->
+        <div class="row">
+            <!-- Bootstrap carousel -->
+            <div class="col-md mb-2">
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
+                        <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
+                        <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="~/Template/assets/img/elements/13.jpg" alt="First slide" />
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>First slide</h3>
+                                <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue pertinacia.</p>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content.
-                                This content is a little bit longer.
-                            </p>
-                            <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md">
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content.
-                                This content is a little bit longer.
-                            </p>
-                            <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
-                            <div class="card-body">
-                                @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                <i class="fa-solid fa-headset  fa-3x"></i>
-                                <p class="icon-name text-capitalize text-truncate mb-0">INQUIRIES</p>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="~/Template/assets/img/elements/2.jpg" alt="Second slide" />
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Second slide</h3>
+                                <p>In numquam omittam sea.</p>
                             </div>
                         </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-2">
-        <div class="col-md">
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content.
-                                This content is a little bit longer.
-                            </p>
-                            <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
-                            <div class="card-body">
-                                @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                <i class="fa-solid fa-file-zipper fa-3x"></i>
-                                <p class="icon-name text-capitalize text-truncate mb-0">TRAVEL REPORT</p>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="~/Template/assets/img/elements/18.jpg" alt="Third slide" />
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Third slide</h3>
+                                <p>Lorem ipsum dolor sit amet, virtute consequat ea qui, minim graeco mel no.</p>
                             </div>
                         </div>
-
                     </div>
+                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
                 </div>
             </div>
-        </div>
-        <div class="col-md">
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4 ">
-                        <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
-                            <div class="card-body">
-                                @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                <i class="fa-solid fa-comment-dots fa-3x"></i>
-                                <p class="icon-name text-capitalize text-truncate mb-0">INQUIRY FORUM</p>
+            <!-- Bootstrap crossfade carousel -->
+            <div class="col-md mb-2">
+
+                <div id="carouselExample-cf"
+                     class="carousel carousel-dark slide carousel-fade"
+                     data-bs-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-bs-target="#carouselExample-cf" data-bs-slide-to="0" class="active"></li>
+                        <li data-bs-target="#carouselExample-cf" data-bs-slide-to="1"></li>
+                        <li data-bs-target="#carouselExample-cf" data-bs-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="~/Template/assets/img/elements/18.jpg" alt="First slide" />
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>First slide</h3>
+                                <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue pertinacia.</p>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content.
-                                This content is a little bit longer.
-                            </p>
-                            <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row mb-2">
-        <div class="col-md">
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content.
-                                This content is a little bit longer.
-                            </p>
-                            <button type="button"
-                                    class="btn btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#fullscreenModal">
-                               view
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
-                            <div class="card-body">
-                                @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                <i class="fa-solid fa-blender-phone fa-3x"></i>
-                                <p class="icon-name text-capitalize text-truncate mb-0">CONTACT US</p>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="~/Template/assets/img/elements/13.jpg" alt="Second slide" />
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Second slide</h3>
+                                <p>In numquam omittam sea.</p>
                             </div>
                         </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md">
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4 ">
-                        <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
-                            <div class="card-body">
-                                @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                <i class="fa-solid fa-calendar-check fa-3x "></i>
-                                <p class="icon-name text-capitalize text-truncate mb-0">SCHEDULES</p>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="~/Template/assets/img/elements/2.jpg" alt="Third slide" />
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Third slide</h3>
+                                <p>Lorem ipsum dolor sit amet, virtute consequat ea qui, minim graeco mel no.</p>
                             </div>
                         </div>
-
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content.
-                                This content is a little bit longer.
-                            </p>
-                            <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
-                        </div>
-                    </div>
+                    <a class="carousel-control-prev" href="#carouselExample-cf" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExample-cf" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
                 </div>
             </div>
         </div>
-
-    </div>
-
-    <!--/ Horizontal -->
-    @*<div class="row mb-2">
-        <div class="col-md-6 col-lg-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-            <div class="card text-center mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-            <div class="card text-end mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-    </div>*@
-    <!-- Hoverable Table rows -->
-    <div class="card">
-        <h5 class="card-header">Rescent Travel  Activities</h5>
-        <div class="table-responsive text-nowrap">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Project</th>
-                        <th>Client</th>
-                        <th>Users</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    <tr>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular Project</strong></td>
-                        <td>Albert Cook</td>
-                        <td>
-                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Lilian Fuller">
-                                    <img src="~/Template/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Sophia Wilkerson">
-                                    <img src="~/Template/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Christina Parker">
-                                    <img src="~/Template/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                            </ul>
-                        </td>
-                        <td><span class="badge bg-label-primary me-1">Active</span></td>
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+        <div class="row mb-2">
+            <div class="col-md">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 ">
+                            <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
+                                <div class="card-body">
+                                    @*<i class="bx bxl-adobe mb-2 "></i>*@
+                                    <i class="fa-solid fa-calendar-check fa-3x "></i>
+                                    <p class="icon-name text-capitalize text-truncate mb-0">SCHEDULES</p>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>React Project</strong></td>
-                        <td>Barry Hunter</td>
-                        <td>
-                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Lilian Fuller">
-                                    <img src="~/Template/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Sophia Wilkerson">
-                                    <img src="~/Template/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Christina Parker">
-                                    <img src="~/Template/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                            </ul>
-                        </td>
-                        <td><span class="badge bg-label-success me-1">Completed</span></td>
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                                    This content is a little bit longer.
+                                </p>
+                                <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                                    This content is a little bit longer.
+                                </p>
+                                <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
+                                <div class="card-body">
+                                    @*<i class="bx bxl-adobe mb-2 "></i>*@
+                                    <i class="fa-solid fa-headset  fa-3x"></i>
+                                    <p class="icon-name text-capitalize text-truncate mb-0">INQUIRIES</p>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>VueJs Project</strong></td>
-                        <td>Trevor Baker</td>
-                        <td>
-                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Lilian Fuller">
-                                    <img src="~/Template/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Sophia Wilkerson">
-                                    <img src="~/Template/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Christina Parker">
-                                    <img src="~/Template/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                            </ul>
-                        </td>
-                        <td><span class="badge bg-label-info me-1">Scheduled</span></td>
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>Bootstrap Project</strong>
-                        </td>
-                        <td>Jerry Milton</td>
-                        <td>
-                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Lilian Fuller">
-                                    <img src="~/Template/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Sophia Wilkerson">
-                                    <img src="~/Template/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                                <li data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Christina Parker">
-                                    <img src="~/Template/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                                </li>
-                            </ul>
-                        </td>
-                        <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <!--/ Hoverable Table rows -->
-    <!-- Modal -->
-    <div class="modal fade in" id="fullscreenModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalFullTitle">Contact information goes here</h5>
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+
+        <div class="row mb-2">
+            <div class="col-md">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                                    This content is a little bit longer.
+                                </p>
+                                <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
+                                <div class="card-body">
+                                    @*<i class="bx bxl-adobe mb-2 "></i>*@
+                                    <i class="fa-solid fa-file-zipper fa-3x"></i>
+                                    <p class="icon-name text-capitalize text-truncate mb-0">TRAVEL REPORT</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p>
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
-                        facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum
-                        at eros.
-                    </p>
-                    <p>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                        lacus vel augue laoreet rutrum faucibus dolor auctor.
-                    </p>
-                 
+            </div>
+            <div class="col-md">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 ">
+                            <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
+                                <div class="card-body">
+                                    @*<i class="bx bxl-adobe mb-2 "></i>*@
+                                    <i class="fa-solid fa-comment-dots fa-3x"></i>
+                                    <p class="icon-name text-capitalize text-truncate mb-0">INQUIRY FORUM</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                                    This content is a little bit longer.
+                                </p>
+                                <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        Close
-                    </button>
+            </div>
+
+        </div>
+        <div class="row mb-2">
+            <div class="col-md">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                                    This content is a little bit longer.
+                                </p>
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#fullscreenModal">
+                                    view
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
+                                <div class="card-body">
+                                    @*<i class="bx bxl-adobe mb-2 "></i>*@
+                                    <i class="fa-solid fa-blender-phone fa-3x"></i>
+                                    <p class="icon-name text-capitalize text-truncate mb-0">CONTACT US</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 ">
+                            <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
+                                <div class="card-body">
+                                    @*<i class="bx bxl-adobe mb-2 "></i>*@
+                                    <i class="fa-solid fa-calendar-check fa-3x "></i>
+                                    <p class="icon-name text-capitalize text-truncate mb-0">SCHEDULES</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                                    This content is a little bit longer.
+                                </p>
+                                <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--/ Horizontal -->
+        @*<div class="row mb-2">
+            <div class="col-md-6 col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-center mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-end mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <!-- Hoverable Table rows -->
+        <div class="card">
+            <h5 class="card-header">Rescent Travel  Activities</h5>
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Client</th>
+                            <th>Users</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <tr>
+                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular Project</strong></td>
+                            <td>Albert Cook</td>
+                            <td>
+                                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Lilian Fuller">
+                                        <img src="~/Template/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Sophia Wilkerson">
+                                        <img src="~/Template/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Christina Parker">
+                                        <img src="~/Template/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                </ul>
+                            </td>
+                            <td><span class="badge bg-label-primary me-1">Active</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>React Project</strong></td>
+                            <td>Barry Hunter</td>
+                            <td>
+                                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Lilian Fuller">
+                                        <img src="~/Template/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Sophia Wilkerson">
+                                        <img src="~/Template/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Christina Parker">
+                                        <img src="~/Template/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                </ul>
+                            </td>
+                            <td><span class="badge bg-label-success me-1">Completed</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>VueJs Project</strong></td>
+                            <td>Trevor Baker</td>
+                            <td>
+                                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Lilian Fuller">
+                                        <img src="~/Template/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Sophia Wilkerson">
+                                        <img src="~/Template/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Christina Parker">
+                                        <img src="~/Template/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                </ul>
+                            </td>
+                            <td><span class="badge bg-label-info me-1">Scheduled</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>Bootstrap Project</strong>
+                            </td>
+                            <td>Jerry Milton</td>
+                            <td>
+                                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Lilian Fuller">
+                                        <img src="~/Template/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Sophia Wilkerson">
+                                        <img src="~/Template/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                    <li data-bs-toggle="tooltip"
+                                        data-popup="tooltip-custom"
+                                        data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up"
+                                        title="Christina Parker">
+                                        <img src="~/Template/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
+                                    </li>
+                                </ul>
+                            </td>
+                            <td><span class="badge bg-label-warning me-1">Pending</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--/ Hoverable Table rows -->
+        <!-- Modal -->
+        <div class="modal fade in" id="fullscreenModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalFullTitle">Contact information goes here</h5>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum
+                            at eros.
+                        </p>
+                        <p>
+                            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+                            lacus vel augue laoreet rutrum faucibus dolor auctor.
+                        </p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+            }
+            else
+            {
+            <script>
+                swal({
+                    title: "NOT AUTHORISED",
+                    text: "ACCESSDE DENIED",
+                    icon: "error"
+                });</script>
+
+            }
+            }

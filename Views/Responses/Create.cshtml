@@ -6,114 +6,132 @@
 }
 
 
-<style>
-    body, .row {
-        text-align: center;
-    }
 
-    .modal-body {
-        display: inline-block;
-    }
-</style>
+@{
+    if (Session["userid"] != null)
+    {
+        <style>
+            body, .row {
+                text-align: center;
+            }
 
-<div class="container-xxl flex-grow-1 container-p-y">
+            .modal-body {
+                display: inline-block;
+            }
+        </style>
 
-    <div class="row mb-5">
-        <div class="col-md-6 col-lg-4 mb-3">
-            <div class="card">
-                <div class="card-header">RESPONSE CENTER</div>
-                <div class="card-body">
+        <div class="container-xxl flex-grow-1 container-p-y">
 
-                    <p class="card-text">
-                        Click button incase modal does not apear
-                    </p>
-                    <button type="button"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalCenter">
+            <div class="row mb-5">
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card">
+                        <div class="card-header">RESPONSE CENTER</div>
+                        <div class="card-body">
 
-                        RESPOND TO INQUIRY
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-    <!-- Vertically Centered Modal -->
-    <div class="col-lg-4 col-md-6">
-
-        <div class="mt-3">
-
-            <div class="modal fade in" id="modalCenter" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalCenterTitle">#</h5>
+                            <p class="card-text">
+                                Click button incase modal does not apear
+                            </p>
                             <button type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                    class="btn btn-primary"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalCenter">
+
+                                RESPOND TO INQUIRY
+                            </button>
                         </div>
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="modal-body text-center" style="align-items:center;">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card md-12">
-                                            <h5 class="card-header">RESPONSE CENTER</h5>
-                                            <div class="card-body demo-vertical-spacing demo-only-element">
-                                                <small class="text-light fw-semibold d-block">SELECT INQUIRY</small>
-
-                                                <div class="input-group input-group-merge">
-                                                    @Html.DropDownList("Inquirery_id", null, htmlAttributes: new
-                                                    {
-                                                        @class = "form-select",
-                                                        id = "exampleFormControlSelect1",@*aria-label = "Default select example"*@})
-                                                    @Html.ValidationMessageFor(model => model.Inquirery_id, "", new { @class = "text-danger" })
-
-                                                </div>
-
-                                                <small class="text-light fw-semibold d-block pt-3">
-                                                    TYPE RESPONSE HERE
-                                                </small>
-
-                                                <div>
-                                                    <textarea class="form-control" name="Response1" id="exampleFormControlTextarea1" rows="5 "></textarea>
-                                                    @Html.ValidationMessageFor(model => model.Response1, "", new { @class = "text-danger" })
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                    Close
-                                </button>
-                                <input type="submit" class="btn btn-primary" value="Save changes">
-                            </div>
-                        }
-
                     </div>
                 </div>
             </div>
+
+
+
+
+
+            <!-- Vertically Centered Modal -->
+            <div class="col-lg-4 col-md-6">
+
+                <div class="mt-3">
+
+                    <div class="modal fade in" id="modalCenter" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalCenterTitle">#</h5>
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="modal-body text-center" style="align-items:center;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card md-12">
+                                                    <h5 class="card-header">RESPONSE CENTER</h5>
+                                                    <div class="card-body demo-vertical-spacing demo-only-element">
+                                                        <small class="text-light fw-semibold d-block">SELECT INQUIRY</small>
+
+                                                        <div class="input-group input-group-merge">
+                                                            @Html.DropDownList("Inquirery_id", null, htmlAttributes: new
+                                                            {
+                                                                @class = "form-select",
+                                                                id = "exampleFormControlSelect1",@*aria-label = "Default select example"*@})
+                                                            @Html.ValidationMessageFor(model => model.Inquirery_id, "", new { @class = "text-danger" })
+
+                                                        </div>
+
+                                                        <small class="text-light fw-semibold d-block pt-3">
+                                                            TYPE RESPONSE HERE
+                                                        </small>
+
+                                                        <div>
+                                                            <textarea class="form-control" name="Response1" id="exampleFormControlTextarea1" rows="5 "></textarea>
+                                                            @Html.ValidationMessageFor(model => model.Response1, "", new { @class = "text-danger" })
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <input type="submit" class="btn btn-primary" value="Save changes">
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(window).on('load', function () {
+                    $('#modalCenter').modal('show');
+                });
+            </script>
         </div>
-    </div>
-    <script type="text/javascript">
-        $(window).on('load', function () {
-            $('#modalCenter').modal('show');
-        });
-    </script>
-</div>
+    }
+    else
+    {
+        <script>
+            swal({
+                title: "NOT AUTHORISED",
+                text: "ACCESSDE DENIED",
+                icon: "error"
+            });</script>
+
+    }
+}
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

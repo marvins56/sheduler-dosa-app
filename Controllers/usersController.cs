@@ -23,6 +23,10 @@ namespace sheduler.Controllers
             var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
             return View(students.ToList());
         }
+        public ActionResult Admin()
+        {
+            return View();
+        }
         public ActionResult Users()
         {
             var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
@@ -238,7 +242,7 @@ namespace sheduler.Controllers
                         if (actualrole == "ADMINISTRATOR" || actualrole == "SUPER ADMINISTRATOR")
                         {
                             Session["userroles"] = actualrole.ToString();
-                            return RedirectToAction("index", "Events");
+                            return RedirectToAction("Admin", "Users");
                         }
                         else
                         {

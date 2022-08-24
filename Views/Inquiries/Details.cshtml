@@ -4,39 +4,56 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Inquiry</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
+@{
+    if (Session["userid"] != null)
+    {
+        <div>
+            <h4>Inquiry</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.inquirry)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.UserId)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.inquirry)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.inquirry)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Dateposteed)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.inquirry)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Dateposteed)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Dateposteed)
+                </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Inquirery_id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                <dd>
+                    @Html.DisplayFor(model => model.Dateposteed)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Inquirery_id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+    else
+    {
+        <script>
+            swal({
+                title: "NOT AUTHORISED",
+                text: "ACCESSDE DENIED",
+                icon: "error"
+            });</script>
+
+    }
+}
+
+

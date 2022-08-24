@@ -46,9 +46,17 @@
                             @Html.DisplayNameFor(model => model.IsFullDay)
                         </dt>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.IsFullDay)
-                        </dd>
+                        <Dd>
+                            @if (Model.IsFullDay == true)
+                            {
+                                <button class="btn btn-outline-success"> Fullday</button>
+
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-warning"> Giventime</button>
+                            }
+                        </Dd>
 
                     </dl>
                 </div>

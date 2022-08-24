@@ -5,79 +5,97 @@
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
 
-@if (TempData["nullvalue"] != null)
-{
-    <script>
+
+
+
+@{
+    if (Session["userid"] != null)
+    {
+        if (TempData["nullvalue"] != null)
+        {
+            <script>
      swal({
         title: "PENDING",
   text: "@TempData["nullvalue"]",
   icon: "warning"
         });</script>
-}
-else if (TempData["values"] != null)
-{
-    <script>
+        }
+        else if (TempData["values"] != null)
+        {
+            <script>
      swal({
         title: "RESPONED TO",
   text: "@TempData["values"]",
   icon: "success"
         });</script>
-}
-<div class="container-xxl flex-grow-1 container-p-y">
-    <!-- Hoverable Table rows -->
-    <div class="card">
-        <span class="card-header text-capitalize">
-            Manage inquiries
-            <a href="@Url.Action("Create","Responses")">
-                <span class="btn btn-primary " style="float:right"> RESPOND TO INQUIRY</span>
-            </a>
+        }
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Hoverable Table rows -->
+            <div class="card">
+                <span class="card-header text-capitalize">
+                    Manage inquiries
+                    <a href="@Url.Action("Create","Responses")">
+                        <span class="btn btn-primary " style="float:right"> RESPOND TO INQUIRY</span>
+                    </a>
 
-        </span>
-        <div class="table-responsive text-nowrap">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.UserId)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.inquirry)
+                </span>
+                <div class="table-responsive text-nowrap">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.inquirry)
 
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Dateposteed)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                <a href="@Url.Action("userInquiries", "Inquiries", new { id = item.UserId })">
-                                @Html.DisplayFor(modelItem => item.UserId)
-                                </a>
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Dateposteed)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("userInquiries", "Inquiries", new { id = item.UserId })">
+                                            @Html.DisplayFor(modelItem => item.UserId)
+                                        </a>
 
 
-                        
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.inquirry)
 
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Dateposteed)
-                            </td>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.inquirry)
 
-                            <td>
-                                @Html.ActionLink("status", "userResponse", new { id = item.Inquirery_id })
-                                |
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Dateposteed)
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("status", "userResponse", new { id = item.Inquirery_id })
+                                        |
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    }
+    else
+    {
+        <script>
+            swal({
+                title: "NOT AUTHORISED",
+                text: "ACCESSDE DENIED",
+                icon: "error"
+            });</script>
+
+    }
+}

@@ -695,18 +695,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Campus_Branches\Create.cshtml" />
     <Content Include="Views\Campus_Branches\Delete.cshtml" />
-    <Content Include="Views\Campus_Branches\Details.cshtml" />
     <Content Include="Views\Campus_Branches\Edit.cshtml" />
     <Content Include="Views\Campus_Branches\Index.cshtml" />
     <Content Include="Views\Cours\Create.cshtml" />
     <Content Include="Views\Cours\Delete.cshtml" />
-    <Content Include="Views\Cours\Details.cshtml" />
     <Content Include="Views\Cours\Edit.cshtml" />
     <Content Include="Views\Cours\Index.cshtml" />
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Events\AdminDetails.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
-    <Content Include="Views\Events\Delete.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
@@ -737,12 +734,10 @@
     <Content Include="Views\Roles\_Roles.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Roles\Delete.cshtml" />
-    <Content Include="Views\Roles\Details.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\semesters\Create.cshtml" />
     <Content Include="Views\semesters\Delete.cshtml" />
-    <Content Include="Views\semesters\Details.cshtml" />
     <Content Include="Views\semesters\Edit.cshtml" />
     <Content Include="Views\semesters\Index.cshtml" />
     <Content Include="Views\UserLocations\Create.cshtml" />
@@ -751,7 +746,6 @@
     <Content Include="Views\UserLocations\Index.cshtml" />
     <Content Include="Views\Userroles\Create.cshtml" />
     <Content Include="Views\Userroles\Delete.cshtml" />
-    <Content Include="Views\Userroles\Details.cshtml" />
     <Content Include="Views\Userroles\Edit.cshtml" />
     <Content Include="Views\Userroles\Index.cshtml" />
     <Content Include="Views\users\Details.cshtml" />
@@ -865,6 +859,7 @@
     <Content Include="Template\scss\_theme\_common.scss" />
     <Content Include="Template\scss\_theme\_theme.scss" />
     <Content Include="Views\Events\AdminCreate.cshtml" />
+    <Content Include="Views\users\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

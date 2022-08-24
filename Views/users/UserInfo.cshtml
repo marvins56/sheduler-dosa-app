@@ -4,76 +4,93 @@
     ViewBag.Title = "UserInfo";
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
-@if (TempData["nullvalue"] != null)
-{
-    <script>
+
+@{
+    if (Session["userid"] != null)
+    {
+
+        @if (TempData["nullvalue"] != null)
+        {
+            <script>
      swal({
         title: "PENDING",
   text: "@TempData["nullvalue"]",
   icon: "warning"
         });</script>
-}
-<div class="container-xxl flex-grow-1 container-p-y">
-    <!-- Hoverable Table rows -->
-    <div class="card">
-        <h5 class="card-header">USER DETAILS</h5>
-        <div class="table-responsive text-nowrap">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.AccessNumber)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.UserName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Campus_Branches.Campus_branch)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Cours.courseName)
-                        </th>
-                        <th></th>
-                        <th>ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
+        }
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Hoverable Table rows -->
+            <div class="card">
+                <h5 class="card-header">USER DETAILS</h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AccessNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Campus_Branches.Campus_branch)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cours.courseName)
+                                </th>
+                                <th></th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AccessNumber)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UserName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Campus_Branches.Campus_branch)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Cours.courseName)
-                            </td>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AccessNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Campus_Branches.Campus_branch)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cours.courseName)
+                                    </td>
 
-                            <td>
+                                    <td>
 
-                                @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })|
-                                <a href="@Url.Action("userInquiries", "Inquiries", new { id = item.AccessNumber })">inquiries</a>
-                                @Html.ActionLink("Calender", "Details", new { id = item.AccessNumber })|
-                                @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })|
-                                @Html.ActionLink("location", "Details", new { id = item.AccessNumber })|
-                                @Html.ActionLink("deactivate", "Details", new { id = item.AccessNumber })
+                                        @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })|
+                                        <a href="@Url.Action("userInquiries", "Inquiries", new { id = item.AccessNumber })">inquiries</a>
+                                        @Html.ActionLink("Calender", "Details", new { id = item.AccessNumber })|
+                                        @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })|
+                                        @Html.ActionLink("location", "Details", new { id = item.AccessNumber })|
+                                        @Html.ActionLink("deactivate", "Details", new { id = item.AccessNumber })
 
-                            </td>
+                                    </td>
 
 
 
-                        </tr>
-                    }
+                                </tr>
+                            }
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--/ Hoverable Table rows -->
         </div>
-    </div>
-    <!--/ Hoverable Table rows -->
-</div>
+    }
+    else
+    {
+        <script>
+            swal({
+                title: "NOT AUTHORISED",
+                text: "ACCESSDE DENIED",
+                icon: "error"
+            });</script>
+
+    }
+}

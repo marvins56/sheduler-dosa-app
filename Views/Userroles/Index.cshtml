@@ -4,45 +4,61 @@
     ViewBag.Title = "Manage UserRoles";
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
-<div class="container-xxl flex-grow-1 container-p-y">
-    <!-- Hoverable Table rows -->
-    <div class="card">
-        <h5 class="card-header">Manage UserRoles</h5>
-        <div class="table-responsive text-nowrap">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Student.UserName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Role.Role1)
-                        </th>
 
-                        <th> <a href="@Url.Action("Create","Userroles")" class="btn btn-primary">  Add User role</a></th>
+@{
+    if (Session["userid"] != null)
+    {
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Hoverable Table rows -->
+            <div class="card">
+                <h5 class="card-header">Manage UserRoles</h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Student.UserName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Role.Role1)
+                                </th>
 
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
+                                <th> <a href="@Url.Action("Create","Userroles")" class="btn btn-primary">  Add User role</a></th>
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Student.UserName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Role.Role1)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.userroleid }) |
-                                @Html.ActionLink("Revoke rights", "Delete", new { id = item.userroleid })
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Student.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Role.Role1)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.userroleid }) |
+                                        @Html.ActionLink("Revoke rights", "Delete", new { id = item.userroleid })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    }
+    else
+    {
+        <script>
+            swal({
+                title: "NOT AUTHORISED",
+                text: "ACCESSDE DENIED",
+                icon: "error"
+            });</script>
+
+    }
+}
