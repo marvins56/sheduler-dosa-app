@@ -21,17 +21,16 @@
 
                             <div class="card-body">
                                 <div class="form-floating">
+                                    <div class="form-group">
+                                        <textarea name="inquirry" class="form-control mb-2" id="floatingInput" placeholder="My Inquiry ..." rows="10" cols="30">  </textarea>
 
-                                    <textarea name="inquirry" class="form-control mb-2" id="floatingInput" placeholder="My Inquiry ..." rows="30" cols="30">  </textarea>
+                                        @Html.ValidationMessageFor(model => model.inquirry, "", new { @class = "text-danger",placeholder= "Type your inquiry.." })
+                                       
+                                        @*@Html.LabelFor(model => model.inquirry, htmlAttributes: new { @lass = "form-label" })*@
 
-                                    @Html.ValidationMessageFor(model => model.inquirry, "", new { @class = "text-danger" })
-                                    <label> Type your inquiry..</label>
-                                    @*@Html.LabelFor(model => model.inquirry, htmlAttributes: new { @lass = "form-label" })*@
-
-                                    <input type="submit" value="SUBMIT" class="btn btn-primary w-50" />
-                                    <a href="@Url.Action("myInquiries","Inquiries" )" class="btn btn-primary">
-                                        My Inquiries
-                                    </a>
+                                        <input type="submit" value="SUBMIT" class="btn btn-primary w-50" />
+                                      
+                                    </div>
                                 </div>
                             </div>
                         }
@@ -39,7 +38,11 @@
                 </div>
                 <div class="col-md-6 ">
                     <div class="card mb-4">
-                        <h5 class="card-header">MAKE INQUIRY DIRECT TO DOSA</h5>
+                        <h5 class="card-header">
+                            <a href="@Url.Action("myInquiries","Inquiries" )" class="btn btn-primary">
+                                My Inquiries
+                            </a>
+                        </h5>
 
                         <div class="card-body">
                             <div class="form-floating">

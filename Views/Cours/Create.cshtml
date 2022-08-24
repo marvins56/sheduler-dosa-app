@@ -10,15 +10,7 @@
 @{
     if (Session["userid"] != null)
     {
-        <style>
-            body, .row {
-                text-align: center;
-            }
-
-            .modal-body {
-                display: inline-block;
-            }
-        </style>
+        
 
         <div class="container-xxl flex-grow-1 container-p-y">
 
@@ -73,7 +65,7 @@
                                                             @Html.LabelFor(model => model.courseName, htmlAttributes: new { @class = "control-label " })
                                                         </small>
 
-                                                        <div>
+                                                        <div class="form-group">
                                                             @Html.EditorFor(model => model.courseName, new { htmlAttributes = new { @class = "form-control" } })
                                                             @Html.ValidationMessageFor(model => model.courseName, "", new { @class = "text-danger" })
                                                         </div>

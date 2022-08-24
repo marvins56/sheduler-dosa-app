@@ -36,22 +36,37 @@ namespace sheduler.Controllers
         }
         public ActionResult userResponse(int id)
         {
-            
+            try
+            {
                 var responseid = db.Responses.Where(a => a.Inquirery_id == id).FirstOrDefault();
-            var res = db.Responses.Where(a => a.Inquirery_id == id).Select(a => a.Response1).FirstOrDefault();
-            var date = db.Responses.Where(a => a.Inquirery_id == id).Select(a => a.DatetimeOfReply).FirstOrDefault();
-            if (responseid == null)
+                var res = db.Responses.Where(a => a.Inquirery_id == id).Select(a => a.Response1).FirstOrDefault();
+                var date = db.Responses.Where(a => a.Inquirery_id == id).Select(a => a.DatetimeOfReply).FirstOrDefault();
+                if (responseid == null)
+                {
+                    TempData["nullvalue"] = "RESPONSE PENDING";
+                    var ROLE = Session["userroles"];
+
+                    if (ROLE.Equals(3)|| ROLE.Equals(6))
+                    {
+                        return RedirectToAction("index");
+                    }
+                    else
+                    {
+                        return RedirectToAction("myInquiries");
+                    }
+
+                }
+                else
+                {
+                    TempData["values"] = "RESPONSE: " + res + " On " + date;
+                    return RedirectToAction("index");
+                }
+            }catch(Exception E)
             {
-                TempData["nullvalue"] = "RESPONSE PENDING";
-                return RedirectToAction("index");
+                TempData["error"] = E.Message;
             }
-            else
-            {
-                TempData["values"] = "RESPONSE: " + res + " On " + date;
-                return RedirectToAction("index");
-            }
-           
-           
+
+            return View();
 
         }
         public ActionResult userInquiries(String id)
@@ -64,6 +79,15 @@ namespace sheduler.Controllers
             }
           
             return View(myInquiries);
+        }
+
+        public ActionResult Generate_All_inquiries_PDF()
+        {
+            return new Rotativa.ActionAsPdf("Index");
+        }
+        public ActionResult Generate_personal_inquiries_PDF()
+        {
+            return new Rotativa.ActionAsPdf("myInquiries");
         }
         public ActionResult myInquiries()
         {
@@ -111,7 +135,7 @@ namespace sheduler.Controllers
                 inquiry.Dateposteed = DateTime.Now;
                 db.Inquiries.Add(inquiry);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("muInquireies");
             }
 
             return View(inquiry);

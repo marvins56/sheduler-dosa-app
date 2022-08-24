@@ -10,16 +10,7 @@
 @{
     if (Session["userid"] != null)
     {
-        <style>
-            body, .row {
-                text-align: center;
-            }
-
-            .modal-body {
-                display: inline-block;
-            }
-        </style>
-
+       
         <div class="container-xxl flex-grow-1 container-p-y">
 
             <div class="row mb-5">
@@ -74,7 +65,7 @@
                                                     <div class="card-body demo-vertical-spacing demo-only-element">
                                                         <small class="text-light fw-semibold d-block">SELECT INQUIRY</small>
 
-                                                        <div class="input-group input-group-merge">
+                                                        <div class="form-group">
                                                             @Html.DropDownList("Inquirery_id", null, htmlAttributes: new
                                                             {
                                                                 @class = "form-select",
@@ -87,7 +78,7 @@
                                                             TYPE RESPONSE HERE
                                                         </small>
 
-                                                        <div>
+                                                        <div class="form-group">
                                                             <textarea class="form-control" name="Response1" id="exampleFormControlTextarea1" rows="5 "></textarea>
                                                             @Html.ValidationMessageFor(model => model.Response1, "", new { @class = "text-danger" })
 

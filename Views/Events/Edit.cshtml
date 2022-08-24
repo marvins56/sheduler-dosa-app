@@ -90,17 +90,10 @@
                                                         </small>
 
                                                         <div>
-                                                            @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.EditorFor(model => model.Start.Date, new { htmlAttributes = new { @class = "form-control" } })
                                                             @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
                                                         </div>
-                                                        <small class="text-light fw-semibold d-block pt-3">
-                                                            @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label" })
-
-                                                        </small>
-                                                        <div>
-                                                            @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
-                                                            @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
-                                                        </div>
+ 
                                                         <small class="text-light fw-semibold d-block pt-3">
                                                             @Html.LabelFor(model => model.ThemeColor, htmlAttributes: new { @class = "control-label" })
 

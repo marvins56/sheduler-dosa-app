@@ -241,12 +241,12 @@ namespace sheduler.Controllers
                         //TempData["success"] = "verified";
                         if (actualrole == "ADMINISTRATOR" || actualrole == "SUPER ADMINISTRATOR")
                         {
-                            Session["userroles"] = actualrole.ToString();
+                            Session["userroles"] = userrolesz;
                             return RedirectToAction("Admin", "Users");
                         }
                         else
                         {
-                 
+                            Session["userroles"] = userrolesz;
                             return RedirectToAction("index", "Home");
                         }
                     }

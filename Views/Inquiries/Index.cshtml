@@ -35,11 +35,13 @@
                 <span class="card-header text-capitalize">
                     Manage inquiries
                     <a href="@Url.Action("Create","Responses")">
-                        <span class="btn btn-primary " style="float:right"> RESPOND TO INQUIRY</span>
+                        <span class="btn btn-primary  m-2" style="float:right;margin-right :3px;"> RESPOND TO INQUIRY</span>
                     </a>
-
+                    <a href="@Url.Action("Generate_All_inquiries_PDF","Inquiries")">
+                        <span class="btn btn-primary m-2" style="float:right"> GENERATE REPORT</span>
+                    </a>
                 </span>
-                <div class="table-responsive text-nowrap">
+                <div class="table-responsive text-wrap">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -65,10 +67,8 @@
                                             @Html.DisplayFor(modelItem => item.UserId)
                                         </a>
 
-
-
                                     </td>
-                                    <td>
+                                    <td style="width:50%;word-wrap:break-word;">
                                         @Html.DisplayFor(modelItem => item.inquirry)
 
                                     </td>
@@ -77,8 +77,9 @@
                                     </td>
 
                                     <td>
-                                        @Html.ActionLink("status", "userResponse", new { id = item.Inquirery_id })
-                                        |
+                                        <button class="btn btn-outline-success text-white">  @Html.ActionLink("status", "userResponse", new { id = item.Inquirery_id })</button>
+                                       
+                                        
                                     </td>
                                 </tr>
                             }

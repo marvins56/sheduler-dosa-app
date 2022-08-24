@@ -40,8 +40,8 @@
 
                 </span>
 
-                <div class="table-responsive text-nowrap">
-                    <table class="table table-hover">
+                <div class="table-responsive text-wrap">
+                    <table class="table table-hover" style="width:100%;">
                         <thead>
 
                             <tr>
@@ -63,13 +63,13 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>
+                                    <td style="width:30%;word-wrap:break-word;">
                                         @Html.DisplayFor(modelItem => item.Inquiry.inquirry)
                                     </td>
-                                    <td>
+                                    <td style="width:50%;word-wrap:break-word;">
                                         @Html.DisplayFor(modelItem => item.Response1)
                                     </td>
-                                    <td>
+                                    <td style="width:20%;word-wrap:break-word;">
                                         @Html.DisplayFor(modelItem => item.DatetimeOfReply)
                                     </td>
 

@@ -8,17 +8,57 @@ using System.Web.Mvc;
 //using FullCalendar;
 using Event = sheduler.Models.Event;
 using sheduler.Models;
+using System.Collections.Generic;
+using sheduler.ViewModels;
+
 namespace sheduler.Controllers
 {
     public class EventsController : Controller
     {
         private MyDosa_dbEntities1 db = new MyDosa_dbEntities1();
 
+
+        public ActionResult UserReports()
+        {
+            var personalinfo = Get_myinquiries();
+
+            var userDetails = new userReports();
+
+            userDetails.Inquiry = personalinfo;
+
+
+            return View();
+        }
+        public List<Inquiry> Get_myinquiries()
+        {
+            var id = (Session["userid"]).ToString();
+            try
+            {
+                TempData["inquiries"] = db.Inquiries.Where(a => a.UserId == id).ToList().Count();
+                db.Inquiries.Where(a => a.UserId == id).ToList();
+
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = e.Message;
+            }
+
+            return (db.Inquiries.Where(a => a.UserId == id).ToList());
+        }
+       
         // GET: Events
         public ActionResult Index()
         {
 
             return View();
+        }
+        public ActionResult Generate_All_Events_PDF()
+        {
+            return new Rotativa.ActionAsPdf("viewallevents");
+        }
+        public ActionResult Generate_personal_Events_PDF()
+        {
+            return new Rotativa.ActionAsPdf("Myshedules");
         }
         public ActionResult viewallevents()
         {

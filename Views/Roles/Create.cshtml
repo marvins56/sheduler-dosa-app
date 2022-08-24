@@ -10,15 +10,7 @@
 @{
     if (Session["userid"] != null)
     {
-        <style>
-            body, .row {
-                text-align: center;
-            }
 
-            .modal-body {
-                display: inline-block;
-            }
-        </style>
 
         <div class="container-xxl flex-grow-1 container-p-y">
 
@@ -88,7 +80,7 @@
                                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                             Close
                                         </button>
-                                        <a href="@Url.Action("Index","Roles")" class="btn btn-outline-secondary">  Back</a>
+                                        <a href="@Url.Action("Index", "Roles")" class="btn btn-outline-secondary">  Back</a>
 
                                         <input type="submit" class="btn btn-primary" value="Save changes">
                                     </div>
@@ -104,21 +96,21 @@
                     $('#modalCenter').modal('show');
                 });
             </script>
-        </div>
-        @section Scripts {
-        }
-else
+        </div>}
+    else
     {
-< script >
-swal({
+        <script >
+        swal({
         title: "NOT AUTHORISED",
-    text: "ACCESSDE DENIED",
-    icon: "error"
-});</ script >
+        text: "ACCESSDE DENIED",
+        icon: "error"
+        });</script >
 
+    }
+@section Scripts {
 }
+
 }
 
 
 @Scripts.Render("~/bundles/jqueryval")
-}
