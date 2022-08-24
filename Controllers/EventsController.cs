@@ -17,11 +17,20 @@ namespace sheduler.Controllers
         // GET: Events
         public ActionResult Index()
         {
+
             return View();
         }
         public ActionResult viewallevents()
         {
-            return View(db.Events.ToList());
+            try
+            {
+                    var result = db.Events.ToList();
+                    return View(result);
+            }catch(Exception E)
+            {
+                TempData["error"] = E.Message;
+            }
+            return View();
         }
         public ActionResult Myshedules()
         {
@@ -158,10 +167,21 @@ namespace sheduler.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    @event.userid = Session["userid"].ToString();
-                    ; db.Events.Add(@event);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    var start = @event.Start;
+                    var end = @event.End;
+                    if(start > end)
+                    {
+                        TempData["error"] = "INVALID  SET START DATE";
+                    }
+                    else
+                    {
+                        @event.userid = Session["userid"].ToString();
+                        db.Events.Add(@event);
+                        db.SaveChanges();
+                        TempData["success"] = "OPERATION SUCCESSFULL";
+                        return RedirectToAction("MyCalendar");
+                    }
+                
                 }
 
             }
@@ -169,7 +189,7 @@ namespace sheduler.Controllers
             {
                 TempData["error"] = ex.Message;
             }
-            return RedirectToAction("Index", @event);
+            return RedirectToAction("MyCalendar", @event);
         }
         public ActionResult AdminCreate()
         {
@@ -180,14 +200,34 @@ namespace sheduler.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AdminCreate([Bind(Include = "EventID,Subject,Description,Start,End,ThemeColor,IsFullDay,userid")] Event @event)
         {
-            if (ModelState.IsValid)
+            try
             {
-                 db.Events.Add(@event);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                var ROLE = Session["userroles"].ToString();
+                if (ROLE == "ADMINISTRATOR" || ROLE == "SUPER ADMINISTRATOR")
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Events.Add(@event);
+                        db.SaveChanges();
+                        TempData["success"] = "OPERATIO SUCCESSFULL";
+                        return RedirectToAction("Index");
+                    }
 
-            return View(@event);
+                    return View(@event);
+                }
+                else
+                {
+                    TempData["error"] = "ACCESS DENIED";
+                }
+
+               
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            
+                return View(@event);
         }
 
         // GET: Events/Edit/5

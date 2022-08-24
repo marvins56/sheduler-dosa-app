@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "viewallevents";
+
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
 @if (TempData["error"] != null)
@@ -16,11 +17,16 @@
 }
 else
 {
+    <style>
+        .description{
+            width:50%;
+        }
+    </style>
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Hoverable Table rows -->
         <div class="card">
-            <div class="table-responsive text-nowrap">
-                <table class="table table-hover">
+            <div class="table-responsive text-wrap">
+                <table class="table table-hover  "style="width:100%">
                     <thead>
                         <tr>
                             <th>
@@ -33,9 +39,7 @@ else
                             <th>
                                 @Html.DisplayNameFor(model => model.Start)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.End)
-                            </th>
+
 
                             <th>
                                 @Html.DisplayNameFor(model => model.IsFullDay)
@@ -47,20 +51,18 @@ else
                     <tbody class="table-border-bottom-0">
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
+                            <tr class="">
+                                <td style="width:10%;">
                                     @Html.DisplayFor(modelItem => item.userid)
                                 </td>
 
-                                <td>
+                                <td style="width:50%; word-wrap:break-word;">
                                     @Html.DisplayFor(modelItem => item.Description)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Start)
+                                    @Html.DisplayFor(modelItem => item.Start.Date)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.End)
-                                </td>
+                               
 
                                 <td>
                                     @if (item.IsFullDay == true)

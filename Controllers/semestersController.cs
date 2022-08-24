@@ -10,7 +10,7 @@ using sheduler.Models;
 
 namespace sheduler.Controllers
 {
-    //[Authorize]
+    
     [HandleError]
     public class semestersController : Controller
     {

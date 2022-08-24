@@ -35,8 +35,8 @@
           <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Subject" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
-          <Property Name="Start" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="End" Type="datetime2" Precision="7" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" Nullable="false" />
           <Property Name="ThemeColor" Type="nvarchar" MaxLength="50" />
           <Property Name="IsFullDay" Type="bit" Nullable="false" />
           <Property Name="userid" Type="nvarchar" MaxLength="50" />
@@ -316,8 +316,8 @@
           <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Start" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="End" Type="DateTime" Precision="7" />
+          <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="ThemeColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsFullDay" Type="Boolean" Nullable="false" />
           <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

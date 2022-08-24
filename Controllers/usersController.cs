@@ -227,19 +227,27 @@ namespace sheduler.Controllers
             try
             {
                 var Passcode = db.Students.Where(a => a.AccessNumber == userid).Select(a => a.Passcode).FirstOrDefault();
+                var idz = db.Students.Where(a => a.AccessNumber == userid).Select(a => a.AccessNumber).FirstOrDefault();
                 if (Passcode == passcodes.Passcode)
                 {
-                    TempData["success"] = "verified";
-
-
-                    if(actualrole == "ADMINISTRATOR" || actualrole == "SUPER ADMINISTRATOR")
+                    
+                    if(idz == userid)
                     {
-                        return RedirectToAction("index", "Events");
+                        Session["userid"] = idz.ToString();
+                        //TempData["success"] = "verified";
+                        if (actualrole == "ADMINISTRATOR" || actualrole == "SUPER ADMINISTRATOR")
+                        {
+                            Session["userroles"] = actualrole.ToString();
+                            return RedirectToAction("index", "Events");
+                        }
+                        else
+                        {
+                 
+                            return RedirectToAction("index", "Home");
+                        }
                     }
-                    else
-                    {
-                        return RedirectToAction("index", "Home");
-                    }
+
+                  
                     
                 }
                 else
