@@ -81,14 +81,7 @@ namespace sheduler.Controllers
             return View(myInquiries);
         }
 
-        public ActionResult Generate_All_inquiries_PDF()
-        {
-            return new Rotativa.ActionAsPdf("Index");
-        }
-        public ActionResult Generate_personal_inquiries_PDF()
-        {
-            return new Rotativa.ActionAsPdf("myInquiries");
-        }
+      
         public ActionResult myInquiries()
         {
            string id = Session["userid"].ToString();

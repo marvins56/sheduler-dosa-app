@@ -127,14 +127,7 @@ namespace sheduler.Controllers
 
             return View();
         }
-        public ActionResult Generate_All_Events_PDF()
-        {
-            return new Rotativa.ActionAsPdf("viewallevents");
-        }
-        public ActionResult Generate_personal_Events_PDF()
-        {
-            return new Rotativa.ActionAsPdf("Myshedules");
-        }
+       
         public ActionResult viewallevents()
         {
             try
