@@ -67,12 +67,10 @@ namespace sheduler.Controllers
         {
             return (db.Responses.ToList());
         }
-
         public List<Event> Get_all_events()
         {
             return (db.Events.ToList());
         }
-
         public ActionResult Index()
         {
 
@@ -217,8 +215,7 @@ namespace sheduler.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
-
-        // GET: Events/Create
+    
         [HttpGet]
         public ActionResult Create()
         {
@@ -293,8 +290,6 @@ namespace sheduler.Controllers
             
                 return View(@event);
         }
-
-        // GET: Events/Edit/5
         public ActionResult Edit(int? id)
         {
             try
@@ -341,7 +336,6 @@ namespace sheduler.Controllers
             return View(@event);
         }
 
-        // GET: Events/Delete/5
         public ActionResult Delete(int? id)
         {
             try

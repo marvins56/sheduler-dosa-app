@@ -7,11 +7,27 @@
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="card  mb-3">
+        <div class="card-header">
+            WELCOME @Session["userid"]
+        </div>
+        <div class="card-body ">
+            <h5 class="card-title">GENERATE FULL SYSTEM REPORTS</h5>
+            <p class="card-text"> NOTE: to generate specific student reports, kindly navigate to user management under user settings under users and click on the link for personal report</p>
+            <a href="@Url.Action("AdminCreate","Events")" class="mb-3">
+                <span class="btn btn-primary  "> EXPORT TO PDF</span>
+            </a>
+            <a href="@Url.Action("Viewallevents","Events")" class="mb-3">
+                <span class="btn btn-primary  "> EXPORT TO EXCEL</span>
+            </a>
+        </div>
+    </div>
     <!-- Hoverable Table rows -->
-    <div class="card mb-2">
+    <div class="card mb-4">
         <div class="table-responsive text-wrap">
             <table class="table table-hover  " style="width:100%">
                 <thead>
+                    <tr> <h2 class="text-capitalize text-center"> ALL AVAILABLE  TRAVEL SHEDULES</h2></tr>
                     <tr>
                         <th>
                             STUDENT
@@ -64,8 +80,10 @@
         </div>
     </div>
 
-    <div class="card mb-2">
+    <div class="card mb-4">
         <div class="table-responsive text-wrap">
+            <tr> <h2 class="text-capitalize text-center"> ALL AVAILABLE  INQUIRIES</h2></tr>
+
             <table class="table table-hover  " style="width:100%">
                 <thead>
                     <tr>
@@ -78,9 +96,7 @@
                         <th>
                             DATE POSTED
                         </th>
-                        <th>
-                            FULL DAY
-                        </th>
+
                         <th></th>
                     </tr>
                 </thead>
@@ -108,10 +124,12 @@
         </div>
     </div>
 
-    <div class="card mb-2">
+    <div class="card mb-4">
         <div class="table-responsive text-wrap">
             <table class="table table-hover  " style="width:100%">
                 <thead>
+                    <tr> <h2 class="text-capitalize text-center"> ALL RESPONSES TO INQUIRIES</h2></tr>
+
                     <tr>
                         <th>
                             INQUIRY
@@ -131,8 +149,8 @@
                     {
 
                         <tr class="">
-                            <td style="width:10%;">
-                                @Html.DisplayFor(modelItem => item.Inquiry)
+                            <td style="width:30%;">
+                                @Html.DisplayFor(modelItem => item.Inquiry.inquirry)
                             </td>
 
                             <td style="width:50%; word-wrap:break-word;">
@@ -149,10 +167,12 @@
             </table>
         </div>
     </div>
-    <div class="card mb-2">
+    <div class="card mb-4">
         <div class="table-responsive text-wrap">
             <table class="table table-hover  " style="width:100%">
                 <thead>
+                    <tr> <h2 class="text-capitalize text-center"> ALL STUDENTS</h2></tr>
+
                     <tr>
                         <th>
                             USERNAME
@@ -163,8 +183,8 @@
                         <th>
                             Country
                         </th>
-                      
-                        
+
+
                         <th></th>
                     </tr>
                 </thead>
@@ -180,11 +200,11 @@
                             <td style=" word-wrap:break-word;">
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
-                          
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.Country)
                             </td>
-                         
+
                         </tr>
                     }
 
