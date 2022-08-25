@@ -17,7 +17,6 @@ namespace sheduler.Controllers
     {
         private MyDosa_dbEntities1 db = new MyDosa_dbEntities1();
 
-        // GET: users
         public ActionResult Index()
         {
             var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
@@ -25,12 +24,30 @@ namespace sheduler.Controllers
         }
         public ActionResult Admin()
         {
+            try
+            {
+                ViewBag.inquiries_no = db.Inquiries.ToList().Count();
+                ViewBag.inquiries_noViewBag.inquiries_no = db.Responses.ToList().Count();
+                var n1 = Convert.ToInt32(ViewBag.inquiries_no);
+                var n2 = Convert.ToInt32(ViewBag.inquiries_no);
+                int pending = sum( n1,n2 );
+                ViewBag.pending = pending;
+                ViewBag.allusers = db.Students.ToList().Count();
+            }catch(Exception E)
+            {
+                TempData["error"] = E.Message;
+            }
             return View();
         }
         public ActionResult Users()
         {
             var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
             return View(students.ToList());
+        }
+        public int  sum(int a, int b)
+        {
+
+            return (a - b);
         }
         public ActionResult UserInfo()
         {

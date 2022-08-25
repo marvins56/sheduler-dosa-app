@@ -207,10 +207,10 @@
                         })
                     }
 
-                    $('#btnEdit').click(function () {
-                        //Open modal dialog for edit event
-                        openAddEditForm();
-                    })
+                    //$('#btnEdit').click(function () {
+                    //    //Open modal dialog for edit event
+                    //    openAddEditForm();
+                    //})
                     $('#btnDelete').click(function () {
                         if (selectedEvent != null && confirm('Are you sure?')) {
                             $.ajax({
@@ -264,78 +264,78 @@
                     //    $('#backDropModal').modal('hide');
                     //    $('#myModalSave').modal();
                     //}
-                    $('#btnSave').click(function () {
+                  /*  $('#btnSave').click(function () {*/
                         //Validation/
-                        if ($('#txtSubject').val().trim() == "") {
-                            swal({
-                                title: "ERROR",
-                                text: "SUBJECT REQUIRED",
-                                icon: "error"
-                            });
-                            return;
-                        }
-                        if ($('#txtStart').val().trim() == "") {
-                            swal({
-                                title: "ERROR",
-                                text: "INVALID START DATE FORMAT",
-                                icon: "error"
-                            });
-                            return;
-                        }
-                        if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
-                            swal({
-                                title: "ERROR",
-                                text: "INVALID END DATE FORMAT",
-                                icon: "error"
-                            });
-                            return;
-                        }
-                        else {
-                            var startDate = moment($('#txtStart').val(), "DD/MM/YYYY HH:mm:ss").toDate();
-                            var endDate = moment($('#txtEnd').val(), "DD/MM/YYYY HH:mm:ss").toDate();
-                            if (startDate > endDate) {
-                                swal({
-                                    title: "ERROR",
-                                    text: "INVALID DATE FORMAT",
-                                    icon: "error"
-                                });
-                                return;
-                            }
-                        }
+                        //if ($('#txtSubject').val().trim() == "") {
+                        //    swal({
+                        //        title: "ERROR",
+                        //        text: "SUBJECT REQUIRED",
+                        //        icon: "error"
+                        //    });
+                        //    return;
+                        //}
+                        //if ($('#txtStart').val().trim() == "") {
+                        //    swal({
+                        //        title: "ERROR",
+                        //        text: "INVALID START DATE FORMAT",
+                        //        icon: "error"
+                        //    });
+                        //    return;
+                        //}
+                        //if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
+                        //    swal({
+                        //        title: "ERROR",
+                        //        text: "INVALID END DATE FORMAT",
+                        //        icon: "error"
+                        //    });
+                        //    return;
+                        /*}*/
+                        //else {
+                        //    var startDate = moment($('#txtStart').val(), "DD/MM/YYYY HH:mm:ss").toDate();
+                        //    var endDate = moment($('#txtEnd').val(), "DD/MM/YYYY HH:mm:ss").toDate();
+                        //    if (startDate > endDate) {
+                        //        swal({
+                        //            title: "ERROR",
+                        //            text: "INVALID DATE FORMAT",
+                        //            icon: "error"
+                        //        });
+                        //        return;
+                        //    }
+                        //}
 
-                        var data = {
-                            /* EventID: $('#hdEventID').val(),*/
-                            Subject: $('#txtSubject').val().trim(),
-                            Start: $('#txtStart').val().trim(),
-                            End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
-                            Description: $('#txtDescription').val(),
-                            ThemeColor: $('#ddThemeColor').val(),
-                            IsFullDay: $('#chkIsFullDay').is(':checked')
-                        }
-                        SaveEvent(data);
-                        // call function for submit data to the server
-                    })
-                    function SaveEvent(data) {
-                        $.ajax({
-                            type: "POST",
-                            url: '/Events/SaveEvent',
-                            data: data,
-                            success: function (data) {
-                                if (data.status) {
-                                    //Refresh the calender
-                                    FetchEventAndRenderCalendar();
-                                    $('#myModalSave').modal('hide');
-                                }
-                            },
-                            error: function () {
-                                swal({
-                                    title: "ERROR",
-                                    text: "OPERATION FAILED",
-                                    icon: "error"
-                                });
-                            }
-                        })
-                    }
+                        //var data = {
+                        //    /* EventID: $('#hdEventID').val(),*/
+                        //    Subject: $('#txtSubject').val().trim(),
+                        //    Start: $('#txtStart').val().trim(),
+                        //    End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
+                        //    Description: $('#txtDescription').val(),
+                        //    ThemeColor: $('#ddThemeColor').val(),
+                        //    IsFullDay: $('#chkIsFullDay').is(':checked')
+                        //}
+                        //SaveEvent(data);
+                        //// call function for submit data to the server
+                   /* })*/
+                    //function SaveEvent(data) {
+                    //    $.ajax({
+                    //        type: "POST",
+                    //        url: '/Events/SaveEvent',
+                    //        data: data,
+                    //        success: function (data) {
+                    //            if (data.status) {
+                    //                //Refresh the calender
+                    //                FetchEventAndRenderCalendar();
+                    //                $('#myModalSave').modal('hide');
+                    //            }
+                    //        },
+                    //        error: function () {
+                    //            swal({
+                    //                title: "ERROR",
+                    //                text: "OPERATION FAILED",
+                    //                icon: "error"
+                    //            });
+                    //        }
+                    //    })
+                    //}
                 })
             </script>
         }

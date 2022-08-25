@@ -217,7 +217,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\userReports.cs" />
+    <Compile Include="ViewModels\General_reports.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Auth\css\style.css" />
@@ -380,6 +380,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="App_Browsers\qt.browser" />
+    <None Include="Properties\PublishProfiles\dosaapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
@@ -878,6 +879,7 @@
     <Content Include="Views\Events\AdminCreate.cshtml" />
     <Content Include="Views\users\Admin.cshtml" />
     <Content Include="Views\Inquiries\myInquiries.cshtml" />
+    <Content Include="Views\Events\Generalreport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

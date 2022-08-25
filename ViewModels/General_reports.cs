@@ -6,11 +6,13 @@ using System.Web;
 
 namespace sheduler.ViewModels
 {
-    public class userReports
+    public class General_reports
     {
         public List<Response> Response { get; set; }
-        public List<Event> Event { get; set; }
+     
         public List<Inquiry> Inquiry { get; set; }
         public List<UserLocation> UserLocation { get; set; }
+        public List<Student> students { get; set; }
+        public List<Event> events { get; set; }
     }
 }

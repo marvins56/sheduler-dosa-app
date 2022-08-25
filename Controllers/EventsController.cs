@@ -17,18 +17,13 @@ namespace sheduler.Controllers
     {
         private MyDosa_dbEntities1 db = new MyDosa_dbEntities1();
 
-
-        public ActionResult UserReports()
-        {
-            var personalinfo = Get_myinquiries();
-
-            var userDetails = new userReports();
-
-            userDetails.Inquiry = personalinfo;
-
-
-            return View();
-        }
+        //public ActionResult UserReports()
+        //{
+        //    var personalinfo = Get_myinquiries();
+        //    var userDetails = new userReports();
+        //    userDetails.Inquiry = personalinfo;
+        //    return View();
+        //}
         public List<Inquiry> Get_myinquiries()
         {
             var id = (Session["userid"]).ToString();
@@ -45,8 +40,39 @@ namespace sheduler.Controllers
 
             return (db.Inquiries.Where(a => a.UserId == id).ToList());
         }
-       
-        // GET: Events
+
+        public List<Student> Get_students()
+        {
+            return (db.Students.ToList());
+        }
+        public ActionResult Generalreport()
+        {
+            var users = Get_students();
+            var inquiry = Get_all_Inquiries();
+            var response = Get_all_responses();
+            var calendar_events = Get_all_events();
+            var genaralreports = new General_reports();
+            genaralreports.students=users;
+            genaralreports.Inquiry = inquiry;
+            genaralreports.Response = response;
+            genaralreports.events = calendar_events;
+
+            return View(genaralreports);
+        }
+        public List<Inquiry> Get_all_Inquiries()
+        {
+            return (db.Inquiries.ToList());
+        }
+        public List<Response> Get_all_responses()
+        {
+            return (db.Responses.ToList());
+        }
+
+        public List<Event> Get_all_events()
+        {
+            return (db.Events.ToList());
+        }
+
         public ActionResult Index()
         {
 
@@ -259,8 +285,6 @@ namespace sheduler.Controllers
                 {
                     TempData["error"] = "ACCESS DENIED";
                 }
-
-               
             }
             catch (Exception ex)
             {
