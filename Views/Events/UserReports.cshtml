@@ -1,43 +1,97 @@
 ﻿@using sheduler.ViewModels;
-@model General_reports
-
-
+@model UserReport
 @{
-    ViewBag.Title = "Generalreport";
+    ViewBag.Title = "UserReports";
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
+
 <div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card  mb-3">
-        <div class="card-header">
-            WELCOME @Session["userid"]
-        </div>
-        <div class="card-body ">
-            <h5 class="card-title">GENERATE FULL SYSTEM REPORTS</h5>
-            <p class="card-text">
-                <div class="mb-3 col-12 mb-0">
-                    <div class="alert alert-warning">
-                        <h6 class="alert-heading fw-bold mb-1"> NOTE:</h6>
-                        <p class="mb-0">
-                            To generate specific student reports, kindly navigate to user management under user settings under users and click on the link for personal report
-                        </p>
+    <div class="row">
+        <div class="col-md-12">
+          
+            <div class="card  mb-3">
+                <div class="card-header">
+                    <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> @Session["userid"]</a>
+                        </li>
+
+                    </ul>
+                    
+                </div>
+                <div class="card-body ">
+                    <h5 class="card-title">GENERATE USER REPORTS</h5>
+                    <p class="card-text">
+                        <a href="@Url.Action("AdminCreate","Events")" class="mb-5">
+                            <span class="btn btn-primary  "> TO PDF</span>
+                        </a>
+                        <a href="@Url.Action("Viewallevents","Events")" class="mb-3">
+                            <span class="btn btn-primary  "> TO EXCEL</span>
+                        </a>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <h5 class="card-header">Profile Details</h5>
+
+                <hr class="my-0" />
+                <div class="card-body">
+                    <div class="table-responsive text-wrap">
+                        <table class="table table-hover  " style="width:100%">
+                            <thead>
+                                <tr> <H4 class="text-capitalize text-center"> VIEWING REPORT OF  @Session["userid"] </H4></tr>
+
+                                <tr>
+                                    <th>
+                                        USERNAME
+                                    </th>
+                                    <th>
+                                        EMAIL
+                                    </th>
+                                    <th>
+                                        Country
+                                    </th>
+
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach (var item in Model.students)
+                                {
+
+                                    <tr class="">
+                                        <td style="width:10%;">
+                                            @Html.DisplayFor(modelItem => item.UserName)
+                                        </td>
+
+                                        <td style=" word-wrap:break-word;">
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Country)
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+                <!-- /Account -->
+            </div>
 
-            </p>
-            <a href="@Url.Action("AdminCreate","Events")" class="mb-5">
-                <span class="btn btn-primary  "> TO PDF</span>
-            </a>
-            <a href="@Url.Action("Viewallevents","Events")" class="mb-3">
-                <span class="btn btn-primary  "> TO EXCEL</span>
-            </a>
+
         </div>
     </div>
+
     <!-- Hoverable Table rows -->
     <div class="card mb-4">
         <div class="table-responsive text-wrap">
             <table class="table table-hover  " style="width:100%">
                 <thead>
-                    <tr> <H4 class="text-capitalize text-center"> ALL AVAILABLE  TRAVEL SHEDULES</H4></tr>
+                    <tr> <H4 class="text-capitalize text-center"> @Session["userid"]'s TRAVEL SHEDULES</H4></tr>
                     <tr>
                         <th>
                             STUDENT
@@ -92,7 +146,7 @@
 
     <div class="card mb-4">
         <div class="table-responsive text-wrap">
-            <tr> <H4 class="text-capitalize text-center"> ALL AVAILABLE  INQUIRIES</H4></tr>
+            <tr> <H4 class="text-capitalize text-center"> @Session["userid"]'s  INQUIRIES</H4></tr>
 
             <table class="table table-hover  " style="width:100%">
                 <thead>
@@ -134,11 +188,11 @@
         </div>
     </div>
 
-    <div class="card mb-4">
+    @*<div class="card mb-4">
         <div class="table-responsive text-wrap">
             <table class="table table-hover  " style="width:100%">
                 <thead>
-                    <tr> <H4 class="text-capitalize text-center"> ALL RESPONSES TO INQUIRIES</H4></tr>
+                    <tr> <H4 class="text-capitalize text-center"> @Session["userid"]'s RESPONSES TO INQUIRIES</H4></tr>
 
                     <tr>
                         <th>
@@ -160,7 +214,7 @@
 
                         <tr class="">
                             <td style="width:30%;">
-                                @Html.DisplayFor(modelItem => item.Inquiry.inquirry)
+                                @Html.DisplayFor(modelItem => item.Inquiry)
                             </td>
 
                             <td style="width:50%; word-wrap:break-word;">
@@ -176,53 +230,8 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="card mb-4">
-        <div class="table-responsive text-wrap">
-            <table class="table table-hover  " style="width:100%">
-                <thead>
-                    <tr> <H4 class="text-capitalize text-center"> ALL STUDENTS</H4></tr>
+    </div>*@
 
-                    <tr>
-                        <th>
-                            USERNAME
-                        </th>
-                        <th>
-                            EMAIL
-                        </th>
-                        <th>
-                            Country
-                        </th>
-
-
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @foreach (var item in Model.students)
-                    {
-
-                        <tr class="">
-                            <td style="width:10%;">
-                                @Html.DisplayFor(modelItem => item.UserName)
-                            </td>
-
-                            <td style=" word-wrap:break-word;">
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Country)
-                            </td>
-
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
-        </div>
-    </div>
 
 </div>
-
 

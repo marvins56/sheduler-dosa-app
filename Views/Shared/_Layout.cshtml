@@ -132,14 +132,11 @@
                        data-bs-toggle="tooltip"
                        data-bs-offset="0,4"
                        data-bs-html="true" title=" <span>Inquire</span>">
-
-
                         <i class="fa-solid fa-headset  fa-2x"></i>
-
                     </a>
                 </li>
                 <li>
-                    <a href="~/Template/html/pages-misc-under-maintenance.html" class="bloc-icon"
+                    <a href="@Url.Action("PersonalReports", "Events", new { id = Session["userid"].ToString() })" class="bloc-icon"
                        data-bs-toggle="tooltip"
                        data-bs-offset="0,4"
                        data-bs-html="true" title=" <span>My reports</span>">
@@ -202,7 +199,8 @@
 
                         </li>
                         <li class="menu-item">
-                            <a href="~/Template/html/pages-misc-under-maintenance.html" class="menu-link  ">
+                            
+                            <a href="@Url.Action("PersonalReports", "Events", new { id = Session["userid"].ToString() })" class="menu-link  ">
                                 <i class="fa-solid fa-file-zipper menu-icon"></i>
                                 <div data-i18n="Authentications">My Travel Report</div>
                             </a>

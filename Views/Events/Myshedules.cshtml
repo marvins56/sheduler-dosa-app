@@ -72,11 +72,9 @@ else
                                         <button class="btn btn-outline-warning"> Given time</button>
                                     }
                                 </td>
+                              
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.userid)
-                                </td>
-                                <td>
-                                    |
+                                    
                                     @Html.ActionLink("Details", "Details", new { id = item.EventID }) |
                                     @Html.ActionLink("Delete", "Delete", new { id = item.EventID })
                                 </td>

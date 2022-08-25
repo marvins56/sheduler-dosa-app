@@ -1,0 +1,238 @@
+﻿@using sheduler.ViewModels;
+@model UserReport
+@{
+    ViewBag.Title = "PersonalReports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card  mb-3">
+                <div class="card-header">
+                    <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> @Session["userid"]</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="card-body ">
+                    <h5 class="card-title">GENERATE USER REPORTS</h5>
+                    <p class="card-text">
+                        <a href="@Url.Action("AdminCreate","Events")" class="mb-5">
+                            <span class="btn btn-primary  "> TO PDF</span>
+                        </a>
+                        <a href="@Url.Action("Viewallevents","Events")" class="mb-3">
+                            <span class="btn btn-primary  "> TO EXCEL</span>
+                        </a>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <h5 class="card-header">Profile Details</h5>
+
+                <hr class="my-0" />
+                <div class="card-body">
+                    <div class="table-responsive text-wrap">
+                        <table class="table table-hover  " style="width:100%">
+                            <thead>
+                                <tr> <H4 class="text-capitalize text-center"> VIEWING REPORT OF  @Session["userid"] </H4></tr>
+
+                                <tr>
+                                    <th>
+                                        USERNAME
+                                    </th>
+                                    <th>
+                                        EMAIL
+                                    </th>
+                                    <th>
+                                        Country
+                                    </th>
+
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach (var item in Model.students)
+                                {
+
+                                    <tr class="">
+                                        <td style="width:10%;">
+                                            @Html.DisplayFor(modelItem => item.UserName)
+                                        </td>
+
+                                        <td style=" word-wrap:break-word;">
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Country)
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /Account -->
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Hoverable Table rows -->
+    <div class="card mb-4">
+        <div class="table-responsive text-wrap">
+            <table class="table table-hover  " style="width:100%">
+                <thead>
+                    <tr> <H4 class="text-capitalize text-center"> @Session["userid"]'s TRAVEL SHEDULES</H4></tr>
+                    <tr>
+                        <th>
+                            STUDENT
+                        </th>
+                        <th>
+                            TRAVEL DESCRIPTION
+                        </th>
+                        <th>
+                            SET OFF TIME
+                        </th>
+                        <th>
+                            FULL DAY
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model.events)
+                    {
+                        <tr class="">
+                            <td style="width:10%;">
+                                @Html.DisplayFor(modelItem => item.userid)
+                            </td>
+
+                            <td style="width:50%; word-wrap:break-word;">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Start.Date)
+                            </td>
+
+
+                            <td>
+                                @if (item.IsFullDay == true)
+                                {
+                                    <button class="btn btn-outline-success"> Fullday</button>
+
+                                }
+                                else
+                                {
+                                    <button class="btn btn-outline-warning"> Given time</button>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="table-responsive text-wrap">
+            <tr> <H4 class="text-capitalize text-center"> @Session["userid"]'s  INQUIRIES</H4></tr>
+
+            <table class="table table-hover  " style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            STUDENT
+                        </th>
+                        <th>
+                            INQUIRY
+                        </th>
+                        <th>
+                            DATE POSTED
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model.Inquiry)
+                    {
+
+                        <tr class="">
+                            <td style="width:10%;">
+                                @Html.DisplayFor(modelItem => item.UserId)
+                            </td>
+
+                            <td style="width:50%; word-wrap:break-word;">
+                                @Html.DisplayFor(modelItem => item.inquirry)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Dateposteed)
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @*<div class="card mb-4">
+            <div class="table-responsive text-wrap">
+                <table class="table table-hover  " style="width:100%">
+                    <thead>
+                        <tr> <H4 class="text-capitalize text-center"> @Session["userid"]'s RESPONSES TO INQUIRIES</H4></tr>
+
+                        <tr>
+                            <th>
+                                INQUIRY
+                            </th>
+                            <th>
+                                RESPONSE
+                            </th>
+                            <th>
+                                DATE REPLIED
+                            </th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @foreach (var item in Model.Response)
+                        {
+
+                            <tr class="">
+                                <td style="width:30%;">
+                                    @Html.DisplayFor(modelItem => item.Inquiry)
+                                </td>
+
+                                <td style="width:50%; word-wrap:break-word;">
+                                    @Html.DisplayFor(modelItem => item.Response1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DatetimeOfReply)
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
+
+
+</div>
+

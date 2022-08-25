@@ -17,16 +17,35 @@ namespace sheduler.Controllers
     {
         private MyDosa_dbEntities1 db = new MyDosa_dbEntities1();
 
-        //public ActionResult UserReports()
-        //{
-        //    var personalinfo = Get_myinquiries();
-        //    var userDetails = new userReports();
-        //    userDetails.Inquiry = personalinfo;
-        //    return View();
-        //}
-        public List<Inquiry> Get_myinquiries()
+        public ActionResult UserReports(string id)
         {
-            var id = (Session["userid"]).ToString();
+            var personalinfo = Get_myinquiries(id);
+            var studt = Get_mystudent(id);
+            var myevents = Get_UserEvents(id);
+            var response = Get_all_responses();
+            var userDetails = new UserReport();
+            userDetails.Inquiry = personalinfo;
+            userDetails.students = studt;
+            userDetails.events = myevents;
+            userDetails.Response = response;
+            return View(userDetails);
+        }
+        public ActionResult PersonalReports(string id)
+        {
+            var personalinfo = Get_myinquiries(id);
+            var studt = Get_mystudent(id);
+            var myevents = Get_UserEvents(id);
+            var response = Get_all_responses();
+            var userDetails = new UserReport();
+            userDetails.Inquiry = personalinfo;
+            userDetails.students = studt;
+            userDetails.events = myevents;
+            userDetails.Response = response;
+            return View(userDetails);
+        }
+        public List<Inquiry> Get_myinquiries(string id)
+        {
+            id = (Session["userid"]).ToString();
             try
             {
                 TempData["inquiries"] = db.Inquiries.Where(a => a.UserId == id).ToList().Count();
@@ -40,11 +59,43 @@ namespace sheduler.Controllers
 
             return (db.Inquiries.Where(a => a.UserId == id).ToList());
         }
+        public List<Student> Get_mystudent(string id)
+        {
+            id = (Session["userid"]).ToString();
+            try
+            {
+                TempData["students"] = db.Students.Where(a => a.AccessNumber == id).ToList().Count();
+                db.Students.Where(a => a.AccessNumber == id).ToList();
 
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = e.Message;
+            }
+
+            return (db.Students.Where(a => a.AccessNumber == id).ToList());
+        }
+        public List<Event> Get_UserEvents(string id)
+        {
+            id = (Session["userid"]).ToString();
+            try
+            {
+                TempData["events"] = db.Events.Where(a => a.userid == id).ToList().Count();
+                db.Events.Where(a => a.userid == id).ToList();
+
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = e.Message;
+            }
+
+            return (db.Events.Where(a => a.userid == id).ToList());
+        }
         public List<Student> Get_students()
         {
             return (db.Students.ToList());
         }
+
         public ActionResult Generalreport()
         {
             var users = Get_students();

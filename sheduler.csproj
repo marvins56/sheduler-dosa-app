@@ -218,6 +218,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\General_reports.cs" />
+    <Compile Include="ViewModels\UserReport.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Auth\css\style.css" />
@@ -880,6 +881,8 @@
     <Content Include="Views\users\Admin.cshtml" />
     <Content Include="Views\Inquiries\myInquiries.cshtml" />
     <Content Include="Views\Events\Generalreport.cshtml" />
+    <Content Include="Views\Events\UserReports.cshtml" />
+    <Content Include="Views\Events\PersonalReports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

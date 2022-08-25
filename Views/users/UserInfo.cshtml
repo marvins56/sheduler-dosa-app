@@ -9,7 +9,7 @@
     if (Session["userid"] != null)
     {
 
-        @if (TempData["nullvalue"] != null)
+        if (TempData["nullvalue"] != null)
         {
             <script>
      swal({
@@ -63,11 +63,11 @@
                                     <td>
 
                                         @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })|
-                                        <a href="@Url.Action("userInquiries", "Inquiries", new { id = item.AccessNumber })">inquiries</a>
+                                        <a href="@Url.Action("userInquiries", "Inquiries", new { id = item.AccessNumber })">inquiries</a>|
                                         @Html.ActionLink("Calender", "Details", new { id = item.AccessNumber })|
-                                        @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })|
+                                    <a href="@Url.Action("UserReports", "Events", new { id = item.AccessNumber })">Report</a>
+                                       
                                         @Html.ActionLink("location", "Details", new { id = item.AccessNumber })|
-                                        @Html.ActionLink("deactivate", "Details", new { id = item.AccessNumber })
 
                                     </td>
 
