@@ -4,19 +4,28 @@
     ViewBag.Title = "Admin";
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
+@if (TempData["error"] != null)
+{
+    <script>
+     swal({
+        title: "ERROR",
+  text: "@TempData["error"]",
+  icon: "error"
+        });
+    </script>
+}
 @{
     if (Session["userid"] != null)
     {
         <div class="container-xxl flex-grow-1 container-p-y">
-
             <!-- Basic Layout -->
             <div class="row">
                 <div class="col-xl">
                     <div class="card mb-4">
-                        <div class="card-header d-flex justify-content-between align-items-center">                         
+                        <div class="card-header d-flex justify-content-between align-items-center">
                         </div>
                         <div class="card-body">
-                            <div id="donutchart" style="width:300px; height: 300px; "></div>
+                            <div id="donutchart" style=" height: 300px; "></div>
                         </div>
                     </div>
                 </div>
@@ -25,14 +34,11 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                         </div>
                         <div class="card-body">
-                            <div id="donutchart2" style=" width: 300px; height: 300px;"></div>
+                            <div id="donutchart2" style="height: 300px; "></div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- / Content -->
-
 
             <div class="card">
                 <h5 class="card-header">Rescent Travel  Activities</h5>
@@ -251,7 +257,7 @@
                 </div>
             </div>
         </div>
-       
+
         <script type="text/javascript">
             google.charts.load("current", { packages: ["corechart"] });
             google.charts.setOnLoadCallback(drawChart);
@@ -280,7 +286,7 @@
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
                     ['INQUIRIES Vs RESPONSES', 'PERCENTAGES'],
-                   
+
                     ['RESPONSED TO', @ViewBag.responsed_to],
                     ['PENDING INQUIRIES', @ViewBag.pending],
 

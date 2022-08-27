@@ -1,6 +1,15 @@
 ﻿@model sheduler.Models.Event
 
-
+@if (TempData["error"] != null)
+{
+    <script>
+     swal({
+        title: "ERROR",
+  text: "@TempData["error"]",
+  icon: "error"
+        });
+    </script>
+}
 
 
 @{
@@ -48,11 +57,10 @@
                                             data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
-                                @using (Html.BeginForm("Create", "Events", FormMethod.Post))
+                                @using (Html.BeginForm())
                                 {
                                     @Html.AntiForgeryToken()
 
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                                     <div class="modal-body ">
                                         <div class="row">
@@ -61,6 +69,8 @@
                                                     <h5 class="card-header">ADD TRAVEL SHEDULE</h5>
                                                     <div class="card-body demo-vertical-spacing demo-only-element">
                                                         <div class="form-group">
+                                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                                                             <small class="text-light fw-semibold d-block pt-3">
                                                                 @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label " })
                                                             </small>
@@ -114,6 +124,12 @@
                                                                 <option value="Gray">Gray</option>
                                                                 <option value="yellow">yellow</option>
                                                                 <option value="pink">pink</option>
+                                                                <option value="Teal">pink</option>
+                                                                <option value="Navy">pink</option>
+                                                                <option value="peach">pink</option>
+                                                                <option value="Beige">pink</option>
+                                                                <option value="brown">pink</option>
+                                                             
                                                             </select>
 
                                                         </div>

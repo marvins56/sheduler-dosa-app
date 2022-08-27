@@ -3,7 +3,16 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+@if (TempData["error"] != null)
+{
+    <script>
+     swal({
+        title: "ERROR",
+  text: "@TempData["error"]",
+  icon: "error"
+        });
+    </script>
+}
 
 @{
     if (Session["userid"] != null)
@@ -72,14 +81,14 @@
 
                                                         </small>
 
-                                                        <div class="input-group input-group-merge">
+                                                        <div class="form-group ">
                                                             @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
                                                             @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
                                                         </div>
                                                         <small class="text-light fw-semibold d-block">
                                                             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
                                                         </small>
-                                                        <div class="input-group input-group-merge">
+                                                        <div class="form-group">
                                                             <textarea class="form-control" name="Description" id="exampleFormControlTextarea1" rows="5 "></textarea>
 
                                                             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -89,16 +98,16 @@
 
                                                         </small>
 
-                                                        <div>
+                                                        <div class="form-group ">
                                                             @Html.EditorFor(model => model.Start.Date, new { htmlAttributes = new { @class = "form-control" } })
                                                             @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
                                                         </div>
- 
+
                                                         <small class="text-light fw-semibold d-block pt-3">
                                                             @Html.LabelFor(model => model.ThemeColor, htmlAttributes: new { @class = "control-label" })
 
                                                         </small>
-                                                        <div>
+                                                        <div class="form-group ">
                                                             @Html.EditorFor(model => model.ThemeColor, new { htmlAttributes = new { @class = "form-control" } })
                                                             @Html.ValidationMessageFor(model => model.ThemeColor, "", new { @class = "text-danger" })
                                                         </div>
@@ -106,7 +115,7 @@
                                                             @Html.LabelFor(model => model.IsFullDay, htmlAttributes: new { @class = "control-label" })
 
                                                         </small>
-                                                        <div>
+                                                        <div class="form-group ">
                                                             @Html.EditorFor(model => model.IsFullDay, new { htmlAttributes = new { @class = "form-control" } })
                                                             @Html.ValidationMessageFor(model => model.IsFullDay, "", new { @class = "text-danger" })
                                                         </div>

@@ -103,7 +103,7 @@
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                                         <label>  <i class="fa-solid fa-key pl-2"></i></label>
-                                        @Html.EditorFor(model => model.Passcode, new { htmlAttributes = new { @class = "", Placehoder = "security code" } })
+                                        @Html.EditorFor(model => model.Passcode, new { htmlAttributes = new { @class = "", Placehoder = "security code",Type="password" } })
                                         @Html.ValidationMessageFor(model => model.Passcode, "", new { @class = "text-danger" })
                                     </div>
 

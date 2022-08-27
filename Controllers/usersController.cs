@@ -27,16 +27,17 @@ namespace sheduler.Controllers
             try
             {
                 ViewBag.inquiries_no = db.Inquiries.ToList().Count();
-                ViewBag.inquiries_noViewBag.inquiries_no = db.Responses.ToList().Count();
+                ViewBag.responsed_to = db.Responses.ToList().Count();
                 var n1 = Convert.ToInt32(ViewBag.inquiries_no);
-                var n2 = Convert.ToInt32(ViewBag.inquiries_no);
+                var n2 = Convert.ToInt32(ViewBag.responsed_to);
                 int pending = sum( n1,n2 );
                 ViewBag.pending = pending;
                 ViewBag.allusers = db.Students.ToList().Count();
-            }catch(Exception E)
+        }catch(Exception E)
             {
                 TempData["error"] = E.Message;
             }
+
             return View();
         }
         public ActionResult Users()

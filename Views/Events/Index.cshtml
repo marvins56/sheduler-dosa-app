@@ -36,16 +36,16 @@
             <div class="card-body ">
                 <h5 class="card-title">DETAILS VIEW OF THE STUDENT TRAVEL SCHEDULES</h5>
                 <p class="card-text"></p>
-                <a href="@Url.Action("AdminCreate","Events")" class="mb-3">
-                    <span class="btn btn-primary  "> SHEDULE TRAVEL PLAN FOR STUDENT</span>
-                </a>
+
                 <a href="@Url.Action("Viewallevents","Events")" class="mb-3">
                     <span class="btn btn-primary  "> VIEW ALL SHEDULES</span>
                 </a>
             </div>
         </div>
         <div id="calender"></div>
-
+        <a href="@Url.Action("Admin","Users")" class="mt-3 ">
+            <span class="btn btn-primary  "> BACK</span>
+        </a>
         <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
             <div class="modal-dialog">
                 <form class="modal-content">
@@ -136,6 +136,11 @@
                     function GenerateCalender(events) {
                         $('#calender').fullCalendar('destroy');
                         $('#calender').fullCalendar({
+                            eventAfterRender: function (event, element, view) {
+                                $(element).css('padding', '10'),
+                                    $(element).css('color', 'white');
+
+                            },
                             contentHeight: 400,
                             defaultDate: new Date(),
                             timeFormat: 'h(:mm)a',
@@ -160,7 +165,7 @@
 
                                 $('#backDropModal').modal();
                             }, eventMouseover: function (calEvent, jsEvent) {
-                                var tooltip = '<div class="tooltipevent"  style="width:30%;  padding:10px;border-radius:8px;  height:100px;background:#630606;position:absolute;z-index:10001; color:white"> STUDENT:' + calEvent.userid + ' </br>' + calEvent.description + '</div>';
+                                var tooltip = '<div class="tooltipevent"  style="width:30%;  padding:10px;border-radius:8px;  height:auto;background:#630606;position:absolute;z-index:10001; color:white">  STUDENT:' + calEvent.userid + ' </br>' + calEvent.description + '</div>';
                                 var $tooltip = $(tooltip).appendTo('body');
 
                                 $(this).mouseover(function (e) {
@@ -264,57 +269,57 @@
                     //    $('#backDropModal').modal('hide');
                     //    $('#myModalSave').modal();
                     //}
-                  /*  $('#btnSave').click(function () {*/
-                        //Validation/
-                        //if ($('#txtSubject').val().trim() == "") {
-                        //    swal({
-                        //        title: "ERROR",
-                        //        text: "SUBJECT REQUIRED",
-                        //        icon: "error"
-                        //    });
-                        //    return;
-                        //}
-                        //if ($('#txtStart').val().trim() == "") {
-                        //    swal({
-                        //        title: "ERROR",
-                        //        text: "INVALID START DATE FORMAT",
-                        //        icon: "error"
-                        //    });
-                        //    return;
-                        //}
-                        //if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
-                        //    swal({
-                        //        title: "ERROR",
-                        //        text: "INVALID END DATE FORMAT",
-                        //        icon: "error"
-                        //    });
-                        //    return;
-                        /*}*/
-                        //else {
-                        //    var startDate = moment($('#txtStart').val(), "DD/MM/YYYY HH:mm:ss").toDate();
-                        //    var endDate = moment($('#txtEnd').val(), "DD/MM/YYYY HH:mm:ss").toDate();
-                        //    if (startDate > endDate) {
-                        //        swal({
-                        //            title: "ERROR",
-                        //            text: "INVALID DATE FORMAT",
-                        //            icon: "error"
-                        //        });
-                        //        return;
-                        //    }
-                        //}
+                    /*  $('#btnSave').click(function () {*/
+                    //Validation/
+                    //if ($('#txtSubject').val().trim() == "") {
+                    //    swal({
+                    //        title: "ERROR",
+                    //        text: "SUBJECT REQUIRED",
+                    //        icon: "error"
+                    //    });
+                    //    return;
+                    //}
+                    //if ($('#txtStart').val().trim() == "") {
+                    //    swal({
+                    //        title: "ERROR",
+                    //        text: "INVALID START DATE FORMAT",
+                    //        icon: "error"
+                    //    });
+                    //    return;
+                    //}
+                    //if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
+                    //    swal({
+                    //        title: "ERROR",
+                    //        text: "INVALID END DATE FORMAT",
+                    //        icon: "error"
+                    //    });
+                    //    return;
+                    /*}*/
+                    //else {
+                    //    var startDate = moment($('#txtStart').val(), "DD/MM/YYYY HH:mm:ss").toDate();
+                    //    var endDate = moment($('#txtEnd').val(), "DD/MM/YYYY HH:mm:ss").toDate();
+                    //    if (startDate > endDate) {
+                    //        swal({
+                    //            title: "ERROR",
+                    //            text: "INVALID DATE FORMAT",
+                    //            icon: "error"
+                    //        });
+                    //        return;
+                    //    }
+                    //}
 
-                        //var data = {
-                        //    /* EventID: $('#hdEventID').val(),*/
-                        //    Subject: $('#txtSubject').val().trim(),
-                        //    Start: $('#txtStart').val().trim(),
-                        //    End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
-                        //    Description: $('#txtDescription').val(),
-                        //    ThemeColor: $('#ddThemeColor').val(),
-                        //    IsFullDay: $('#chkIsFullDay').is(':checked')
-                        //}
-                        //SaveEvent(data);
-                        //// call function for submit data to the server
-                   /* })*/
+                    //var data = {
+                    //    /* EventID: $('#hdEventID').val(),*/
+                    //    Subject: $('#txtSubject').val().trim(),
+                    //    Start: $('#txtStart').val().trim(),
+                    //    End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
+                    //    Description: $('#txtDescription').val(),
+                    //    ThemeColor: $('#ddThemeColor').val(),
+                    //    IsFullDay: $('#chkIsFullDay').is(':checked')
+                    //}
+                    //SaveEvent(data);
+                    //// call function for submit data to the server
+                    /* })*/
                     //function SaveEvent(data) {
                     //    $.ajax({
                     //        type: "POST",
