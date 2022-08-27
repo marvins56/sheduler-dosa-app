@@ -163,6 +163,40 @@ namespace sheduler.Controllers
             
             return View();
         }
+
+
+        public ActionResult usercalendar(string id)
+        {
+            Session["calendarid"] = id;
+            return View();
+        }
+        public JsonResult GetuserEvents()
+        {
+            using (MyDosa_dbEntities1 dc = new MyDosa_dbEntities1())
+            {
+                try
+                {
+                    string id = Session["calendarid"].ToString();
+                    if (id == null)
+                    {
+
+                        TempData["error"] = "ERROR WHILE VALIDATING USER";
+                    }
+                    else
+                    {
+                        var shedule = db.Events.Where(a => a.userid == id).ToList();
+                        return new JsonResult { Data = shedule, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    }
+
+                }
+                catch (Exception E)
+                {
+                    TempData["error"] = E.Message;
+
+                }
+                return new JsonResult { Data = null, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+        }
         public JsonResult GetEvents()
         {
             using (MyDosa_dbEntities1 dc = new MyDosa_dbEntities1())
@@ -283,7 +317,7 @@ namespace sheduler.Controllers
                 else
                 {
                     {
-                        TempData["error"] ="ERROR WHILE COMPLETING ACTION";
+                        TempData["error"] ="ERROR WHILE VALIDATING DATA ";
                     }
                 }
 

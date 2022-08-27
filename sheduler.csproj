@@ -875,6 +875,7 @@
     <Content Include="Views\Events\Generalreport.cshtml" />
     <Content Include="Views\Events\UserReports.cshtml" />
     <Content Include="Views\Events\PersonalReports.cshtml" />
+    <Content Include="Views\Events\usercalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

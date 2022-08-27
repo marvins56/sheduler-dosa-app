@@ -64,14 +64,14 @@
 
                                         @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })|
                                         <a href="@Url.Action("userInquiries", "Inquiries", new { id = item.AccessNumber })">inquiries</a>|
-                                        @Html.ActionLink("Calender", "Details", new { id = item.AccessNumber })|
-                                    <a href="@Url.Action("UserReports", "Events", new { id = item.AccessNumber })">Report</a>
-                                       
-                                        @Html.ActionLink("location", "Details", new { id = item.AccessNumber })|
+                                        <a href="@Url.Action("usercalendar", "Events", new { id = item.AccessNumber })">Calendar</a>|
+                                        <a href="@Url.Action("UserReports", "Events", new { id = item.AccessNumber })">Report</a>|
+
+                                        @Html.ActionLink("location", "Details", new { id = item.AccessNumber })
 
                                     </td>
 
-
+                                    
 
                                 </tr>
                             }

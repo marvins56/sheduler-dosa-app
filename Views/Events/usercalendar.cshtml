@@ -1,6 +1,8 @@
-﻿@{
+﻿
+@{
     Layout = "~/Views/Shared/Eventslayout.cshtml";
 }
+
 
 
 
@@ -27,30 +29,28 @@
         });
             </script>
         }
-
-
         <div class="card  mb-3">
             <div class="card-header">
                 WELCOME @Session["userid"]
             </div>
             <div class="card-body ">
-                <h5 class="card-title">DETAILS VIEW OF THE STUDENT TRAVEL SCHEDULES</h5>
+                <h5 class="card-title">MY TRAVEL SCHEDULES</h5>
                 <p class="card-text"></p>
 
-                <a href="@Url.Action("Viewallevents","Events")" class="mb-3">
+                <a href="@Url.Action("Myshedules","Events")" class="mb-3">
                     <span class="btn btn-primary  "> VIEW ALL SHEDULES</span>
                 </a>
             </div>
         </div>
         <div id="calender"></div>
-        <a href="@Url.Action("Admin","Users")" class="mt-3 ">
+        <a href="@Url.Action("Admin","users")" class="mb-3 mt-3">
             <span class="btn btn-primary  "> BACK</span>
         </a>
         <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
             <div class="modal-dialog">
                 <form class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="backDropModalTitle">Modal title</h5>
+                        <h5 class="modal-title" id="backDropModalTitle"> TRAVEL SHEDULE</h5>
                         <button type="button"
                                 class="btn-close"
                                 data-dismiss="modal"
@@ -70,9 +70,7 @@
                                     </div>
 
                                 </div>
-
                             </div>
-
                             <button id="btnDelete" class="btn btn-default btn-sm pull-right">
                                 <span class="glyphicon glyphicon-remove"></span> Remove
                             </button>
@@ -106,7 +104,7 @@
                         events = [];
                         $.ajax({
                             type: "GET",
-                            url: "/Events/GetEvents",
+                            url: "/Events/GetuserEvents",
                             success: function (data) {
                                 $.each(data, function (i, v) {
                                     events.push({
@@ -355,5 +353,7 @@
 
     }
 }
+
+
 
 
