@@ -33,7 +33,9 @@ namespace sheduler.Controllers
                 int pending = sum( n1,n2 );
                 ViewBag.pending = pending;
                 ViewBag.allusers = db.Students.ToList().Count();
-        }catch(Exception E)
+                ViewBag.events = db.Events.ToList().Count();
+            }
+            catch(Exception E)
             {
                 TempData["error"] = E.Message;
             }
@@ -268,9 +270,13 @@ namespace sheduler.Controllers
                             return RedirectToAction("index", "Home");
                         }
                     }
+                    else
+                    {
+                        TempData["error"] = "ACCESS DENIED";
+                    }
 
-                  
-                    
+
+
                 }
                 else
                 {

@@ -274,21 +274,17 @@ namespace sheduler.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var start = @event.Start;
-                    var end = @event.End;
-                    if(start > end)
-                    {
-                        TempData["error"] = "INVALID  SET START DATE";
-                    }
-                    else
-                    {
                         @event.userid = Session["userid"].ToString();
                         db.Events.Add(@event);
                         db.SaveChanges();
                         TempData["success"] = "OPERATION SUCCESSFULL";
                         return RedirectToAction("MyCalendar");
+                }
+                else
+                {
+                    {
+                        TempData["error"] ="ERROR WHILE COMPLETING ACTION";
                     }
-                
                 }
 
             }
@@ -296,7 +292,7 @@ namespace sheduler.Controllers
             {
                 TempData["error"] = ex.Message;
             }
-            return RedirectToAction("MyCalendar", @event);
+            return View(@event);
         }
         public ActionResult AdminCreate()
         {
