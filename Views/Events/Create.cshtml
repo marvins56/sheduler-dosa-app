@@ -87,7 +87,9 @@
                                                             </small>
 
                                                             <div class="form-group">
-                                                                <textarea class="form-control" name="Description"></textarea>
+                                                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                                @*<textarea class="form-control" name="Description"></textarea>*@
                                                                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                                             </div>
                                                         </div>
@@ -110,7 +112,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="IsFullDay">
+                                                            <input type="checkbox" class="form-check-input"  name="IsFullDay" disabled >
+
                                                             <label class="form-check-label" for="exampleCheck1">SET FULL DAY</label>
                                                         </div>
                                                         <div class="form-group">

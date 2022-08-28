@@ -320,7 +320,7 @@ namespace sheduler.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
-        public void SendSheduleEmail(string emailId, string usernames,string id, DateTime start,string subjects, string reason)
+        public void SendSheduleEmail(string emailId,string studentname, string usernames,string id, DateTime start,string subjects, string reason)
         {
             var fromEmail = new MailAddress("testmarvinug@gmail.com", "UGANDA CHRISTIAN UNIVERSITY(DOSA)");
             var toEmail = new MailAddress(emailId);
@@ -328,7 +328,7 @@ namespace sheduler.Controllers
             var fromEmailPassword = "kcywjucbmujbrycc";
 
             var subject = "STUDENT TRAVEL SCHEDULE UPDATE";
-            var body1 = usernames + " With Access Number : " + id + " Has shedule Their Travel Intensions," + "<br/>"
+            var body1 = "Grettings" +  usernames + ", "+ studentname+ " With Access Number : " + id + " Has shedule Their Travel Intensions," + "<br/>"
 
                  + "From " + start + " with an estimated arrival on ...  <br/>"
                    + " TRAVEL SUBJECT :" + subjects + "<br/>"
@@ -386,40 +386,51 @@ namespace sheduler.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var id = Session["userid"].ToString();
-                    var Adminid = db.Roles.Where(a => a.Role1 == "SUPER ADMINISTRATOR").Select(A => A.Role_id).FirstOrDefault();
-                    var adminemailid = db.Userroles.Where(a => a.Roleid == Adminid).Select(a => a.AccessNo).FirstOrDefault();
-                    var email = db.Students.Where(a => a.AccessNumber == adminemailid).Select(a => a.Email).FirstOrDefault();
+             
 
-                    var username = db.Students.Where(a => a.AccessNumber == id).Select(a => a.UserName).FirstOrDefault();
-                    var start = db.Events.Where((a => a.Start == @event.Start && a.userid == id)).Select(a=>a.Start).FirstOrDefault();
-                    var subjects = db.Events.Where((a => a.Start == @event.Start && a.userid == id)).Select(a => a.Subject).FirstOrDefault();
-                    var reason = db.Events.Where((a => a.Start == @event.Start && a.userid == id)).Select(a => a.Description).FirstOrDefault();
-                    if(id!= null && email != null && username != null && start != null && subjects != null && reason != null)
+                    if ((@event.Start > DateTime.Now || @event.Start == DateTime.Now) && (@event.End > DateTime.Now))
                     {
+                        var id = Session["userid"].ToString();
                         @event.userid = Session["userid"].ToString();
                         db.Events.Add(@event);
                         db.SaveChanges();
-                        SendSheduleEmail(email, username, id, start, subjects, reason);
 
-                        TempData["success"] = "OPERATION SUCCESSFULL, DOSA's OFICE HAS BEEN NOTIFIED";
-                        return RedirectToAction("MyCalendar");
+                        //GENERATE DATA TO SEND MAIL
+                        var Adminid = db.Roles.Where(a => a.Role1 == "SUPER ADMINISTRATOR").Select(A => A.Role_id).FirstOrDefault();
+                        var adminemailid = db.Userroles.Where(a => a.Roleid == Adminid).Select(a => a.AccessNo).FirstOrDefault();
+                        var email = db.Students.Where(a => a.AccessNumber == adminemailid).Select(a => a.Email).FirstOrDefault();
+                        var adminname = db.Students.Where(a => a.AccessNumber == adminemailid).Select(a => a.UserName).FirstOrDefault();
+
+                        var username = db.Students.Where(a => a.AccessNumber == id).Select(a => a.UserName).FirstOrDefault();
+                        var start = db.Events.Where((a => a.Start == @event.Start && a.userid == id)).Select(a => a.Start).FirstOrDefault();
+                        var subjects = db.Events.Where((a => a.Start == @event.Start && a.userid == id)).Select(a => a.Subject).FirstOrDefault();
+                        var reason = db.Events.Where((a => a.Start == @event.Start && a.userid == id)).Select(a => a.Description).FirstOrDefault();
+
+                        if (id != null && email != null && username != null && start != null && subjects != null && reason != null && adminname != null)
+                        {
+                           
+                            SendSheduleEmail(email, username, adminname, id, start, subjects, reason);
+                            TempData["success"] = "OPERATION SUCCESSFULL, DOSA's OFICE HAS BEEN NOTIFIED";
+                            return RedirectToAction("MyCalendar");
+                        }
+                        else
+                        {
+                            TempData["error"] = "ERROR OCCURED WHILE NOTIFYING  DOSA OFFICE KINDLYTRY AGAIN";
+                        }
                     }
                     else
                     {
-                        TempData["error"] = "ERRROR SENDING MAIL TO DOSA OFFICE KINDLYTRY AGAIN";
-                    }
+                        TempData["error"] = "INVALID SET-OFF / ARRIVAL DATE";
 
-                       
+                    }
                 }
                 else
                 {
-                    {
-                        TempData["error"] ="ERROR WHILE VALIDATING DATA ";
-                        TempData["error"] = ViewData.ModelState.Values;
-                    }
+                    //var modelStateErrors = this.ModelState.Keys.SelectMany(key => this.ModelState[key].Errors);
+                    //TempData["error"] = getallerrors(ModelState);                  
+                    var modelStateErrors = this.ModelState.Values.SelectMany(m => m.Errors);
+                    TempData["error"] = modelStateErrors;
                 }
-
             }
             catch (Exception ex)
             {
@@ -427,6 +438,7 @@ namespace sheduler.Controllers
             }
             return View(@event);
         }
+
         public ActionResult AdminCreate()
         {
             return View();
@@ -562,6 +574,8 @@ namespace sheduler.Controllers
             }
             return View();
         }
+
+
         public ActionResult AdminDetails(int? id)
         {
             if (id == null)

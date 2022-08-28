@@ -46,7 +46,7 @@ namespace sheduler.Controllers
                     TempData["nullvalue"] = "RESPONSE PENDING";
                     var ROLE = Session["userroles"];
 
-                    if (ROLE.Equals(3)|| ROLE.Equals(6))
+                    if (ROLE.ToString() == "ADMINISTRATOR" || ROLE.ToString() == "SUPER ADMINISTRATOR")
                     {
                         return RedirectToAction("index");
                     }

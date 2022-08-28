@@ -178,7 +178,7 @@ namespace sheduler.Controllers
         [NonAction]
         public string Generate_Pass()
         {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
             var stringChars = new char[6];
             var random = new Random();
 
@@ -261,12 +261,12 @@ namespace sheduler.Controllers
                         //TempData["success"] = "verified";
                         if (actualrole == "ADMINISTRATOR" || actualrole == "SUPER ADMINISTRATOR")
                         {
-                            Session["userroles"] = userrolesz;
+                            Session["userroles"] = actualrole;
                             return RedirectToAction("Admin", "Users");
                         }
                         else
                         {
-                            Session["userroles"] = userrolesz;
+                            Session["userroles"] = actualrole;
                             return RedirectToAction("index", "Home");
                         }
                     }
