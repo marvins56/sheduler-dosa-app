@@ -2,7 +2,7 @@
 @model UserReport
 @{
     ViewBag.Title = "UserReports";
-    Layout = "~/Views/Shared/adminlayout.cshtml";
+    Layout = "~/Views/Shared/Eventslayout.cshtml";
 }
 
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -22,13 +22,11 @@
                 <div class="card-body ">
                     <h5 class="card-title">GENERATE USER REPORTS</h5>
                     <p class="card-text">
-                        <a href="#" class="mb-5">
-                            <span class="btn btn-primary  "> TO PDF</span>
-                        </a>
-                        <a href="#" class="mb-3">
-                            <span class="btn btn-primary  "> TO EXCEL</span>
-                        </a>
-                </div>
+                        @*<a href="@Url.Action("Extract_General_data","Events",new { }))" class="mb-5">
+                            <span class="btn btn-primary  "> GENREATE REPORT</span>
+                        </a>*@
+                       
+</div>
             </div>
             <div class="card mb-4">
                 <h5 class="card-header">Profile Details</h5>
@@ -36,7 +34,7 @@
                 <hr class="my-0" />
                 <div class="card-body">
                     <div class="table-responsive text-wrap">
-                        <table class="table table-hover  " style="width:100%">
+                        <table class="table table-hover  " style="width:100%" id="datatable">
                             <thead>
                                
 
@@ -152,7 +150,8 @@
 
             <table class="table table-hover  " style="width:100%">
                 <thead>
-                    <th> <H4 class="text-capitalize text-left" style="margin-left:2px;">  INQUIRIES</H4></th>
+                    <th> <H4 class="text-capitalize text-left" style="margin-left:2px;">  INQUIRIES</H4>
+                </th>
                     <tr>
                         <th>
                             STUDENT

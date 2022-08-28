@@ -20,7 +20,7 @@
 }
 
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     $(function () {
         $('#datatable').DataTable({
             dom: 'Bfrtip',
@@ -41,15 +41,11 @@
         });
 
     });
-</script>
+</script>*@
 
 
 
 <script type="text/javascript">
-
-
-
-
 
     //$(document).ready(function () {
     //    $('#datatable').DataTable({
@@ -60,34 +56,30 @@
     //    });
     //});
 
-
-
-
-
-    //$(document).ready(function () {
-    //    var table = $('#datatable').dataTable();
-    //    var tableTools = new $.fn.dataTable.TableTools(table, {
-    //        'aButtons': [
-    //            {
-    //                'sExtends': 'xls',
-    //                'sButtonText': 'Save to Excel',
-    //                'sFileName': 'General_report.xls'
-    //            },
-    //            {
-    //                'sExtends': 'print',
-    //                'bShowAll': true,
-    //            },
-    //            {
-    //                'sExtends': 'pdf',
-    //                'bFooter': false
-    //            },
-    //            'copy',
-    //            'csv'
-    //        ],
-    //        'sSwfPath': '//cdn.datatables.net/tabletools/2.2.4/swf/copy_csv_xls_pdf.swf'
-    //    });
-    //    $(tableTools.fnContainer()).insertBefore('#datatable_wrapper');
-    //});
+    $(document).ready(function () {
+        var table = $('#datatable').dataTable();
+        var tableTools = new $.fn.dataTable.TableTools(table, {
+            'aButtons': [
+                {
+                    'sExtends': 'xls',
+                    'sButtonText': 'Save to Excel',
+                    'sFileName': 'General_report.xls'
+                },
+                {
+                    'sExtends': 'print',
+                    'bShowAll': true,
+                },
+                {
+                    'sExtends': 'pdf',
+                    'bFooter': false
+                },
+                'copy',
+                'csv'
+            ],
+            'sSwfPath': '//cdn.datatables.net/tabletools/2.2.4/swf/copy_csv_xls_pdf.swf'
+        });
+        $(tableTools.fnContainer()).insertBefore('#datatable_wrapper');
+    });
 </script>
 
 
@@ -111,13 +103,10 @@
                 </div>
 
             </p>
-            <a href="#" class="mb-5">
-                <span class="btn btn-primary  "> TO PDF</span>
+            <a href="@Url.Action("Extract_General_data","Events")" class="mb-5">
+                <span class="btn btn-primary  "> GENREATE REPORT</span>
             </a>
-            <a href="#" class="mb-3">
-                <span class="btn btn-primary  "> TO EXCEL</span>
-            </a>
-
+            
         </div>
     </div>
     <!-- Hoverable Table rows -->

@@ -1,22 +1,18 @@
 ﻿@model sheduler.Models.Year
 
-@{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/adminlayout.cshtml";
-}
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("save", "Years", FormMethod.Post, new { id = "popupForm" }))
 {
     @Html.AntiForgeryToken()
-    
+
+    if (Model != null && Model.Year_id > 0)
+    {
+        @Html.HiddenFor(a => a.Year_id)
+    }
     <div class="form-horizontal">
         <h4>Year</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-     
         <div class="form-group">
             @Html.LabelFor(model => model.yearName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -33,10 +29,3 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

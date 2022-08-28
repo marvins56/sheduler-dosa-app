@@ -19,11 +19,12 @@ using System.Xml.Linq;
 [Display(Name = "EVENT")]
         public int EventID { get; set; }
         [Display(Name = "TRAVEL SUBJECT")]
+        [MaxLength(100, ErrorMessage = "invalid description length")]
         public string Subject { get; set; }
 
         [Display(Name = " TRAVEL DESCRIPTION")]
         [DataType(DataType.MultilineText)]
-        [MaxLength(500, ErrorMessage = "please give a shorter sentence")]
+       
         [MinLength(100, ErrorMessage = "invalid description length")]
         [Required(AllowEmptyStrings = false, ErrorMessage = " Body Content field required")]
         public string Description { get; set; }
