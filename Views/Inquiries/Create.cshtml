@@ -6,8 +6,27 @@
 
 
 @{
-    if (Session["userid"] != null)
-    {
+
+   if (TempData["success"] != null)
+            {
+            <script >
+     swal({
+    itle: "SUCCESSFULL OPERATION",
+  text: "@TempData["success"]",
+         icon: "success"
+        });</script >
+        }
+            else if (TempData["error"] != null)
+            {
+            <script >
+     swal({
+    itle: "ERROR",
+  text: "@TempData["error"]",
+         icon: "warning"
+        });</script >
+            }
+            if (Session["userid"] != null)
+            {
         <div class="container-xxl flex-grow-1 container-p-y">
 
             <div class="row">
@@ -16,10 +35,10 @@
                     <div class="card mb-6">
                         <h5 class="card-header">MAKE INQUIRY DIRECT TO DOSA</h5>
                         @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
+        {
+            @Html.AntiForgeryToken()
 
-                            <div class="card-body">
+            <div class="card-body">
                                 <div class="form-floating">
                                     <div class="form-group">
                                         <textarea name="inquirry" class="form-control mb-2" id="floatingInput" placeholder="My Inquiry ..." rows="10" cols="30">  </textarea>

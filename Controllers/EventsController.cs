@@ -71,12 +71,12 @@ namespace sheduler.Controllers
             userDetails.Response = response;
             return View(userDetails);
         }
-
         public List<Inquiry> Get_myinquiries(string id)
         {
-            id = (Session["userid"]).ToString();
+          
             try
             {
+                id = (Session["userid"]).ToString();
                 TempData["inquiries"] = db.Inquiries.Where(a => a.UserId == id).ToList().Count();
                 db.Inquiries.Where(a => a.UserId == id).ToList();
 
@@ -86,13 +86,13 @@ namespace sheduler.Controllers
                 TempData["error"] = e.Message;
             }
 
-            return (db.Inquiries.Where(a => a.UserId == id).ToList());
+            return (db.Inquiries.Where(a => a.UserId == id).OrderBy(a => a.Dateposteed).ToList());
         }
         public List<Student> Get_mystudent(string id)
         {
-            id = (Session["userid"]).ToString();
             try
             {
+                id = (Session["userid"]).ToString();
                 TempData["students"] = db.Students.Where(a => a.AccessNumber == id).ToList().Count();
                 db.Students.Where(a => a.AccessNumber == id).ToList();
 
@@ -106,9 +106,9 @@ namespace sheduler.Controllers
         }
         public List<Event> Get_UserEvents(string id)
         {
-            id = (Session["userid"]).ToString();
             try
             {
+                id = (Session["userid"]).ToString();
                 TempData["events"] = db.Events.Where(a => a.userid == id).ToList().Count();
                 db.Events.Where(a => a.userid == id).ToList();
 
@@ -118,7 +118,7 @@ namespace sheduler.Controllers
                 TempData["error"] = e.Message;
             }
 
-            return (db.Events.Where(a => a.userid == id).ToList());
+            return (db.Events.Where(a => a.userid == id).OrderBy(a => a.Start).ToList());
         }
         public List<Student> Get_students()
         {
@@ -141,11 +141,11 @@ namespace sheduler.Controllers
         }
         public List<Inquiry> Get_all_Inquiries()
         {
-            return (db.Inquiries.ToList());
+            return (db.Inquiries.OrderBy(a => a.Dateposteed).ToList());
         }
         public List<Response> Get_all_responses()
         {
-            return (db.Responses.ToList());
+            return (db.Responses.OrderBy(a => a.DatetimeOfReply).ToList());
         }
         public List<Event> Get_all_events()
         {
@@ -161,7 +161,7 @@ namespace sheduler.Controllers
         {
             try
             {
-                    var result = db.Events.ToList();
+                    var result = db.Events.OrderBy(a=>a.Start).ToList();
                     return View(result);
             }catch(Exception E)
             {
@@ -176,7 +176,7 @@ namespace sheduler.Controllers
                 string id = Session["userid"].ToString();
                 if(id!= null)
                 {
-                    var shedule = db.Events.Where(a => a.userid == id).ToList();
+                    var shedule = db.Events.Where(a => a.userid == id).OrderBy(a=>a.Start).ToList();
                     return View(shedule);
                 }
               
@@ -303,16 +303,40 @@ namespace sheduler.Controllers
             var status = false;
             try
             {
-                using (MyDosa_dbEntities1 dc = new MyDosa_dbEntities1())
-                {
-                    var v = dc.Events.Where(a => a.EventID == eventID).FirstOrDefault();
+                   var id = Session["userid"].ToString();
+
+                    var v = db.Events.Where(a => a.EventID == eventID).FirstOrDefault();
                     if (v != null)
                     {
-                        dc.Events.Remove(v);
-                        dc.SaveChanges();
-                        status = true;
+                        //GENERATE DATA TO SEND MAIL
+                        var Adminid = db.Roles.Where(a => a.Role1 == "SUPER ADMINISTRATOR").Select(A => A.Role_id).FirstOrDefault();
+                        var adminemailid = db.Userroles.Where(a => a.Roleid == Adminid).Select(a => a.AccessNo).FirstOrDefault();
+                        var email = db.Students.Where(a => a.AccessNumber == adminemailid).Select(a => a.Email).FirstOrDefault();
+                        var adminname = db.Students.Where(a => a.AccessNumber == adminemailid).Select(a => a.UserName).FirstOrDefault();
+                        var username = db.Students.Where(a => a.AccessNumber == id).Select(a => a.UserName).FirstOrDefault();
+                        var start = db.Events.Where((a => a.EventID == eventID && a.userid == id)).Select(a => a.Start).FirstOrDefault();
+                        var subjects = db.Events.Where((a => a.EventID == eventID && a.userid == id)).Select(a => a.Subject).FirstOrDefault();
+                        var reason = db.Events.Where((a => a.EventID == eventID && a.userid == id)).Select(a => a.Description).FirstOrDefault();
+                        if (id != null && email != null && username != null && start != null && subjects != null && reason != null && adminname != null)
+                        {
+                            db.Events.Remove(v);
+                            db.SaveChanges();
+                            status = true;
+                            Send_Delete_Event_Email(email, username, adminname, id, start, subjects, reason);
+                            TempData["success"] = "OPERATION SUCCESSFULL, DOSA OFICE HAS BEEN NOTIFIED";
+
+                        }
+                        else
+                        {
+                            TempData["error"] = "ERROR OCCURED WHILE NOTIFYING  DOSA OFFICE KINDLYTRY AGAIN";
+                        }
+
                     }
-                }
+                    else
+                    {
+                        TempData["error"] = "INVALID REFRENCE";
+                    }
+                
             }
             catch (Exception ex)
             {
@@ -320,6 +344,62 @@ namespace sheduler.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
+
+        public void Send_Delete_Event_Email(string emailId, string studentname, string usernames, string id, DateTime start, string subjects, string reason)
+        {
+            var fromEmail = new MailAddress("testmarvinug@gmail.com", "UGANDA CHRISTIAN UNIVERSITY(DOSA)");
+            var toEmail = new MailAddress(emailId);
+            //this password is generated by u in ur email account
+            var fromEmailPassword = "kcywjucbmujbrycc";
+
+            var subject = "STUDENT TRAVEL SCHEDULE UPDATE";
+            var body1 = "Grettings" + usernames + ", " + studentname + " With Access Number : " + id + " Has WITHDRAWN Their Travel Schedule that was intended to happen" + "<br/>"
+
+                 + "ON " + start + "<br/>" + "<br/>"
+                   + "The schedule had the folowing details :" + "<br/>" +
+                  "SUBJECT: "+ subjects + "<br/>" + "<br/>"
+            + " REASON :" + reason + ".<br/> <br/> Kindly check the Platform for more details";
+
+            var smtp = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new System.Net.NetworkCredential(fromEmail.Address, fromEmailPassword),
+            };
+
+            string body = string.Empty;
+            var root = AppDomain.CurrentDomain.BaseDirectory;
+
+            using (var reader = new System.IO.StreamReader(root + @"/Template/html/email.html"))
+            {
+                string readFile = reader.ReadToEnd();
+                string StrContent = string.Empty;
+                StrContent = readFile;
+                //Assing the field values in the template
+                StrContent = StrContent.Replace("[body]", body1);
+
+                body = StrContent.ToString();
+            }
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+                //Fetching Email Body Text from EmailTemplate File.  
+            })
+                try
+                {
+                    smtp.Send(message);
+                }
+                catch (Exception e)
+                {
+                    TempData["error"] = e.Message;
+                }
+        }
+
         public void SendSheduleEmail(string emailId,string studentname, string usernames,string id, DateTime start,string subjects, string reason)
         {
             var fromEmail = new MailAddress("testmarvinug@gmail.com", "UGANDA CHRISTIAN UNIVERSITY(DOSA)");
@@ -328,11 +408,11 @@ namespace sheduler.Controllers
             var fromEmailPassword = "kcywjucbmujbrycc";
 
             var subject = "STUDENT TRAVEL SCHEDULE UPDATE";
-            var body1 = "Grettings" +  usernames + ", "+ studentname+ " With Access Number : " + id + " Has shedule Their Travel Intensions," + "<br/>"
+            var body1 = "Grettings" +  usernames + ", "+ studentname+ " With Access Number : " + id + " Has shedule Their Travel Intensions," + "<br/> <br/>"
 
-                 + "From " + start + " with an estimated arrival on ...  <br/>"
+                 + "From " + start + " with an estimated arrival on ... <br/> <br/>"
                    + " TRAVEL SUBJECT :" + subjects + "<br/>"
-            + " REASON :" + reason + ".<br/> Kindly check the Platform for more details";
+            + " REASON :" + reason + ".<br/><br/> Kindly check the Platform for more details";
 
             var smtp = new SmtpClient("smtp.gmail.com")
             {
@@ -386,9 +466,12 @@ namespace sheduler.Controllers
             {
                 if (ModelState.IsValid)
                 {
-             
-
-                    if ((@event.Start > DateTime.Now || @event.Start == DateTime.Now) && (@event.End > DateTime.Now))
+                    if ((@event.Start < DateTime.Now || @event.End < DateTime.Now))
+                    {
+                        TempData["error"] = "INVALID SET-OFF / ARRIVAL DATE";
+ 
+                    }
+                    else
                     {
                         var id = Session["userid"].ToString();
                         @event.userid = Session["userid"].ToString();
@@ -408,7 +491,6 @@ namespace sheduler.Controllers
 
                         if (id != null && email != null && username != null && start != null && subjects != null && reason != null && adminname != null)
                         {
-                           
                             SendSheduleEmail(email, username, adminname, id, start, subjects, reason);
                             TempData["success"] = "OPERATION SUCCESSFULL, DOSA's OFICE HAS BEEN NOTIFIED";
                             return RedirectToAction("MyCalendar");
@@ -417,11 +499,6 @@ namespace sheduler.Controllers
                         {
                             TempData["error"] = "ERROR OCCURED WHILE NOTIFYING  DOSA OFFICE KINDLYTRY AGAIN";
                         }
-                    }
-                    else
-                    {
-                        TempData["error"] = "INVALID SET-OFF / ARRIVAL DATE";
-
                     }
                 }
                 else

@@ -5,10 +5,29 @@
 }
 
 
-
 @{
-    if (Session["userid"] != null)
-    {
+
+  if (TempData["success"] != null)
+                {
+            <script >
+     swal({
+                    title: "SUCCESSFULL OPERATION",
+  text: "@TempData["success"]",
+         icon: "success"
+        });</script>
+        }
+                else if (TempData["error"] != null)
+                {
+            <script>
+     swal({
+                    title: "ERROR",
+  text: "@TempData["error"]",
+         icon: "warning"
+        });</ script >
+                }
+
+                if (Session["userid"] != null)
+                {
         <div>
             <h4>Inquiry</h4>
             <hr />
@@ -48,7 +67,7 @@
     {
         <script>
             swal({
-                title: "NOT AUTHORISED",
+        title: "NOT AUTHORISED",
                 text: "ACCESSDE DENIED",
                 icon: "error"
             });</script>
