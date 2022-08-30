@@ -9,7 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using sheduler.Models;
-
+using PagedList.Mvc;
+using PagedList;
 namespace sheduler.Controllers
 {
     public class InquiriesController : Controller
@@ -18,22 +19,58 @@ namespace sheduler.Controllers
 
         // GET: Inquiries
         
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-        //    var inquiryList = (from t in db.Inquiries
-        //                       join r in db.Responses on t.Inquirery_id equals r.Inquirery_id
-        //                       select new
-        //                       {
-        //                          Inquiry =  t.inquirry,
-        //                           Inquirery_id =  t.Inquirery_id,
-        //                           UserId = t.UserId,
-        //                           ResponseId =    r.ResponseId,
-        //                           Response1 = r.Response1,
-        //                           DatetimeOfReply =   r.DatetimeOfReply,
-        //                           Dateposteed = t.Dateposteed
-        //                       }).ToList();
+            try
+            {
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.inquirydesc = String.IsNullOrEmpty(sortOrder) ? "inquirydesc" : "";
+                ViewBag.Date = sortOrder == "Date" ? "date_desc" : "Date";
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
 
-            return View(db.Inquiries.ToList());
+                ViewBag.CurrentFilter = searchString;
+
+                var result = from s in db.Inquiries
+                             select s;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    result = result.Where(s => s.inquirry.Contains(searchString)
+                                           || s.UserId.Contains(searchString));
+                }
+
+
+                switch (sortOrder)
+                {
+                    case "Description_desc":
+                        result = result.OrderByDescending(s => s.inquirry);
+                        break;
+                    case "Date":
+                        result = result.OrderBy(s => s.Dateposteed);
+                        break;
+                    case "date_desc":
+                        result = result.OrderByDescending(s => s.Dateposteed);
+                        break;
+                    default:
+                        result = result.OrderBy(s => s.Dateposteed);
+                        break;
+                }
+
+                int pageSize = 6;
+                int pageNumber = (page ?? 1);
+                return View(result.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception E)
+            {
+                TempData["error"] = E.Message;
+            }
+            return View();
         }
         public ActionResult userResponse(int id)
         {

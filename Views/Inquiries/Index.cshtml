@@ -1,12 +1,14 @@
-﻿@model IEnumerable<sheduler.Models.Inquiry>
+﻿
+@model IPagedList<sheduler.Models.Inquiry>
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 
 @{
     ViewBag.Title = "Inquiries";
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
-
-
-
 
 @{
     if (Session["userid"] != null)
@@ -29,65 +31,130 @@
   icon: "success"
         });</script>
         }
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <!-- Hoverable Table rows -->
-            <div class="card">
-                <span class="card-header text-capitalize">
-                    Manage inquiries
-                    <a href="@Url.Action("Create","Responses")">
-                        <span class="btn btn-primary  m-2" style="float:right;margin-right :3px;"> RESPOND TO INQUIRY</span>
-                    </a>
-                    <a href="@Url.Action("Generate_All_inquiries_PDF","Inquiries")">
-                        <span class="btn btn-primary m-2" style="float:right"> GENERATE REPORT</span>
-                    </a>
-                </span>
-                <div class="table-responsive text-wrap">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.UserId)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.inquirry)
+<div class="container-xxl flex-grow-1 container-p-y">
 
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Dateposteed)
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        <a href="@Url.Action("userInquiries", "Inquiries", new { id = item.UserId })">
-                                            @Html.DisplayFor(modelItem => item.UserId)
-                                        </a>
+    <div class="mb-3 col-12 mb-0">
+        <div class="alert alert-warning">
+            <h6 class="alert-heading fw-bold mb-1"> NOTE:</h6>
+            <p class="mb-0">
+                To sort in diffrent areas like sort all descriptions to descending or assending plus dates inclusive, kindly click on the headers to sort
+            </p>
+        </div>
+    </div>
+    @using (Html.BeginForm())
 
-                                    </td>
-                                    <td style="width:50%;word-wrap:break-word;">
-                                        @Html.DisplayFor(modelItem => item.inquirry)
+    {<nav class="layout-navbar  mb-3 container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+          id="layout-navbar">
 
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Dateposteed)
-                                    </td>
+            @*<div class=" align-items-center" id="navbar-collapse">*@
+            <div class="navbar-nav align-items-center">
+                <div class="nav-item d-flex align-items-center">
+                    <button type="submit" class="btn btn-light">
+                        <i class="bx bx-search fs-4 lh-0"></i>
+                    </button>
+                    <input type="text"
+                           class="form-control border-0 shadow-none"
+                           placeholder="Search..."
+                           aria-label="Search..." name="SearchString" style="width:100%" />
 
-                                    <td>
-                                        <button class="btn btn-outline-success text-white">  @Html.ActionLink("status", "userResponse", new { id = item.Inquirery_id })</button>
-                                       
-                                        
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
                 </div>
             </div>
-        </div>
+            @*</div>*@
+        </nav>
+
+    }
+    <!-- Hoverable Table rows -->
+<div class="card">
+    <span class="card-header text-capitalize">
+        Manage inquiries
+        <a href="#">
+            <span class="btn btn-primary  m-2" style="float:right;margin-right :3px;"> RESPOND TO INQUIRY</span>
+        </a>
+        <a href="#">
+            <span class="btn btn-primary m-2" style="float:right"> GENERATE REPORT</span>
+        </a>
+    </span>
+    <div class="table-responsive text-wrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <button type="button"
+                                class="btn btn-light text-black"
+                                data-bs-toggle="tooltip"
+                                data-bs-offset="0,4"
+                                data-bs-placement="top"
+                                data-bs-html="true"
+                                title=" </i><span> STUDENT ACCESS NUMBER<span>">
+
+                            ACC/NO
+                        </button>
+                    </th>
+                    <th>
+                        <button type="button"
+                                class="btn btn-light text-black"
+                                data-bs-toggle="tooltip"
+                                data-bs-offset="0,4"
+                                data-bs-placement="top"
+                                data-bs-html="true"
+                                title=" </i><span> SORT BY INQUIRY</span>">
+                            @Html.ActionLink("INQUIRY", "index", new { sortOrder = ViewBag.inquirydesc })
+
+                        </button>
+
+                    </th>
+                    <th>
+                        <button type="button"
+                                class="btn btn-light text-black"
+                                data-bs-toggle="tooltip"
+                                data-bs-offset="0,4"
+                                data-bs-placement="top"
+                                data-bs-html="true"
+                                title=" </i><span> SORT BY DATE POSTED</span>">
+                            @Html.ActionLink("DATE POSTED", "index", new { sortOrder = ViewBag.Date })
+
+                        </button>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("userInquiries", "Inquiries", new { id = item.UserId })">
+                                @Html.DisplayFor(modelItem => item.UserId)
+                            </a>
+
+                        </td>
+                        <td style="width:50%;word-wrap:break-word;">
+                            @Html.DisplayFor(modelItem => item.inquirry)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dateposteed)
+                        </td>
+
+                        <td>
+                            <button class="btn btn-outline-success text-white">  @Html.ActionLink("status", "userResponse", new { id = item.Inquirery_id })</button>
+
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+    </div>
+</div>
+</div>
     }
     else
     {

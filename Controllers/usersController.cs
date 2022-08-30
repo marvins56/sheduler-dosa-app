@@ -8,7 +8,8 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using sheduler.Models;
-
+using PagedList.Mvc;
+using PagedList;
 namespace sheduler.Controllers
 {
     //[Authorize]
@@ -17,6 +18,63 @@ namespace sheduler.Controllers
     {
         private MyDosa_dbEntities1 db = new MyDosa_dbEntities1();
 
+        public ActionResult Users(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            try
+            {
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.username = String.IsNullOrEmpty(sortOrder) ? "username" : "";
+                ViewBag.accessnumber = String.IsNullOrEmpty(sortOrder) ? "accessnumber" : "";
+                ViewBag.country = String.IsNullOrEmpty(sortOrder) ? "country" : "";
+               
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+
+                ViewBag.CurrentFilter = searchString;
+
+                var result = from s in db.Students
+                             select s;
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    result = result.Where(s => s.AccessNumber.Contains(searchString)
+                   || s.Email.Contains(searchString) || s.UserName.Contains(searchString) || s.Country.Contains(searchString));
+                }
+
+
+                switch (sortOrder)
+                {
+                    case "username":
+                        result = result.OrderByDescending(s => s.UserName);
+                        break;
+                    case "accessnumber":
+                        result = result.OrderBy(s => s.AccessNumber);
+                        break;
+                    case "country":
+                        result = result.OrderByDescending(s => s.Country);
+                        break;
+                    default:
+                        result = result.OrderBy(s => s.Country);
+                        break;
+                }
+
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+                result = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
+                return View(result.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception E)
+            {
+                TempData["error"] = E.Message;
+            }
+            return View();
+        }
         public ActionResult Index()
         {
             var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
@@ -42,20 +100,72 @@ namespace sheduler.Controllers
 
             return View();
         }
-        public ActionResult Users()
-        {
-            var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
-            return View(students.ToList());
-        }
+        //public ActionResult Users()
+        //{
+        //    var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
+        //    return View(students.ToList());
+        //}
         public int  sum(int a, int b)
         {
 
             return (a - b);
         }
-        public ActionResult UserInfo()
+        public ActionResult UserInfo(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
-            return View(students.ToList());
+            try
+            {
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.username = String.IsNullOrEmpty(sortOrder) ? "username" : "";
+                ViewBag.accessnumber = String.IsNullOrEmpty(sortOrder) ? "accessnumber" : "";
+                ViewBag.country = String.IsNullOrEmpty(sortOrder) ? "country" : "";
+
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+
+                ViewBag.CurrentFilter = searchString;
+
+                var result = from s in db.Students
+                             select s;
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    result = result.Where(s => s.AccessNumber.Contains(searchString)
+                   || s.Email.Contains(searchString) || s.UserName.Contains(searchString) || s.Country.Contains(searchString));
+                }
+
+
+                switch (sortOrder)
+                {
+                    case "username":
+                        result = result.OrderByDescending(s => s.UserName);
+                        break;
+                    case "accessnumber":
+                        result = result.OrderBy(s => s.AccessNumber);
+                        break;
+                    case "country":
+                        result = result.OrderByDescending(s => s.Country);
+                        break;
+                    default:
+                        result = result.OrderBy(s => s.Country);
+                        break;
+                }
+
+                int pageSize = 6;
+                int pageNumber = (page ?? 1);
+                result = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
+                return View(result.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception E)
+            {
+                TempData["error"] = E.Message;
+            }
+            return View();
         }
         public ActionResult Details(string id)
         {

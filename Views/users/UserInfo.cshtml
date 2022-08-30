@@ -1,24 +1,46 @@
-﻿@model IEnumerable<sheduler.Models.Student>
-
+﻿
+@model IPagedList<sheduler.Models.Student>
+@using PagedList.Mvc;
+@using PagedList;
 @{
-    ViewBag.Title = "UserInfo";
+    ViewBag.Title = "Users";
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
 
 @{
     if (Session["userid"] != null)
     {
-
-        if (TempData["nullvalue"] != null)
-        {
-            <script>
-     swal({
-        title: "PENDING",
-  text: "@TempData["nullvalue"]",
-  icon: "warning"
-        });</script>
-        }
         <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="mb-3 col-12 mb-0">
+                <div class="alert alert-warning">
+                    <h6 class="alert-heading fw-bold mb-1"> NOTE:</h6>
+                    <p class="mb-0">
+                        To sort in diffrent areas like sort all descriptions to descending or assending plus dates inclusive, kindly click on the headers to sort
+                    </p>
+                </div>
+            </div>
+            @using (Html.BeginForm())
+
+            {<nav class="layout-navbar  mb-3 container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                  id="layout-navbar">
+
+                    @*<div class=" align-items-center" id="navbar-collapse">*@
+                    <div class="navbar-nav align-items-center">
+                        <div class="nav-item d-flex align-items-center">
+                            <button type="submit" class="btn btn-light">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                            </button>
+                            <input type="text"
+                                   class="form-control border-0 shadow-none"
+                                   placeholder="Search..."
+                                   aria-label="Search..." name="SearchString" style="width:100%" />
+
+                        </div>
+                    </div>
+                    @*</div>*@
+                </nav>
+
+            }
             <!-- Hoverable Table rows -->
             <div class="card">
                 <h5 class="card-header">USER DETAILS</h5>
@@ -27,19 +49,94 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.AccessNumber)
+
+                                    <button type="button"
+                                            class="btn btn-light text-black"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4"
+                                            data-bs-placement="top"
+                                            data-bs-html="true"
+                                            title=" </i><span> SORT BY ACCESS NUMBER</span>">
+                                        @Html.ActionLink("USER", "UserInfo", new { sortOrder = ViewBag.accessnumber })
+
+                                    </button>
+
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.UserName)
+                                    <button type="button"
+                                            class="btn btn-light text-black"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4"
+                                            data-bs-placement="top"
+                                            data-bs-html="true"
+                                            title=" </i><span> SORT BY USERNAME</span>">
+                                        @Html.ActionLink("USERNAME", "UserInfo", new { sortOrder = ViewBag.username })
+
+                                    </button>
+
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Campus_Branches.Campus_branch)
+                                    <button type="button"
+                                            class="btn btn-light text-black"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4"
+                                            data-bs-placement="top"
+                                            data-bs-html="true"
+                                            title=" </i><span>  USERNAME</span>">
+
+                                        CAMPUS
+                                    </button>
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Cours.courseName)
+                                    <button type="button"
+                                            class="btn btn-light text-black"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4"
+                                            data-bs-placement="top"
+                                            data-bs-html="true"
+                                            title=" </i><span>  COURSE</span>">
+
+                                        COURSE
+                                    </button>
+                                </th>
+                                <th>
+                                    <button type="button"
+                                            class="btn btn-light text-black"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4"
+                                            data-bs-placement="top"
+                                            data-bs-html="true"
+                                            title=" </i><span>  SEMESTER</span>">
+
+                                        SEMESTER
+                                    </button>
+                                </th>
+
+                                <th>
+                                    <button type="button"
+                                            class="btn btn-light text-black"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4"
+                                            data-bs-placement="top"
+                                            data-bs-html="true"
+                                            title=" </i><span>  YEAR</span>">
+
+                                        YEAR
+                                    </button>
+                                </th>
+                                <th>
+                                    <button type="button"
+                                            class="btn btn-light text-black"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4"
+                                            data-bs-placement="top"
+                                            data-bs-html="true"
+                                            title=" </i><span> SORT BY COUNTRY</span>">
+                                        @Html.ActionLink("COUNTRY", "UserInfo", new { sortOrder = ViewBag.country })
+
+                                    </button>
                                 </th>
                                 <th></th>
-                                <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -59,7 +156,16 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Cours.courseName)
                                     </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.semester.Semester_taken)
+                                    </td>
 
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Year.yearName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Country)
+                                    </td>
                                     <td>
 
                                         @Html.ActionLink("Details", "Details", new { id = item.AccessNumber })|
@@ -70,18 +176,23 @@
                                         @Html.ActionLink("location", "Details", new { id = item.AccessNumber })
 
                                     </td>
-
-                                    
-
                                 </tr>
                             }
 
                         </tbody>
                     </table>
                 </div>
+                <div class="text-center">
+
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("UserInfo", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+                </div>
             </div>
             <!--/ Hoverable Table rows -->
         </div>
+
     }
     else
     {
@@ -94,3 +205,5 @@
 
     }
 }
+
+

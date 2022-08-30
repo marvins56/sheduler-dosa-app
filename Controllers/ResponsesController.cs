@@ -5,9 +5,12 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Net.NetworkInformation;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using sheduler.Models;
+using PagedList.Mvc;
 
 namespace sheduler.Controllers
 {
@@ -18,8 +21,68 @@ namespace sheduler.Controllers
         private MyDosa_dbEntities1 db = new MyDosa_dbEntities1();
 
         // GET: Responses
+
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            try
+            {
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.responsedesc = String.IsNullOrEmpty(sortOrder) ? "responsedesc" : "";
+                ViewBag.Date = sortOrder == "Date" ? "date_desc" : "Date";
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+
+                ViewBag.CurrentFilter = searchString;
+
+                var result = from s in db.Responses
+                            
+                             select s;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    result = result.Where(s => s.Response1.Contains(searchString)
+                                         );
+                }
+
+
+                switch (sortOrder)
+                {
+                    case "Description_desc":
+                        result = result.OrderByDescending(s => s.Response1);
+                        break;
+                    case "Date":
+                        result = result.OrderBy(s => s.DatetimeOfReply);
+                        break;
+                    case "date_desc":
+                        result = result.OrderByDescending(s => s.DatetimeOfReply);
+                        break;
+                    default:
+                        result = result.OrderBy(s => s.DatetimeOfReply);
+                        break;
+                }
+
+                int pageSize = 6;
+                int pageNumber = (page ?? 1);
+                result = db.Responses.Include(r => r.Inquiry);
+                return View(result.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception E)
+            {
+                TempData["error"] = E.Message;
+            }
+            return View();
+        }
         public ActionResult Index()
         {
+
+
+
+
             var responses = db.Responses.Include(r => r.Inquiry);
             return View(responses.ToList());
         }

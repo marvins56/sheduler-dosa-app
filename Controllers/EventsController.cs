@@ -3,7 +3,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 
+using PagedList.Mvc;
+using PagedList;
 using System.Web.Mvc;
 //using FullCalendar;
 using Event = sheduler.Models.Event;
@@ -157,13 +160,55 @@ namespace sheduler.Controllers
             return View();
         }
        
-        public ActionResult viewallevents()
+        public ActionResult viewallevents(string sortOrder, string currentFilter, string searchString, int? page)
         {
             try
             {
-                    var result = db.Events.OrderBy(a=>a.Start).ToList();
-                    return View(result);
-            }catch(Exception E)
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.eventdescription = String.IsNullOrEmpty(sortOrder) ? "Description_desc" : "";
+                //ViewBag.eventsubject = String.IsNullOrEmpty(sortOrder) ? "subject_desc" : "";
+                ViewBag.Date = sortOrder == "Date" ? "date_desc" : "Date";
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+
+                ViewBag.CurrentFilter = searchString;
+
+                var result = from s in db.Events
+                             select s;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    result = result.Where(s => s.Description.Contains(searchString)
+                                           || s.Subject.Contains(searchString));
+                }
+
+
+                switch (sortOrder)
+                {
+                    case "Description_desc":
+                        result = result.OrderByDescending(s => s.Description);
+                        break;
+                    case "Date":
+                        result = result.OrderBy(s => s.Start);
+                        break;
+                    case "date_desc":
+                        result = result.OrderByDescending(s => s.Start);
+                        break;
+                    default:
+                        result = result.OrderBy(s => s.Start);
+                        break;
+                }
+
+                int pageSize = 6;
+                int pageNumber = (page ?? 1);
+                return View(result.ToPagedList(pageNumber, pageSize));
+            }
+            catch(Exception E)
             {
                 TempData["error"] = E.Message;
             }

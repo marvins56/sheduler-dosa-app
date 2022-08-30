@@ -1,4 +1,9 @@
-﻿@model IEnumerable<sheduler.Models.Event>
+﻿
+
+@model IPagedList<sheduler.Models.Event>
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "viewallevents";
@@ -17,67 +22,140 @@
 }
 else
 {
-   
     <div class="container-xxl flex-grow-1 container-p-y">
-        <!-- Hoverable Table rows -->
-        <div class="card">
-            <div class="table-responsive text-break">
-                <table class="table table-hover  "style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>
-                              STUDENT
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Description)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Start)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IsFullDay)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        @foreach (var item in Model)
-                        {
-                            <tr class="">
-                                <td style="width:10%;">
-                                    @Html.DisplayFor(modelItem => item.userid)
-                                </td>
-
-                                <td style="width:50%; word-wrap:break-word;">
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Start.Date)
-                                </td>
-                               
-
-                                <td>
-                                    @if (item.IsFullDay == true)
-                                    {
-                                        <button class="btn btn-outline-success"> Fullday</button>
-
-                                    }
-                                    else
-                                    {
-                                        <button class="btn btn-outline-warning"> Given time</button>
-                                    }
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Details", "AdminDetails", new { id = item.EventID })
-                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.EventID })*@
-                                </td>
-                            </tr>
-                        }
-
-                    </tbody>
-                </table>
+        <div class="mb-3 col-12 mb-0">
+            <div class="alert alert-warning">
+                <h6 class="alert-heading fw-bold mb-1"> NOTE:</h6>
+                <p class="mb-0">
+                    To sort in diffrent areas like sort all descriptions to descending or assending plus dates inclusive, kindly click on the headers to sort
+                </p>
             </div>
         </div>
+        @using (Html.BeginForm())
+
+        {<nav class="layout-navbar  mb-3 container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+              id="layout-navbar">
+
+                @*<div class=" align-items-center" id="navbar-collapse">*@
+                    <div class="navbar-nav align-items-center">
+                        <div class="nav-item d-flex align-items-center">
+                            <button type="submit" class="btn btn-light">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                            </button>
+                            <input type="text"
+                                   class="form-control border-0 shadow-none"
+                                   placeholder="Search..."
+                                   aria-label="Search..." name="SearchString" style="width:100%" />
+
+                        </div>
+                    </div>
+                @*</div>*@
+            </nav>
+
+        }
+        <!-- Hoverable Table rows -->
+    <div class="card">
+        <div class="table-responsive text-break">
+            <table class="table table-hover  " style="width:100%">
+                <thead>
+                    <th class="text-center"> ALL STUDENT  SHEDULES</th>
+                    <tr>
+                        <th>
+                            <button type="button"
+                                    class="btn btn-light text-black w-50"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-offset="0,4"
+                                    data-bs-placement="top"
+                                    data-bs-html="true"
+                                    title=" </i><span>STUDENT </span>">
+                                USER
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button"
+                                    class="btn btn-light text-black"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-offset="0,4"
+                                    data-bs-placement="top"
+                                    data-bs-html="true"
+                                    title=" </i><span> SORT BY DESCRIPTION</span>">
+                                @Html.ActionLink("DESCRIPTION", "viewallevents", new { sortOrder = ViewBag.eventdescription })
+
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button"
+                                    class="btn btn-light text-black"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-offset="0,4"
+                                    data-bs-placement="top"
+                                    data-bs-html="true"
+                                    title=" </i><span> SORT BY DATETIME </span>">
+                                @Html.ActionLink("SET OFF TIME ", "viewallevents", new { sortOrder = ViewBag.Date })
+
+                            </button>
+
+                        </th>
+                        <th>
+                            <button type="button"
+                                    class="btn btn-light text-black"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-offset="0,4"
+                                    data-bs-placement="top"
+                                    data-bs-html="true"
+                                    title=" </i><span> DAY DURATION </span>">
+                                DAY DURATION
+                            </button>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        <tr class="">
+                            <td style="width:10%;">
+                                @Html.DisplayFor(modelItem => item.userid)
+                            </td>
+
+                            <td style="width:50%; word-wrap:break-word;">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Start.Date)
+                            </td>
+
+
+                            <td>
+                                @if (item.IsFullDay == true)
+                                {
+                                    <button class="btn btn-outline-success"> Fullday</button>
+
+                                }
+                                else
+                                {
+                                    <button class="btn btn-outline-warning"> Given time</button>
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "AdminDetails", new { id = item.EventID })
+                                @*@Html.ActionLink("Delete", "Delete", new { id = item.EventID })*@
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+        <div  class="text-center">
+            
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("viewallevents", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+        </div>
+    </div>
     </div>
 }
 
