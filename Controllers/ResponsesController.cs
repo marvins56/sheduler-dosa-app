@@ -49,8 +49,6 @@ namespace sheduler.Controllers
                     result = result.Where(s => s.Response1.Contains(searchString)
                                          );
                 }
-
-
                 switch (sortOrder)
                 {
                     case "Description_desc":

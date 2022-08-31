@@ -32,23 +32,31 @@
             <div class="row">
 
                 <div class="col-md-6 mb-5">
+                    <h5 class="card-header">
+                        <a href="@Url.Action("myInquiries","Inquiries" )" class="btn btn-primary"
+                           data-bs-offset="0,4"
+                                               data-bs-html="true" title=" <span> View Inquiries </span>">
+                            My Inquiries
+                        </a>
+                    </h5>
                     <div class="card mb-6">
                         <h5 class="card-header">MAKE INQUIRY DIRECT TO DOSA</h5>
                         @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+                        {
+                            @Html.AntiForgeryToken()
 
-            <div class="card-body">
+                            <div class="card-body">
                                 <div class="form-floating">
+
                                     <div class="form-group">
                                         <textarea name="inquirry" class="form-control mb-2" id="floatingInput" placeholder="My Inquiry ..." rows="10" cols="30">  </textarea>
 
-                                        @Html.ValidationMessageFor(model => model.inquirry, "", new { @class = "text-danger",placeholder= "Type your inquiry.." })
-                                       
+                                        @Html.ValidationMessageFor(model => model.inquirry, "", new { @class = "text-danger", placeholder = "Type your inquiry.." })
+
                                         @*@Html.LabelFor(model => model.inquirry, htmlAttributes: new { @lass = "form-label" })*@
 
                                         <input type="submit" value="SUBMIT" class="btn btn-primary w-50" />
-                                      
+
                                     </div>
                                 </div>
                             </div>
@@ -57,19 +65,13 @@
                 </div>
                 <div class="col-md-6 ">
                     <div class="card mb-4">
-                        <h5 class="card-header">
-                            <a href="@Url.Action("myInquiries","Inquiries" )" class="btn btn-primary">
-                                My Inquiries
-                            </a>
-                        </h5>
+                      
 
                         <div class="card-body">
                             <div class="form-floating">
-
-                                We'll never share your details with anyone else.
-                                When the form is submitted, two keys are generated, one private and one public.
-                                The private key is stored locally, and the public key is sent to the server.
-                                The public key could be used to generate a client certificate to authenticate the user in the future.
+                              in order to get a reply to any inqury  one must send a message that will be seen and responded to once its recieved. kindly fill the formto submit your inquiry directly to the DOSA.
+                                These inquiries are not limitted,everything matters. 
+                                
                             </div>
                         </div>
                     </div>

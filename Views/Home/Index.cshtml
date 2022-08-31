@@ -7,9 +7,9 @@
     <div class="container-xxl flex-grow-1 container-p-y">
 
         <!-- Horizontal -->
-        <div class="row">
+        <!--<div class="row">-->
             <!-- Bootstrap carousel -->
-            <div class="col-md mb-2">
+            <!--<div class="col-md mb-2">
                 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
@@ -48,9 +48,9 @@
                         <span class="visually-hidden">Next</span>
                     </a>
                 </div>
-            </div>
+            </div>-->
             <!-- Bootstrap crossfade carousel -->
-            <div class="col-md mb-2">
+            <!--<div class="col-md mb-2">
 
                 <div id="carouselExample-cf"
                      class="carousel carousel-dark slide carousel-fade"
@@ -93,7 +93,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="row mb-2">
             <div class="col-md">
                 <div class="card mb-3">
@@ -102,20 +102,28 @@
                             <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
                                 <div class="card-body">
                                     @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                    <i class="fa-solid fa-calendar-check fa-3x "></i>
-                                    <p class="icon-name text-capitalize text-truncate mb-0">SCHEDULES</p>
+                                    
+                                    <p class="icon-name text-capitalize text-truncate mb-0">
+                                        <a href="@Url.Action("Mycalendar","Events")" class="bloc-icon"
+                                           >
+                                            <i class="fa-solid fa-calendar-check fa-3x " 
+                                               data-bs-toggle="tooltip"
+                                           data-bs-offset="0,4"
+                                           data-bs-html="true" title=" <span> SCHEDULE TRAVEL</span>"></i>
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
 
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+                                <h5 class="card-title">SCHEDULE TRAVEL</h5>
                                 <p class="card-text">
-                                    This is a wider card with supporting text below as a natural lead-in to additional content.
-                                    This content is a little bit longer.
+                                    This tab gives you a calendar view of all the your recent and yet to come  travel schedules.
+                                    Follow this tab to shedule travel plans
                                 </p>
-                                <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
+                                @*<a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>*@
                             </div>
                         </div>
                     </div>
@@ -126,20 +134,29 @@
                     <div class="row g-0">
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+                                <h5 class="card-title">INQUIRIES</h5>
                                 <p class="card-text">
-                                    This is a wider card with supporting text below as a natural lead-in to additional content.
-                                    This content is a little bit longer.
+                                    This tab shows all the inwuiries both answered and unanswered . all the details of the inquiries are seen here
+
                                 </p>
-                                <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
+                                @*<a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>*@
                             </div>
                         </div>
                         <div class="col-md-4 ">
                             <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
                                 <div class="card-body">
                                     @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                    <i class="fa-solid fa-headset  fa-3x"></i>
-                                    <p class="icon-name text-capitalize text-truncate mb-0">INQUIRIES</p>
+                                    
+                                    <p class="icon-name text-capitalize text-truncate mb-0">
+                                        <a href="@Url.Action("Create","Inquiries")" class="bloc-icon"
+                                           >
+                                            <i class="fa-solid fa-headset  fa-3x" 
+                                               data-bs-toggle="tooltip"
+                                           data-bs-offset="0,4"
+                                           data-bs-html="true" title=" <span>INQUIRIES</span>"></i>
+                                         
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
 
@@ -155,20 +172,26 @@
                     <div class="row g-0">
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+                                <h5 class="card-title">TRAVEL REPORT</h5>
                                 <p class="card-text">
-                                    This is a wider card with supporting text below as a natural lead-in to additional content.
-                                    This content is a little bit longer.
+                                    To generate or See  your recent personal actvities that include travel schedules ,inquiries and responses 
+                                    In this tab, there is a detailed preview of all personal activities on the system.
                                 </p>
-                                <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
+                                @*<a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>*@
                             </div>
                         </div>
                         <div class="col-md-4 ">
                             <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
                                 <div class="card-body">
                                     @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                    <i class="fa-solid fa-file-zipper fa-3x"></i>
-                                    <p class="icon-name text-capitalize text-truncate mb-0">TRAVEL REPORT</p>
+
+                                    <p class="icon-name text-capitalize text-truncate mb-0">
+                                        <a href="@Url.Action("PersonalReports", "Events", new { id = Session["userid"].ToString() })" class="bloc-icon">
+                                            <i class="fa-solid fa-file-zipper fa-3x" data-bs-toggle="tooltip"
+                                               data-bs-offset="0,4"
+                                               data-bs-html="true" title=" <span> TRAVEL REPORT</span>"></i>
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
 
@@ -176,6 +199,75 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 ">
+                            <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
+                                <div class="card-body">
+                                    @*<i class="bx bxl-adobe mb-2 "></i>*@
+
+                                    <p class="icon-name text-capitalize text-truncate mb-0">
+                                        <a href="#" class="bloc-icon">
+                                            <i class="fa-solid fa-calendar-check fa-3x " data-bs-toggle="tooltip"
+                                               data-bs-offset="0,4"
+                                               data-bs-html="true" title=" <span> MY RESPONSES</span>"></i>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">MY RESPONSES</h5>
+                                <p class="card-text">
+                                    This tab shows all the responses both answered and unanswered . all the details of the inquiries are seen here
+                                </p>
+                                @*<a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mb-2">
+            <div class="col-md">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">CONTACT US</h5>
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                                    This content is a little bit longer.
+                                </p>
+                              
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
+                                <div class="card-body">
+                                    @*<i class="bx bxl-adobe mb-2 "></i>*@
+                                    <i class="fa-solid fa-blender-phone fa-3x"   
+                                       data-bs-toggle="modal"
+                                        data-bs-target="#fullscreenModal"
+
+                                       data-bs-offset="0,4"
+                                       data-bs-html="true" title="CONTACT US"
+                                       
+                                       ></i>
+                                    <p class="icon-name text-capitalize text-truncate mb-0">
+                                    CONTACT US</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
             <div class="col-md">
                 <div class="card mb-3">
                     <div class="row g-0">
@@ -196,73 +288,12 @@
                                     This is a wider card with supporting text below as a natural lead-in to additional content.
                                     This content is a little bit longer.
                                 </p>
-                                <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
+                                @*<a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>*@
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-        <div class="row mb-2">
-            <div class="col-md">
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">
-                                    This is a wider card with supporting text below as a natural lead-in to additional content.
-                                    This content is a little bit longer.
-                                </p>
-                                <button type="button"
-                                        class="btn btn-primary"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#fullscreenModal">
-                                    view
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-md-4 ">
-                            <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
-                                <div class="card-body">
-                                    @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                    <i class="fa-solid fa-blender-phone fa-3x"></i>
-                                    <p class="icon-name text-capitalize text-truncate mb-0">CONTACT US</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4 ">
-                            <div class="card icon-card cursor-pointer text-center mb-4 my-5  mx-3 ">
-                                <div class="card-body">
-                                    @*<i class="bx bxl-adobe mb-2 "></i>*@
-                                    <i class="fa-solid fa-calendar-check fa-3x "></i>
-                                    <p class="icon-name text-capitalize text-truncate mb-0">SCHEDULES</p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">
-                                    This is a wider card with supporting text below as a natural lead-in to additional content.
-                                    This content is a little bit longer.
-                                </p>
-                                <a href="#"><p class="card-text fs-3 text-primary"><small class="text-muted">view</small></p></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <!--/ Horizontal -->
@@ -514,8 +545,8 @@
         </div>
     </div>
             }
-            else
-            {
+    else
+    {
             <script>
                 swal({
                     title: "NOT AUTHORISED",
