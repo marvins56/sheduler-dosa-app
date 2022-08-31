@@ -30,13 +30,7 @@
             <div class="row">
 
                 <div class="col-md-6 mb-5">
-                    <h5 class="card-header">
-                        <a href="@Url.Action("myInquiries","Inquiries" )" class="btn btn-primary"
-                           data-bs-offset="0,4"
-                         data-bs-html="true" title=" <span> View Inquiries </span>">
-                            My Inquiries
-                        </a>
-                    </h5>
+              
                     <div class="card mb-6">
                         <h5 class="card-header">MAKE INQUIRY DIRECT TO DOSA</h5>
                         @using (Html.BeginForm())
@@ -63,11 +57,19 @@
                 </div>
                 <div class="col-md-6 ">
                     <div class="card mb-4">
+                        <h5 class="card-header">
+                            <a href="@Url.Action("myInquiries","Inquiries" )" class="btn btn-primary"
+                               data-bs-offset="0,4"
+                               data-bs-html="true" title=" <span> View Inquiries </span>">
+                                My Inquiries
+                            </a>
+                        </h5>
                         <div class="card-body">
+
                             <div class="form-floating">
-                              in order to get a reply to any inqury  one must send a message that will be seen and responded to once its recieved. kindly fill the formto submit your inquiry directly to the DOSA.
-                                These inquiries are not limitted,everything matters. 
-                                
+                                in order to get a reply to any inqury  one must send a message that will be seen and responded to once its recieved. kindly fill the formto submit your inquiry directly to the DOSA.
+                                These inquiries are not limitted,everything matters.
+
                             </div>
                         </div>
                     </div>

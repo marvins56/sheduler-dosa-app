@@ -54,7 +54,7 @@
     {<nav class="layout-navbar  mb-3 container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
           id="layout-navbar">
 
-            @*<div class=" align-items-center" id="navbar-collapse">*@
+            <div class=" align-items-center" id="navbar-collapse">
             <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                     <button type="submit" class="btn btn-light">
@@ -67,7 +67,8 @@
 
                 </div>
             </div>
-            @*</div>*@
+
+            </div>
         </nav>
 
     }
@@ -78,6 +79,7 @@
     <div class="table-responsive text-wrap">
         <table class="table table-hover" style="width:100%;">
             <thead>
+                <h3 class="text-center mt-3"> MY INQUIRIES</h3>
                 <tr>
 
                     <th>
@@ -136,7 +138,7 @@
 
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-        @Html.PagedListPager(Model, page => Url.Action("index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        @Html.PagedListPager(Model, page => Url.Action("myInquiries", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
     </div>
 </div>

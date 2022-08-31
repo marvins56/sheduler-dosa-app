@@ -15,6 +15,8 @@ using System.Collections.Generic;
 using sheduler.ViewModels;
 using System.Net.Mail;
 using System.Configuration;
+using System.Data.SqlClient;
+using System.Web.UI;
 
 namespace sheduler.Controllers
 {
@@ -215,21 +217,62 @@ namespace sheduler.Controllers
             }
             return View();
         }
-        public ActionResult Myshedules()
+        public ActionResult Myshedules(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            try
+        try
             {
                 string id = Session["userid"].ToString();
-                if(id!= null)
+                if (id != null)
                 {
-                    var shedule = db.Events.Where(a => a.userid == id).OrderBy(a=>a.Start).ToList();
-                    return View(shedule);
+                    ViewBag.CurrentSort = sortOrder;
+                    ViewBag.eventdescription = String.IsNullOrEmpty(sortOrder) ? "Description_desc" : "";
+                    //ViewBag.eventsubject = String.IsNullOrEmpty(sortOrder) ? "subject_desc" : "";
+                    ViewBag.Date = sortOrder == "Date" ? "date_desc" : "Date";
+                    if (searchString != null)
+                    {
+                        page = 1;
+                    }
+                    else
+                    {
+                        searchString = currentFilter;
+                    }
+
+                    ViewBag.CurrentFilter = searchString;
+                    //var shedule = db.Events.Where(a => a.userid == id).OrderBy(a => a.Start).ToList();
+
+                    var result = from s in db.Events
+                                 where s.userid == id
+                                 select s;
+
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        result = result.Where(s => s.Description.Contains(searchString)
+                                               || s.Subject.Contains(searchString));
+                    }
+                    switch (sortOrder)
+                    {
+                        case "Description_desc":
+                            result = result.OrderByDescending(s => s.Description);
+                            break;
+                        case "Date":
+                            result = result.OrderBy(s => s.Start);
+                            break;
+                        case "date_desc":
+                            result = result.OrderByDescending(s => s.Start);
+                            break;
+                        default:
+                            result = result.OrderBy(s => s.Start);
+                            break;
+                    }
+
+                    int pageSize = 6;
+                    int pageNumber = (page ?? 1);
+                    return View(result.ToPagedList(pageNumber, pageSize));
                 }
-              
             }
-            catch (Exception e)
+            catch (Exception E)
             {
-                TempData["error"] = e.Message;
+                TempData["error"] = E.Message;
             }
             return View();
         }
