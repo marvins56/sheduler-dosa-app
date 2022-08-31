@@ -12,6 +12,8 @@ using sheduler.Models;
 using PagedList.Mvc;
 using PagedList;
 using System.Configuration;
+using System.Data.SqlClient;
+using System.Web.UI;
 
 namespace sheduler.Controllers
 {
@@ -76,15 +78,17 @@ namespace sheduler.Controllers
         }
         public ActionResult userResponse(int id)
         {
+           
             try
             {
+                var ROLE = Session["userroles"];
                 var responseid = db.Responses.Where(a => a.Inquirery_id == id).FirstOrDefault();
                 var res = db.Responses.Where(a => a.Inquirery_id == id).Select(a => a.Response1).FirstOrDefault();
                 var date = db.Responses.Where(a => a.Inquirery_id == id).Select(a => a.DatetimeOfReply).FirstOrDefault();
                 if (responseid == null)
                 {
                     TempData["nullvalue"] = "RESPONSE PENDING";
-                    var ROLE = Session["userroles"];
+                   
 
                     if (ROLE.ToString() == "ADMINISTRATOR" || ROLE.ToString() == "SUPER ADMINISTRATOR")
                     {
@@ -98,8 +102,19 @@ namespace sheduler.Controllers
                 }
                 else
                 {
-                    TempData["values"] = "RESPONSE: " + res + " On " + date;
-                    return RedirectToAction("index");
+
+                    if (ROLE.ToString() == "ADMINISTRATOR" || ROLE.ToString() == "SUPER ADMINISTRATOR")
+                    {
+                        TempData["values"] = "RESPONSE: " + res + " On " + date;
+                        return RedirectToAction("index");
+                    }
+                    else
+                    {
+                        TempData["values"] = "RESPONSE: " + res + " On " + date;
+                        return RedirectToAction("myInquiries");
+                    }
+                    
+                
                 }
             }catch(Exception E)
             {
@@ -121,17 +136,71 @@ namespace sheduler.Controllers
             return View(myInquiries);
         }
 
-        public ActionResult myInquiries()
-        {
-           string id = Session["userid"].ToString();
-            var myInquiries = db.Inquiries.Where(a => a.UserId == id).ToList();
-            if (myInquiries == null)
+        public ActionResult myInquiries(string sortOrder, string currentFilter, string searchString, int? page)
+{
+        try{
+                string id = Session["userid"].ToString();
+                
+                if (id == null)
+                {
+                    TempData["nullvalue"] = id + " Has NO INQUIRIES";
+                    return RedirectToAction("index");
+                }
+                else
+                {
+                    ViewBag.CurrentSort = sortOrder;
+                    ViewBag.inquirydesc = String.IsNullOrEmpty(sortOrder) ? "inquirydesc" : "";
+                    ViewBag.Date = sortOrder == "Date" ? "date_desc" : "Date";
+                    if (searchString != null)
+                    {
+                        page = 1;
+                    }
+                    else
+                    {
+                        searchString = currentFilter;
+                    }
+
+                    ViewBag.CurrentFilter = searchString;
+                    //var myInquiries = db.Inquiries.Where(a => a.UserId == id).ToList();
+                    var result = from s in db.Inquiries
+                                 where s.UserId == id
+                                 select s;
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        result = result.Where(s => s.inquirry.Contains(searchString)
+                                               || s.UserId.Contains(searchString));
+                    }
+
+
+                    switch (sortOrder)
+                    {
+                        case "Description_desc":
+                            result = result.OrderByDescending(s => s.inquirry);
+                            break;
+                        case "Date":
+                            result = result.OrderBy(s => s.Dateposteed);
+                            break;
+                        case "date_desc":
+                            result = result.OrderByDescending(s => s.Dateposteed);
+                            break;
+                        default:
+                            result = result.OrderBy(s => s.Dateposteed);
+                            break;
+                    }
+
+                    int pageSize = 6;
+                    int pageNumber = (page ?? 1);
+                    return View(result.ToPagedList(pageNumber, pageSize));
+                }
+
+
+            }
+            catch (Exception E)
             {
-                TempData["nullvalue"] = id + " Has NO INQUIRIES";
-                return RedirectToAction("index");
+                TempData["error"] = E.Message;
             }
 
-            return View(myInquiries);
+            return View();
         }
         // GET: Inquiries/Details/5
         public ActionResult Details(int? id)
