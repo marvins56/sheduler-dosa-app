@@ -1,9 +1,7 @@
-﻿@{
+﻿@model sheduler.Models.Event
+@{
     Layout = "~/Views/Shared/Eventslayout.cshtml";
 }
-
-
-
 
 @{
     if (Session["userid"] != null)
@@ -35,9 +33,13 @@
             <div class="card-body ">
                 <h5 class="card-title">MY TRAVEL SCHEDULES</h5>
                 <p class="card-text"></p>
-                <a href="@Url.Action("Create","Events")" class="mb-3">
-                    <span class="btn btn-primary  ">  <i class="fa-solid fa-plus fa-2x " title="Add Shedule"></i></span>
-                </a>
+                <button type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalCenter">
+
+                    SHEDULE TRAVEL PLAN
+                </button>
                 <a href="@Url.Action("Myshedules","Events")" class="mb-3">
                     <span class="btn btn-primary  "> VIEW ALL SHEDULES</span>
                 </a>
@@ -86,7 +88,119 @@
             </div>
         </div>
 
+       
 
+            <div class="mt-3">
+
+                <div class="modal fade in" id="modalCenter" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCenterTitle">#</h5>
+                                <button type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            @using (Html.BeginForm("Create","Events",FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+
+                                <div class="modal-body ">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card mb-4">
+                                                <h5 class="card-header">ADD TRAVEL SHEDULE</h5>
+                                                <div class="card-body demo-vertical-spacing demo-only-element">
+                                                    <div class="form-group">
+                                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                                        <small class="text-light fw-semibold d-block pt-3">
+                                                            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label " })
+                                                        </small>
+
+                                                        <div class="form-group">
+                                                            @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <small class="text-light fw-semibold d-block pt-3">
+
+                                                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
+                                                        </small>
+
+                                                        <div class="form-group">
+                                                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                            @*<textarea class="form-control" name="Description"></textarea>*@
+                                                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <small class="text-light fw-semibold d-block pt-3">
+                                                            @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label " })
+                                                        </small>
+                                                        <div class="form-group">
+                                                            @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <small class="text-light fw-semibold d-block pt-3">
+                                                            @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label " })
+                                                        </small>
+                                                        <div class="form-group">
+                                                            @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" name="IsFullDay" disabled>
+
+                                                        <label class="form-check-label" for="exampleCheck1">SET FULL DAY</label>
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <label for="inputState">State</label>
+                                                        <select id="inputState" class="form-control" name="ThemeColor">
+                                                            <option selected>Choose Color</option>
+                                                            <option value="green">green</option>
+                                                            <option value="orange">orange</option>
+                                                            <option value="blue">blue</option>
+                                                            <option value="Gray">Gray</option>
+                                                            <option value="yellow">yellow</option>
+                                                            <option value="pink">pink</option>
+                                                            <option value="Teal">Teal</option>
+                                                            <option value="Navy">Navy</option>
+                                                            <option value="peach">peach</option>
+                                                            <option value="Beige">Beige</option>
+                                                            <option value="brown">brown</option>
+
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <a href="@Url.Action("Mycalendar","Events")" class="btn btn-outline-secondary">  Back</a>
+
+                                    <input type="submit" class="btn btn-primary" value="Save changes">
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+        
+        </div>
         <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
         <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
@@ -132,10 +246,10 @@
 
                     function GenerateCalender(events) {
                         $('#calender').fullCalendar('destroy');
-                        $('#calender').fullCalendar({                          
+                        $('#calender').fullCalendar({
                             eventAfterRender: function (event, element, view) {
                                 /*$(element).css('padding', '2'),*/
-                                    $(element).css('color', 'white');
+                                $(element).css('color', 'white');
                             },
                             contentHeight: 600,
                             defaultDate: new Date(),

@@ -2,7 +2,8 @@
 @model UserReport
 @{
     ViewBag.Title = "UserReports";
-    Layout = "~/Views/Shared/Eventslayout.cshtml";
+       Layout = "~/Views/Shared/adminlayout.cshtml";
+
 }
 
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -29,55 +30,55 @@
 </div>
             </div>
             <div class="card mb-4">
-                <h5 class="card-header">Profile Details</h5>
+                <P>
+                    <H4 class="text-uppercase text-center" style="margin-left:2px;">  Profile Details</H4>
 
-                <hr class="my-0" />
-                <div class="card-body">
-                    <div class="table-responsive text-wrap">
-                        <table class="table table-hover  " style="width:100%" id="datatable">
-                            <thead>
-                               
-
-                                <tr>
-                                    <th>
-                                        USERNAME
-                                    </th>
-                                    <th>
-                                        EMAIL
-                                    </th>
-                                    <th>
-                                        Country
-                                    </th>
+                    <hr class="my-0" />
+                    <div class="card-body">
+                        <div class="table-responsive text-wrap">
+                            <table class="table table-hover  ">
+                                <thead>
 
 
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                @foreach (var item in Model.students)
-                                {
+                                    <tr>
+                                        <th>
+                                            USERNAME
+                                        </th>
+                                        <th>
+                                            EMAIL
+                                        </th>
+                                        <th>
+                                            Country
+                                        </th>
 
-                                    <tr class="">
-                                        <td style="width:10%;">
-                                            @Html.DisplayFor(modelItem => item.UserName)
-                                        </td>
 
-                                        <td style=" word-wrap:break-word;">
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Country)
-                                        </td>
-
+                                        <th></th>
                                     </tr>
-                                }
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                    @foreach (var item in Model.students)
+                                    {
+                                        <tr class="">
+                                            <td style="width:10%;">
+                                                @Html.DisplayFor(modelItem => item.UserName)
+                                            </td>
 
-                            </tbody>
-                        </table>
+                                            <td style=" word-wrap:break-word;">
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Country)
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <!-- /Account -->
+                    <!-- /Account -->
             </div>
 
 
@@ -89,24 +90,22 @@
         <div class="table-responsive text-wrap">
             <table class="table table-hover  " style="width:100%">
                 <thead>
+                <P> <H4 class="text-capitalize text-center" style="margin-left:2px;">  TRAVEL SHEDULES</H4>
+                <tr>
                     <th>
-                    <H4 class="text-capitalize text-left" >  TRAVEL SHEDULES</H4>
+                        STUDENT
                     </th>
-                    <tr>
-                        <th>
-                            STUDENT
-                        </th>
-                        <th>
-                            TRAVEL DESCRIPTION
-                        </th>
-                        <th>
-                            SET OFF TIME
-                        </th>
-                        <th>
-                            FULL DAY
-                        </th>
-                        <th></th>
-                    </tr>
+                    <th>
+                        TRAVEL DESCRIPTION
+                    </th>
+                    <th>
+                        SET OFF TIME
+                    </th>
+                    <th>
+                        FULL DAY
+                    </th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @foreach (var item in Model.events)
@@ -150,7 +149,8 @@
 
             <table class="table table-hover  " style="width:100%">
                 <thead>
-                    <th> <H4 class="text-capitalize text-left" style="margin-left:2px;">  INQUIRIES</H4>
+                    <P> <H4 class="text-capitalize text-center" style="margin-left:2px;"> INQUIRIES</H4>
+
                 </th>
                     <tr>
                         <th>

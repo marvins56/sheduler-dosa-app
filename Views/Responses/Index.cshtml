@@ -28,128 +28,145 @@
          icon: "error"
         });</script>
         }
+        if (Session["userroles"].ToString() == "ADMINISTRATOR" || Session["userroles"].ToString() == "SUPER ADMINISTRATOR")
+        {
+            <div class="container-xxl flex-grow-1 container-p-y">
 
-        <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="mb-3 col-12 mb-0">
+                    <div class="alert alert-warning">
+                        <h6 class="alert-heading fw-bold mb-1"> NOTE:</h6>
+                        <p class="mb-0">
+                            To sort in diffrent areas like sort all descriptions to descending or assending plus dates inclusive, kindly click on the headers to sort
+                        </p>
+                    </div>
+                </div>
+                @using (Html.BeginForm())
 
-            <div class="mb-3 col-12 mb-0">
-                <div class="alert alert-warning">
-                    <h6 class="alert-heading fw-bold mb-1"> NOTE:</h6>
-                    <p class="mb-0">
-                        To sort in diffrent areas like sort all descriptions to descending or assending plus dates inclusive, kindly click on the headers to sort
-                    </p>
+                {<nav class="layout-navbar  mb-3 container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                      id="layout-navbar">
+
+                        @*<div class=" align-items-center" id="navbar-collapse">*@
+                        <div class="navbar-nav align-items-center">
+                            <div class="nav-item d-flex align-items-center">
+                                <button type="submit" class="btn btn-light">
+                                    <i class="bx bx-search fs-4 lh-0"></i>
+                                </button>
+                                <input type="text"
+                                       class="form-control border-0 shadow-none"
+                                       placeholder="Search..."
+                                       aria-label="Search..." name="SearchString" style="width:100%" />
+
+                            </div>
+                        </div>
+                        @*</div>*@
+                    </nav>
+
+                }
+                <!-- Hoverable Table rows -->
+                <div class="card">
+                    <span class="card-header text-capitalize">
+                        RESPONSE LIST
+                        <a href="@Url.Action("Create","Responses")">
+                            <span class="btn btn-primary " style="float:right"> RESPOND TO INQUIRY</span>
+                        </a>
+
+                    </span>
+
+                    <div class="table-responsive text-wrap">
+                        <table class="table table-hover" style="width:100%;">
+                            <thead>
+
+                                <tr>
+                                    <th>
+                                        <button type="button"
+                                                class="btn btn-light text-black"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-offset="0,4"
+                                                data-bs-placement="top"
+                                                data-bs-html="true"
+                                                title=" </i><span>INQUIRY</span>">
+                                            INQUIRY
+                                        </button>
+
+                                    </th>
+                                    <th>
+                                        <button type="button"
+                                                class="btn btn-light text-black"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-offset="0,4"
+                                                data-bs-placement="top"
+                                                data-bs-html="true"
+                                                title=" </i><span> SORT BY RESPONSE</span>">
+                                            @Html.ActionLink("INQUIRY", "index", new { sortOrder = ViewBag.responsedesc })
+
+                                        </button>
+
+                                    </th>
+                                    <th>
+                                        <button type="button"
+                                                class="btn btn-light text-black"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-offset="0,4"
+                                                data-bs-placement="top"
+                                                data-bs-html="true"
+                                                title=" </i><span> SORT BY DATE OF REPLY</span>">
+                                            @Html.ActionLink("INQUIRY", "index", new { sortOrder = ViewBag.Date })
+
+                                        </button>
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="width:30%;word-wrap:break-word;">
+                                            @Html.DisplayFor(modelItem => item.Inquiry.inquirry)
+                                        </td>
+                                        <td style="width:50%;word-wrap:break-word;">
+                                            @Html.DisplayFor(modelItem => item.Response1)
+                                        </td>
+                                        <td style="width:20%;word-wrap:break-word;">
+                                            @Html.DisplayFor(modelItem => item.DatetimeOfReply)
+                                        </td>
+
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ResponseId })
+                                            @Html.ActionLink("Details", "Details", new { id = item.ResponseId })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center">
+
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                        @Html.PagedListPager(Model, page => Url.Action("index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+                    </div>
                 </div>
             </div>
-            @using (Html.BeginForm())
+        }
 
-            {<nav class="layout-navbar  mb-3 container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                  id="layout-navbar">
+        else
+        {
+            <script>
+                swal({
+                    title: "NOT AUTHORISED",
+                    text: "ACCESSDE DENIED",
+                    icon: "error"
+                });</script>
 
-                    @*<div class=" align-items-center" id="navbar-collapse">*@
-                    <div class="navbar-nav align-items-center">
-                        <div class="nav-item d-flex align-items-center">
-                            <button type="submit" class="btn btn-light">
-                                <i class="bx bx-search fs-4 lh-0"></i>
-                            </button>
-                            <input type="text"
-                                   class="form-control border-0 shadow-none"
-                                   placeholder="Search..."
-                                   aria-label="Search..." name="SearchString" style="width:100%" />
+        }
 
-                        </div>
-                    </div>
-                    @*</div>*@
-                </nav>
 
-            }
-            <!-- Hoverable Table rows -->
-        <div class="card">
-            <span class="card-header text-capitalize">
-                RESPONSE LIST
-                <a href="@Url.Action("Create","Responses")">
-                    <span class="btn btn-primary " style="float:right"> RESPOND TO INQUIRY</span>
-                </a>
 
-            </span>
 
-            <div class="table-responsive text-wrap">
-                <table class="table table-hover" style="width:100%;">
-                    <thead>
-
-                        <tr>
-                            <th>
-                                <button type="button"
-                                        class="btn btn-light text-black"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-offset="0,4"
-                                        data-bs-placement="top"
-                                        data-bs-html="true"
-                                        title=" </i><span>INQUIRY</span>">
-                                    INQUIRY
-                                </button>
-
-                            </th>
-                            <th>
-                                <button type="button"
-                                        class="btn btn-light text-black"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-offset="0,4"
-                                        data-bs-placement="top"
-                                        data-bs-html="true"
-                                        title=" </i><span> SORT BY RESPONSE</span>">
-                                    @Html.ActionLink("INQUIRY", "index", new { sortOrder = ViewBag.responsedesc })
-
-                                </button>
-
-                            </th>
-                            <th>
-                                <button type="button"
-                                        class="btn btn-light text-black"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-offset="0,4"
-                                        data-bs-placement="top"
-                                        data-bs-html="true"
-                                        title=" </i><span> SORT BY DATE OF REPLY</span>">
-                                    @Html.ActionLink("INQUIRY", "index", new { sortOrder = ViewBag.Date })
-
-                                </button>
-                            </th>
-
-                            <th></th>
-                        </tr>
-
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td style="width:30%;word-wrap:break-word;">
-                                    @Html.DisplayFor(modelItem => item.Inquiry.inquirry)
-                                </td>
-                                <td style="width:50%;word-wrap:break-word;">
-                                    @Html.DisplayFor(modelItem => item.Response1)
-                                </td>
-                                <td style="width:20%;word-wrap:break-word;">
-                                    @Html.DisplayFor(modelItem => item.DatetimeOfReply)
-                                </td>
-
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ResponseId })
-                                    @Html.ActionLink("Details", "Details", new { id = item.ResponseId })
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div class="text-center">
-
-                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-                @Html.PagedListPager(Model, page => Url.Action("index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-
-            </div>
-        </div>
-        </div>
     }
     else
     {

@@ -55,18 +55,18 @@
           id="layout-navbar">
 
             <div class=" align-items-center" id="navbar-collapse">
-            <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                    <button type="submit" class="btn btn-light">
-                        <i class="bx bx-search fs-4 lh-0"></i>
-                    </button>
-                    <input type="text"
-                           class="form-control border-0 shadow-none"
-                           placeholder="Search..."
-                           aria-label="Search..." name="SearchString" style="width:100%" />
+                <div class="navbar-nav align-items-center">
+                    <div class="nav-item d-flex align-items-center">
+                        <button type="submit" class="btn btn-light">
+                            <i class="bx bx-search fs-4 lh-0"></i>
+                        </button>
+                        <input type="text"
+                               class="form-control border-0 shadow-none"
+                               placeholder="Search..."
+                               aria-label="Search..." name="SearchString" style="width:100%" />
 
+                    </div>
                 </div>
-            </div>
 
             </div>
         </nav>
@@ -75,71 +75,73 @@
     <!-- Hoverable Table rows -->
 
 
+    <div class="card">
+        <div class="table-responsive text-wrap">
 
-    <div class="table-responsive text-wrap">
-        <table class="table table-hover" style="width:100%;">
-            <thead>
-                <h3 class="text-center mt-3"> MY INQUIRIES</h3>
-                <tr>
-
-                    <th>
-                        <button type="button"
-                                class="btn btn-light text-black"
-                                data-bs-toggle="tooltip"
-                                data-bs-offset="0,4"
-                                data-bs-placement="top"
-                                data-bs-html="true"
-                                title=" </i><span> SORT BY INQUIRY</span>">
-                            @Html.ActionLink("INQUIRY", "myInquiries", new { sortOrder = ViewBag.inquirydesc })
-
-                        </button>
-
-                    </th>
-                    <th>
-                        <button type="button"
-                                class="btn btn-light text-black"
-                                data-bs-toggle="tooltip"
-                                data-bs-offset="0,4"
-                                data-bs-placement="top"
-                                data-bs-html="true"
-                                title=" </i><span> SORT BY DATE POSTED</span>">
-                            @Html.ActionLink("DATE POSTED", "myInquiries", new { sortOrder = ViewBag.Date })
-
-                        </button>
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
-                @foreach (var item in Model)
-                {
+            <table class="table table-hover" >
+                <thead>
+                    <h3 class="text-center mt-3"> MY INQUIRIES</h3>
                     <tr>
 
-                        <td style="width:50%;word-wrap:break-word;">
-                            @Html.DisplayFor(modelItem => item.inquirry)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Dateposteed)
-                        </td>
+                        <th>
+                            <button type="button"
+                                    class="btn btn-light text-black"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-offset="0,4"
+                                    data-bs-placement="top"
+                                    data-bs-html="true"
+                                    title=" </i><span> SORT BY INQUIRY</span>">
+                                @Html.ActionLink("INQUIRY", "myInquiries", new { sortOrder = ViewBag.inquirydesc })
 
-                        <td>
-                            <button class="btn btn-outline-success">
-                                @Html.ActionLink("status", "userResponse", new { id = item.Inquirery_id })
                             </button>
-                            @*@Html.ActionLink("Details", "Details", new { id = item.Inquirery_id })*@
 
-                        </td>
+                        </th>
+                        <th>
+                            <button type="button"
+                                    class="btn btn-light text-black"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-offset="0,4"
+                                    data-bs-placement="top"
+                                    data-bs-html="true"
+                                    title=" </i><span> SORT BY DATE POSTED</span>">
+                                @Html.ActionLink("DATE POSTED", "myInquiries", new { sortOrder = ViewBag.Date })
+
+                            </button>
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="text-center">
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
 
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                            <td style="width:50%;">
+                                @Html.DisplayFor(modelItem => item.inquirry)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Dateposteed)
+                            </td>
 
-        @Html.PagedListPager(Model, page => Url.Action("myInquiries", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                            <td>
+                                <button class="btn btn-outline-success">
+                                    @Html.ActionLink("status", "userResponse", new { id = item.Inquirery_id })
+                                </button>
+                                @*@Html.ActionLink("Details", "Details", new { id = item.Inquirery_id })*@
 
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("myInquiries", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+        </div>
     </div>
 </div>
     }

@@ -3,101 +3,119 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
-
-
-
 @{
     if (Session["userid"] != null)
     {
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row mb-5">
-                <div class="col-md-6 col-lg-4 mb-3">
-                    <div class="card">
-                        <div class="card-header">SHEDULE DETAILS</div>
-                        <div class="card-body">
+        if (Session["userroles"].ToString() == "ADMINISTRATOR" || Session["userroles"].ToString() == "SUPER ADMINISTRATOR")
+        {
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="row mb-5">
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card">
+                            <div class="card-header">SHEDULE DETAILS</div>
+                            <div class="card-body">
 
-                            <p class="card-text">
-                                Click button incase modal does not apearto ViewDetails selected
-                            </p>
-                            <button type="button"
-                                    class="btn btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalScrollable">
+                                <p class="card-text">
+                                    Click button incase modal does not apearto ViewDetails selected
+                                </p>
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalScrollable">
 
-                                SHEDULE DETAILS
-                            </button>
+                                    SHEDULE DETAILS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade in" id="modalScrollable" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalScrollableTitle">CALENDAR EVENTS</h5>
+                                <button type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Subject)
+                                    </dt>
+
+                                    <dd class="mb-2">
+                                        @Html.DisplayFor(model => model.Subject)
+                                    </dd>
+
+                                    <dt class="mb-2">
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </dt>
+
+                                    <dd class="mb-2">
+                                        @Html.DisplayFor(model => model.Description)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Start)
+                                    </dt>
+
+                                    <dd>
+
+                                        @Html.DisplayFor(model => model.Start.Date)
+                                    </dd>
+
+                                    <dt>
+                                        EXPECTED ARRIVAL TIME
+                                    </dt>
+                                    <dd>
+                                        @{
+                                            var timer = @Html.DisplayFor(model => model.End);
+                                        }
+                                        <a href="https://logwork.com/countdown-w1mh" class="countdown-timer text-primary" data-style="circles" data-textcolor="#39574c" data-timezone="Africa/Kampala" data-date=@timer>c</a>
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.IsFullDay)
+                                    </dt>
+
+                                    <dd>
+                                        @if (Model.IsFullDay == true)
+                                        {
+                                            <button class="btn btn-outline-success"> Fullday</button>
+
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-outline-warning"> Giventime Set</button>
+                                        }
+                                    </dd>
 
 
+                                </dl>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="@Url.Action("Index","Events")" class="btn btn-outline-secondary">  Back</a>
 
-
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade in" id="modalScrollable" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalScrollableTitle">CALENDAR EVENTS</h5>
-                            <button type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.Subject)
-                                </dt>
+        }
 
-                                <dd class="mb-2">
-                                    @Html.DisplayFor(model => model.Subject)
-                                </dd>
+        else
+        {
+            <script>
+                swal({
+                    title: "NOT AUTHORISED",
+                    text: "ACCESSDE DENIED",
+                    icon: "error"
+                });</script>
 
-                                <dt class="mb-2">
-                                    @Html.DisplayNameFor(model => model.Description)
-                                </dt>
-
-                                <dd class="mb-2">
-                                    @Html.DisplayFor(model => model.Description)
-                                </dd>
-
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.Start)
-                                </dt>
-
-                                <dd>
-
-                                    @Html.DisplayFor(model => model.Start.Date)
-                                </dd>
+        }
 
 
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.IsFullDay)
-                                </dt>
-
-                                <dd>
-                                    @if (Model.IsFullDay == true)
-                                    {
-                                        <button class="btn btn-outline-success"> Fullday</button>
-
-                                    }
-                                    else
-                                    {
-                                        <button class="btn btn-outline-warning"> Giventime Set</button>
-                                    }
-                                </dd>
-
-                            </dl>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="@Url.Action("Index","Events")" class="btn btn-outline-secondary">  Back</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     }
     else
     {

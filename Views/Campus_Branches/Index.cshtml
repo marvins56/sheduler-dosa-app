@@ -10,40 +10,55 @@
 @{
     if (Session["userid"] != null)
     {
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <!-- Hoverable Table rows -->
-            <div class="card">
-                <h5 class="card-header">Manage Campuses</h5>
-                <div class="table-responsive text-nowrap">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Campus_branch)
-                                </th>
-                                <th>   <a href="@Url.Action("Create","Campus_Branches")" class="btn btn-primary">  Add Campus</a></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
+        if (Session["userroles"].ToString() == "ADMINISTRATOR" || Session["userroles"].ToString() == "SUPER ADMINISTRATOR")
+        {
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <!-- Hoverable Table rows -->
+        <div class="card">
+            <h5 class="card-header">Manage Campuses</h5>
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Campus_branch)
+                            </th>
+                            <th>   <a href="@Url.Action("Create","Campus_Branches")" class="btn btn-primary">  Add Campus</a></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
 
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Campus_branch)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.campus_id }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.campus_id })
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Campus_branch)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.campus_id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.campus_id })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
+        }
+
+        else
+        {
+            <script>
+                swal({
+                    title: "NOT AUTHORISED",
+                    text: "ACCESSDE DENIED",
+                    icon: "error"
+                });</script>
+
+        }
+        
     }
     else
     {

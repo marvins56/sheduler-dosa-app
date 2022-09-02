@@ -39,9 +39,9 @@ namespace sheduler.Controllers
         }
         public ActionResult PersonalReports(string id)
         {
-            var personalinfo = Get_myinquiries(id);
-            var studt = Get_mystudent(id);
-            var myevents = Get_UserEvents(id);
+            var personalinfo = Get_myinquiries();
+            var studt = Get_mystudent();
+            var myevents = Get_UserEvents();
             var response = Get_all_responses();
             var userDetails = new UserReport();
             userDetails.Inquiry = personalinfo;
@@ -79,10 +79,28 @@ namespace sheduler.Controllers
         }
         public List<Inquiry> Get_myinquiries(string id)
         {
-          
+           
+
             try
             {
-                id = (Session["userid"]).ToString();
+                TempData["inquiries"] = db.Inquiries.Where(a => a.UserId == id).ToList().Count();
+                db.Inquiries.Where(a => a.UserId == id).ToList();
+
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = e.Message;
+            }
+
+            return (db.Inquiries.Where(a => a.UserId == id).OrderBy(a => a.Dateposteed).ToList());
+        }
+        public List<Inquiry> Get_myinquiries()
+        {
+            var id = (Session["userid"]).ToString();
+
+            try
+            {
+
                 TempData["inquiries"] = db.Inquiries.Where(a => a.UserId == id).ToList().Count();
                 db.Inquiries.Where(a => a.UserId == id).ToList();
 
@@ -98,7 +116,24 @@ namespace sheduler.Controllers
         {
             try
             {
-                id = (Session["userid"]).ToString();
+               
+                TempData["students"] = db.Students.Where(a => a.AccessNumber == id).ToList().Count();
+                db.Students.Where(a => a.AccessNumber == id).ToList();
+
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = e.Message;
+            }
+
+            return (db.Students.Where(a => a.AccessNumber == id).ToList());
+        }
+        public List<Student> Get_mystudent()
+        {
+           var id = (Session["userid"]).ToString();
+            try
+            {
+                
                 TempData["students"] = db.Students.Where(a => a.AccessNumber == id).ToList().Count();
                 db.Students.Where(a => a.AccessNumber == id).ToList();
 
@@ -114,7 +149,7 @@ namespace sheduler.Controllers
         {
             try
             {
-                id = (Session["userid"]).ToString();
+              
                 TempData["events"] = db.Events.Where(a => a.userid == id).ToList().Count();
                 db.Events.Where(a => a.userid == id).ToList();
 
@@ -126,11 +161,31 @@ namespace sheduler.Controllers
 
             return (db.Events.Where(a => a.userid == id).OrderBy(a => a.Start).ToList());
         }
+        public List<Event> Get_UserEvents()
+        {
+            var id = (Session["userid"]).ToString();
+            try
+            {
+               
+                TempData["events"] = db.Events.Where(a => a.userid == id).ToList().Count();
+                db.Events.Where(a => a.userid == id).ToList();
+
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = e.Message;
+            }
+
+            return (db.Events.Where(a => a.userid == id).OrderBy(a => a.Start).ToList());
+        }
+        public List<Event> Get_all_events()
+        {
+            return (db.Events.ToList());
+        }
         public List<Student> Get_students()
         {
             return (db.Students.ToList());
         }
-
         public ActionResult Generalreport()
         {
             var users = Get_students();
@@ -153,10 +208,7 @@ namespace sheduler.Controllers
         {
             return (db.Responses.OrderBy(a => a.DatetimeOfReply).ToList());
         }
-        public List<Event> Get_all_events()
-        {
-            return (db.Events.ToList());
-        }
+     
         public ActionResult Index()
         {
 

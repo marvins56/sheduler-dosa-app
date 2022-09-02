@@ -10,47 +10,62 @@
 @{
     if (Session["userid"] != null)
     {
-        <h3>Are you sure you want to delete this?</h3>
-        <div>
-            <h4>Response</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Response1)
-                </dt>
+        if (Session["userroles"].ToString() == "ADMINISTRATOR" || Session["userroles"].ToString() == "SUPER ADMINISTRATOR")
+        {
+            <h3>Are you sure you want to delete this?</h3>
+            <div>
+                <h4>Response</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Response1)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Response1)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Response1)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.DatetimeOfReply)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DatetimeOfReply)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.DatetimeOfReply)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.DatetimeOfReply)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Inquiry.inquirry)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Inquiry.inquirry)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Inquiry.inquirry)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Inquiry.inquirry)
+                    </dd>
 
-            </dl>
+                </dl>
 
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-                <div class="form-actions no-color">
-                    <input type="submit" value="Delete" class="btn btn-default" /> |
-                    @Html.ActionLink("Back to List", "Index")
-                </div>
-            }
-        </div>
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-default" /> |
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                }
+            </div>
+        }
+
+        else
+        {
+            <script>
+                swal({
+                    title: "NOT AUTHORISED",
+                    text: "ACCESSDE DENIED",
+                    icon: "error"
+                });</script>
+
+        }
+
     }
     else
     {

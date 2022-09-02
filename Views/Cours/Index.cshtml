@@ -8,40 +8,56 @@
 @{
     if (Session["userid"] != null)
     {
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <!-- Hoverable Table rows -->
-            <div class="card">
-                <h5 class="card-header">Manage courses</h5>
-                <div class="table-responsive text-nowrap">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.courseName)
-                                </th>
-                                <th>@Html.ActionLink("Add Course", "Create")</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-
-                            @foreach (var item in Model)
-                            {
+        if (Session["userroles"].ToString() == "ADMINISTRATOR" || Session["userroles"].ToString() == "SUPER ADMINISTRATOR")
+        {
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <!-- Hoverable Table rows -->
+                <div class="card">
+                    <h5 class="card-header">Manage courses</h5>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table table-hover">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.courseName)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.Course_code }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.Course_code })
-                                    </td>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.courseName)
+                                    </th>
+                                    <th>@Html.ActionLink("Add Course", "Create")</th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.courseName)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Course_code }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Course_code })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+
+        else
+        {
+            <script>
+                swal({
+                    title: "NOT AUTHORISED",
+                    text: "ACCESSDE DENIED",
+                    icon: "error"
+                });</script>
+
+        }
+
+
     }
     else
     {

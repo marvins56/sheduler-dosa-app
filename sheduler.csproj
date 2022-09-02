@@ -148,6 +148,7 @@
     <Compile Include="Controllers\UserrolesController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Controllers\YearsController.cs" />
+    <Compile Include="Crypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -490,6 +491,7 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <None Include="Properties\PublishProfiles\dosaapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -652,7 +654,6 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <None Include="Properties\PublishProfiles\dosaapp - Web Deploy.pubxml" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\fullcalendar\fullcalendar.js" />
@@ -1131,7 +1132,6 @@
     <Content Include="Template\scss\_theme\_common.scss" />
     <Content Include="Template\scss\_theme\_theme.scss" />
     <Content Include="Views\Events\AdminCreate.cshtml" />
-    <Content Include="Views\users\Admin.cshtml" />
     <Content Include="Views\Inquiries\myInquiries.cshtml" />
     <Content Include="Views\Events\Generalreport.cshtml" />
     <Content Include="Views\Events\UserReports.cshtml" />

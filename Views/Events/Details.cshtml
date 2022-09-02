@@ -66,6 +66,15 @@
                                 <button class="btn btn-outline-warning"> Giventime</button>
                             }
                         </Dd>
+                        <dt>
+                            EXPECTED ARRIVAL TIME
+                        </dt>
+                        <dd>
+                                @{
+                                    var timer = @Html.DisplayFor(model => model.End);
+                                }
+                                <a href="https://logwork.com/countdown-w1mh" class="countdown-timer text-primary" data-style="circles" data-textcolor="#39574c" data-timezone="Africa/Kampala" data-date=@timer>c</a>
+                        </dd>
 
                     </dl>
                 </div>

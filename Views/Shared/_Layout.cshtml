@@ -31,7 +31,8 @@
     <link rel="stylesheet" href="~/Template/assets/vendor/libs/apex-charts/apex-charts.css" />
     <link rel="stylesheet" href="~/Content/loader.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYnUMc7pgoWwGQQ9cy_ojuCuzmIq31Fog"></script>
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYnUMc7pgoWwGQQ9cy_ojuCuzmIq31Fog"></script>*@
+    <script src="https://cdn.logwork.com/widget/countdown.js"></script>
 
 
     <script src="~/Template/assets/vendor/js/helpers.js"></script>
@@ -213,7 +214,9 @@
                         </li>
 
                         <li class="menu-item">
-                            <a href="~/Template/html/pages-misc-under-maintenance.html" class="menu-link  ">
+                            <a href="#" class="menu-link  "  
+                               data-bs-toggle="modal"
+                                        data-bs-target="#fullscreenModal">
                                 <i class="fa-solid fa-blender-phone menu-icon"></i>
                                 <div data-i18n="Authentications">Contact us</div>
                             </a>

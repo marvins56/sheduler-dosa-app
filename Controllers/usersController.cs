@@ -134,6 +134,7 @@ namespace sheduler.Controllers
 
                 var result = from s in db.Students
                              select s;
+                result = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
@@ -158,15 +159,15 @@ namespace sheduler.Controllers
                         break;
                 }
 
-                int pageSize = 6;
+                int pageSize = 20;
                 int pageNumber = (page ?? 1);
-                result = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
                 return View(result.ToPagedList(pageNumber, pageSize));
             }
             catch (Exception E)
             {
                 TempData["error"] = E.Message;
             }
+
             return View();
         }
         public ActionResult Details(string id)
