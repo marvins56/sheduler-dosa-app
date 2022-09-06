@@ -291,7 +291,7 @@ namespace sheduler.Controllers
         [NonAction]
         public string Generate_Pass()
         {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+            var chars = "123456789";
             var stringChars = new char[6];
             var random = new Random();
 
