@@ -28,7 +28,7 @@ namespace sheduler.Controllers
                 ViewBag.username = String.IsNullOrEmpty(sortOrder) ? "username" : "";
                 ViewBag.accessnumber = String.IsNullOrEmpty(sortOrder) ? "accessnumber" : "";
                 ViewBag.country = String.IsNullOrEmpty(sortOrder) ? "country" : "";
-               
+
                 if (searchString != null)
                 {
                     page = 1;
@@ -90,12 +90,12 @@ namespace sheduler.Controllers
                 ViewBag.responsed_to = db.Responses.ToList().Count();
                 var n1 = Convert.ToInt32(ViewBag.inquiries_no);
                 var n2 = Convert.ToInt32(ViewBag.responsed_to);
-                int pending = sum( n1,n2 );
+                int pending = sum(n1, n2);
                 ViewBag.pending = pending;
                 ViewBag.allusers = db.Students.ToList().Count();
                 ViewBag.events = db.Events.ToList().Count();
             }
-            catch(Exception E)
+            catch (Exception E)
             {
                 TempData["error"] = E.Message;
             }
@@ -107,7 +107,7 @@ namespace sheduler.Controllers
         //    var students = db.Students.Include(s => s.Campus_Branches).Include(s => s.Cours).Include(s => s.semester).Include(s => s.UserLocation).Include(s => s.Year);
         //    return View(students.ToList());
         //}
-        public int  sum(int a, int b)
+        public int sum(int a, int b)
         {
 
             return (a - b);
@@ -194,7 +194,7 @@ namespace sheduler.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AccessNumber,UserName,Email,Course_code,sem_id,Year_Id,campus_id,Country,Passcode")] Student student)
+        public ActionResult Create([Bind(Include = "AccessNumber,UserName,Email,Course_code,sem_id,Year_Id,campus_id,Country,Passcode,Password")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -219,24 +219,41 @@ namespace sheduler.Controllers
             ViewBag.Year_Id = new SelectList(db.Years, "Year_id", "yearName");
             return View();
         }
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SelfRegister([Bind(Include = "AccessNumber,UserName,Email,Course_code,sem_id,Year_Id,campus_id,Country,Passcode")] Student student)
+        public ActionResult SelfRegister([Bind(Include = "AccessNumber,UserName,Email,Course_code,sem_id,Year_Id,campus_id,Country,Passcode,Password")] Student student)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Students.Add(student);
-                    db.SaveChanges();
-                    return RedirectToAction("Login");
+                    var emailexists = IsMailExists(student.Email);
+                    var userexixts = IsuSernameExits(student.AccessNumber);
+
+                    if (emailexists)
+                    {
+                        TempData["error"] = "EMAIL ADDRESS TAKEN";
+                    } else if (userexixts)
+                    {
+                        TempData["error"] = "USER EXISTS";
+                    }
+                    else
+                    {
+                        student.Password = Crypto.Hash(student.Password);
+
+                        db.Students.Add(student);
+                        db.SaveChanges();
+                        TempData["success"] = "REGISTRATION SUCCESSFULL KINDLY LOGIN";
+                    }
+
+                    return RedirectToAction("SelfRegister");
                 }
 
             }
             catch (Exception e)
             {
-                TempData["regerror"] = e.Message;
+                TempData["error"] = e.Message;
             }
 
             ViewBag.campus_id = new SelectList(db.Campus_Branches, "campus_id", "Campus_branch", student.campus_id);
@@ -261,7 +278,7 @@ namespace sheduler.Controllers
                 var Email = db.Students.Where(a => a.AccessNumber == users.AccessNumber).Select(a => a.Email).FirstOrDefault();
                 var passcode = db.Students.Where(a => a.AccessNumber == users.AccessNumber).Select(a => a.Passcode).FirstOrDefault();
                 //check if email and access number are not empty
-                if(accessno != null)
+                if (accessno != null)
                 { //generate code
                     Session["userid"] = accessno;
                     var pass = Generate_Pass();
@@ -271,16 +288,16 @@ namespace sheduler.Controllers
                     if (res > 0)
                     {
                         SendEmailPasscode(Email, passcode);
-                        TempData["success"] = "HELLO " + Session["userid"]+ ". Security Code has been sent to " + Email;
+                        //TempData["success"] = "HELLO " + Session["userid"]+ ". Security Code has been sent to " + Email;
                         return RedirectToAction("verify");
                     }
                 }
                 else
                 {
-                    TempData["error"] = "USER NOT FOUND";                  
+                    TempData["error"] = "USER NOT FOUND";
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 TempData["logineror"] = e.Message;
             }
@@ -327,7 +344,7 @@ namespace sheduler.Controllers
             //this password is generated by u in ur email account
             var fromEmailPassword = pass;
             var subject = "DOSA SECURITY CODE";
-            var body =  Session["userid"] + ", YOUR  SECURITY CODE IS :   " + passcode;/* + "<br /> <a href='" + link + "'> click here</a>";*/
+            var body = Session["userid"] + ", YOUR  SECURITY CODE IS :   " + passcode;/* + "<br /> <a href='" + link + "'> click here</a>";*/
             var smtp = new SmtpClient(smtpclient)
             {
                 Port = Convert.ToInt32(fromport),
@@ -354,7 +371,21 @@ namespace sheduler.Controllers
                     TempData["emailerror"] = ex.Message;
                 }
         }
+        public bool IsMailExists(string emailId)
+        {
 
+            var v = db.Students.Where(a => a.Email == emailId).FirstOrDefault();
+            return v != null;
+
+        }
+        [NonAction]
+        public bool IsuSernameExits(string accessNumber)
+        {
+
+            var v = db.Students.Where(a => a.AccessNumber == accessNumber).FirstOrDefault();
+            return v != null;
+
+        }
         [HttpGet]
         public ActionResult verify()
         {
@@ -363,52 +394,64 @@ namespace sheduler.Controllers
         [HttpPost]
         public ActionResult verify(Student passcodes)
         {
-
-            var userid = Session["userid"].ToString();
-            var userrolesz = db.Userroles.Where(a => a.AccessNo == userid).Select(a =>a.Roleid).FirstOrDefault();
-            var actualrole = db.Roles.Where(a => a.Role_id == userrolesz).Select(a => a.Role1).FirstOrDefault();
-            try
+            var accessno = db.Students.Where(a => a.AccessNumber == passcodes.AccessNumber).Select(a => a.AccessNumber).FirstOrDefault();
+            var email = db.Students.Where(a => a.Email == passcodes.Email).Select(a => a.AccessNumber).FirstOrDefault();
+            if (accessno != null)
             {
-                var Passcode = db.Students.Where(a => a.AccessNumber == userid).Select(a => a.Passcode).FirstOrDefault();
-                var idz = db.Students.Where(a => a.AccessNumber == userid).Select(a => a.AccessNumber).FirstOrDefault();
-                if (Passcode == passcodes.Passcode)
+                var userid = accessno;
+
+                var userrolesz = db.Userroles.Where(a => a.AccessNo == userid).Select(a => a.Roleid).FirstOrDefault();
+                var actualrole = db.Roles.Where(a => a.Role_id == userrolesz).Select(a => a.Role1).FirstOrDefault();
+                try
                 {
-                    
-                    if(idz == userid)
+                    var Passcode = db.Students.Where(a => a.AccessNumber == userid).Select(a => a.Password).FirstOrDefault();
+                    if(Passcode != null)
                     {
-                        Session["userid"] = idz.ToString();
-                        //TempData["success"] = "verified";
-                        if (actualrole == "ADMINISTRATOR" || actualrole == "SUPER ADMINISTRATOR")
+                        var idz = db.Students.Where(a => a.AccessNumber == userid).Select(a => a.AccessNumber).FirstOrDefault();
+                        if (string.Compare(Crypto.Hash(passcodes.Password), Passcode) == 0)
                         {
-                            Session["userroles"] = actualrole;
-                            return RedirectToAction("Admin", "Users");
+                            if (idz == userid)
+                            {
+                                Session["userid"] = idz.ToString();
+                                //TempData["success"] = "verified";
+                                if (actualrole == "ADMINISTRATOR" || actualrole == "SUPER ADMINISTRATOR")
+                                {
+                                    Session["userroles"] = actualrole;
+                                    return RedirectToAction("Admin", "Users");
+                                }
+                                else
+                                {
+                                    Session["userroles"] = actualrole;
+                                    return RedirectToAction("index", "Home");
+                                }
+                            }
+                            else
+                            {
+                                TempData["error"] = "ACCESS DENIED";
+                            }
+
                         }
                         else
                         {
-                            Session["userroles"] = actualrole;
-                            return RedirectToAction("index", "Home");
+                            TempData["error"] = "invalid password";
                         }
                     }
                     else
                     {
-                        TempData["error"] = "ACCESS DENIED";
+                        TempData["error"] = "INVALID PASSWORD";
                     }
-
-
-
                 }
-                else
+                catch (Exception e)
                 {
-                    TempData["error"] = "invalid code";
+                    TempData["error"] = e.Message;
                 }
             }
-            catch (Exception e)
+            else
             {
-                TempData["error"] = e.Message;
+                TempData["error"] = "USER NOT FOUND";
             }
-
-
-            return View(passcodes);
+            
+            return View();
         }
         public ActionResult logout()
         {

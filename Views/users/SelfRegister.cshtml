@@ -1,147 +1,182 @@
 ﻿@model sheduler.Models.Student
 
 @{
-    ViewBag.Title = "SelfRegister";
+    ViewBag.Title = "lOGIN";
     Layout = null;
 }
+@if (TempData["logineror"] != null)
+{
+    <script>
+     swal({
+        title: "ERROR!",
+  text: "@TempData["logineror"]",
+  icon: "error"
+        });</script>
+}
+
+@if (TempData["error"] != null)
+{
+    <script>
+     swal({
+        title: "ERROR!",
+  text: "@TempData["error"]",
+  icon: "warning"
+        });</script>
+}
+@if (TempData["success"] != null)
+{
+    <script>
+     swal({
+         title: "SUCCESSFULL!",
+  text: "@TempData["success"]",
+  icon: "sucess"
+        });</script>
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>StudentAffairs DOSA</title>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="~/Auth/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- Main css -->
-    <link rel="stylesheet" href="~/Auth/css/style.css">
-    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="~/Content/loader.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <style>
-        .signup {
-            background-image: url('/Template/assets/UCU-Libray.jpg');
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+    <link href="~/Auth/register.css" rel="stylesheet">
 
-        .container {
-            opacity: 0.8;
-            background: #fff;
-        }
-
-        .signup-content, .signup-form {
-            padding-bottom: 50px;
-            opacity: 1;
-        }
-    </style>
 </head>
 
 <body>
 
-    @if (TempData["regerror"] != null)
-    {
-        <script>
-     swal({
-        title: "ERROR!",
-  text: "@TempData["regerror"]",
-  icon: "error"
-        });</script>
-    }
-
-    <div class="main" style="height:500px; margin-top:-150px;">
-
-        @using (Html.BeginForm("SelfRegister", "Users", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-
-            <div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
-                <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
-                    <div class="uil-default-css">
-                        <div class="loader">Loading...</div>
-                        <div id="loader"></div>
-                    </div>
-                    <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
-                </div>
-                <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+    <div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+        <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+            <div class="uil-default-css">
+                <div class="loader">Loading...</div>
+                <div id="loader"></div>
             </div>
-            <!-- Sign up form -->
-            <section class="signup">
-                <div class="container">
-                    <div class="signup-content">
-                        <div class="signup-form">
-                            <h2 class="form-title">SELF REGISTER</h2>
+            <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+        </div>
+        <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+    </div>
+    <div class="main" style="height:500px; margin-top:-100px;">
 
-                            <div class="register-form" id="register-form">
-                                <div class="form-group">
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="container" id="container">
+            <div class="form-container sign-up-container signup">
 
-                                    <label for="name"><i class="zmdi zmdi-account material-icons-name pl-2"></i></label>
+                @using (Html.BeginForm("SelfRegister", "Users", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
 
-                                    @Html.EditorFor(model => model.AccessNumber, new { htmlAttributes = new { @class = "", Placeholder = "Access Number" } })
-                                    @Html.ValidationMessageFor(model => model.AccessNumber, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    <label for="name"><i class="zmdi zmdi-account material-icons-name pl-2"></i></label>
-                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "", Placeholder = "eg user@students.ucu.ac.ug" } })
-                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    <label><i class="fa-solid fa-envelope-circle-check pl-2"></i> </label>
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "", Placeholder = "Email" } })
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
+                    <h1>Create Account</h1>
 
-                                    @Html.DropDownList("Course_code", null, htmlAttributes: new { @class = "form-control", Placeholder = "Course" })
-                                    @Html.ValidationMessageFor(model => model.Course_code, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
+                    <div class="form-group">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                    @Html.DropDownList("sem_id", null, htmlAttributes: new { @class = "form-control", Placeholder = "Semester" })
-                                    @Html.ValidationMessageFor(model => model.sem_id, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name pl-2"></i></label>
 
-                                    @Html.DropDownList("Year_Id", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Year_Id, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
+                        @Html.EditorFor(model => model.AccessNumber, new { htmlAttributes = new { @class = "", Placeholder = "Access Number" } })
+                        @Html.ValidationMessageFor(model => model.AccessNumber, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name pl-2"></i></label>
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "", Placeholder = "userName" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-envelope-circle-check pl-2"></i> </label>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "", Placeholder = "Email" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "", Placeholder = "Password", Type = "password" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
 
-                                    @Html.DropDownList("campus_id", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.campus_id, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
+                    <div class="form-group">
 
-                                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "", Placeholder = "Country" } })
-                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-                                </div>
+                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "", Placeholder = "Country" } })
+                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
 
-                                <div class="form-group form-button">
-                                    <input type="submit" name="signup" id="signup" class="btn btn-primary w-100" value="sign Up" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="signup-image">
-                            <figure><img src="~/Auth/images/signup-image.png" alt="sing up image"></figure>
-                            <a href="@Url.Action("login","Users")" class="signup-image-link">already Have an Account</a>
-                            <a href="@Url.Action("login","Users")" class="signup-image-link">Continue as Guest</a>
-                        </div>
+                        @Html.DropDownList("campus_id", null, htmlAttributes: new { @class = "dropdownbtns", style = "padding:10px; width:100p", })
+                        @Html.ValidationMessageFor(model => model.campus_id, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="form-group">
+
+                        @Html.DropDownList("sem_id", null, htmlAttributes: new { @class = "dropdownbtns", style = "padding:10px;", Placeholder = "Semester" })
+                        @Html.ValidationMessageFor(model => model.sem_id, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+
+                        @Html.DropDownList("Year_Id", null, htmlAttributes: new { @class = "dropdownbtns", style = "padding:10px;", })
+                        @Html.ValidationMessageFor(model => model.Year_Id, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.DropDownList("Course_code", null, htmlAttributes: new { @class = "dropdownbtns", style = "padding:10px;", Placeholder = "Course" })
+                        @Html.ValidationMessageFor(model => model.Course_code, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group form-button">
+                        <input type="submit" value="sign Up" />
+                    </div>
+
+                }
+
+            </div>
+            <div class="form-container sign-in-container signin">
+
+
+                @using (Html.BeginForm("Verify", "Users", FormMethod.Post))
+                {
+
+                    @Html.AntiForgeryToken()
+                    <h1>Sign in</h1>
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <span>or use your account</span>
+                    <div class="form-group">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name pl-2"></i></label>
+
+                        @Html.EditorFor(model => model.AccessNumber, new { htmlAttributes = new { @class = "", Placeholder = "Access Number" } })
+                        @Html.ValidationMessageFor(model => model.AccessNumber, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-envelope-circle-check pl-2"></i> </label>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "", Placeholder = "Email" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <a href="#">Forgot your password?</a>
+                    <div class="form-group form-button">
+                        <input type="submit" value="sign In" />
+                    </div>
+                }
+
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Welcome Back!</h1>
+                        <p>To keep connected with us please login with your personal info</p>
+                        <button class="ghost" id="signIn">Sign In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>Enter your personal details and start journey with us</p>
+                        <button class="ghost" id="signUp">Sign Up</button>
                     </div>
                 </div>
-            </section>
-        }
+            </div>
+        </div>
     </div>
 
-    <!-- JS -->
-    <script src="~/Auth/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Auth/js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
         var showLoader = function (text) {
             $('#resultLoading').show();
@@ -155,10 +190,24 @@
         });
 
         $("#loader").fadeOut(1000);
+
+    </script>
+    <script>
+
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('container');
+
+        signUpButton.addEventListener('click', () => {
+            container.classList.add("right-panel-active");
+        });
+
+        signInButton.addEventListener('click', () => {
+            container.classList.remove("right-panel-active");
+        });
     </script>
     @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+
     }
 </body>
 </html>
-

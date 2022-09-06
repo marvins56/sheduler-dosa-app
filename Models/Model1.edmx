@@ -109,6 +109,7 @@
           <Property Name="campus_id" Type="int" Nullable="false" />
           <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Passcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="UserLocations">
           <Key>
@@ -400,6 +401,7 @@
           <NavigationProperty Name="UserLocation" Relationship="Self.FK_UserLocation" FromRole="Students" ToRole="UserLocations" />
           <NavigationProperty Name="Userroles" Relationship="Self.FK_users" FromRole="Students" ToRole="Userroles" />
           <NavigationProperty Name="Year" Relationship="Self.FK_Year_id" FromRole="Students" ToRole="Years" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserLocation">
           <Key>
@@ -684,6 +686,7 @@
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="MyDosa_dbModel.Student">
               <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="AccessNumber" ColumnName="AccessNumber" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
