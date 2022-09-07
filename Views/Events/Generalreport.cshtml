@@ -45,42 +45,7 @@
 
 
 
-<script type="text/javascript">
 
-    //$(document).ready(function () {
-    //    $('#datatable').DataTable({
-    //        dom: 'Bfrtip',
-    //        buttons: [
-    //            'copy', 'csv', 'excel', 'pdf', 'print'
-    //        ]
-    //    });
-    //});
-
-    $(document).ready(function () {
-        var table = $('#datatable').dataTable();
-        var tableTools = new $.fn.dataTable.TableTools(table, {
-            'aButtons': [
-                {
-                    'sExtends': 'xls',
-                    'sButtonText': 'Save to Excel',
-                    'sFileName': 'General_report.xls'
-                },
-                {
-                    'sExtends': 'print',
-                    'bShowAll': true,
-                },
-                {
-                    'sExtends': 'pdf',
-                    'bFooter': false
-                },
-                'copy',
-                'csv'
-            ],
-            'sSwfPath': '//cdn.datatables.net/tabletools/2.2.4/swf/copy_csv_xls_pdf.swf'
-        });
-        $(tableTools.fnContainer()).insertBefore('#datatable_wrapper');
-    });
-</script>
 
 
 @if (Session["userroles"].ToString() == "ADMINISTRATOR" || Session["userroles"].ToString() == "SUPER ADMINISTRATOR")
@@ -109,202 +74,376 @@
 
         </div>
     </div>
-    <!-- Hoverable Table rows -->
-    <div class="card mb-4">
-        <div class="table-responsive text-break" id="datatable_wrapper">
-            <table class="table table-hover  " @*style="width:100%;"*@ id="datatable">
-                <thead>
-                    <tr> <H4 class="text-capitalize text-center mt-2"> ALL AVAILABLE  TRAVEL SHEDULES</H4></tr>
-                    <tr>
-                        <th>
-                            STUDENT
-                        </th>
-                        <th>
-                            TRAVEL DESCRIPTION
-                        </th>
-                        <th>
-                            SET OFF TIME
-                        </th>
-                        <th>
-                            FULL DAY
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @foreach (var item in Model.events)
-                    {
-                        <tr class="">
-                            <td style="width:10%;">
-                                @Html.DisplayFor(modelItem => item.userid)
-                            </td>
+    <div class="">
 
-                            <td style="width:50%; word-wrap:break-word;">
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Start.Date)
-                            </td>
+        <div class="nav-align-top mb-4">
+            <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                <li class="nav-item">
+                    @{
+                        var error3 = Model.events.Count();
+                        if (error3 == 0)
+                        {<button type="button"
+                                 class="nav-link active "
+                                 role="tab"
+                                 data-bs-toggle="tab"
+                                 data-bs-target="#navs-pills-justified-home"
+                                 aria-controls="navs-pills-justified-home"
+                                 aria-selected="true">
+                                <i class="fa-solid fa-calendar-check menu-icon "></i> TRAVEL SHEDULES
+                                <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error3</span>
+                            </button>
+
+                }
+                else
+                {
+                <button type="button"
+                        class="nav-link active "
+                        role="tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#navs-pills-justified-home"
+                        aria-controls="navs-pills-justified-home"
+                        aria-selected="true">
+                    <i class="fa-solid fa-calendar-check menu-icon "></i> TRAVEL SHEDULES
+                    <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error3</span>
+                </button>
+                }
 
 
-                            <td>
-                                @if (item.IsFullDay == true)
+
+                    }
+
+
+                </li>
+                <li class="nav-item">
+
+
+                    @{
+                        var error = Model.Inquiry.Count();
+                        if (error == 0)
+
+                        { <button type="button"
+                                  class="nav-link btn-danger"
+                                  role="tab"
+                                  data-bs-toggle="tab"
+                                  data-bs-target="#navs-pills-justified-profile"
+                                  aria-controls="navs-pills-justified-profile"
+                                  aria-selected="false">
+                                <i class="fa-solid fa-headset  menu-icon"></i> INQUIRIES
+                                <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error</span>
+
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button"
+                                    class="nav-link"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-pills-justified-profile"
+                                    aria-controls="navs-pills-justified-profile"
+                                    aria-selected="false">
+                                <i class="fa-solid fa-headset  menu-icon"></i> INQUIRIES
+                                <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error</span>
+
+                            </button>
+                        }
+
+                    }
+
+                </li>
+                <li class="nav-item">
+                    @{
+                        var error4 = Model.Response.Count();
+                        if (error4 == 0)
+                        {
+                            <button type="button"
+                                    class="nav-link btn-danger"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-pills-justified-messages"
+                                    aria-controls="navs-pills-justified-messages"
+                                    aria-selected="false">
+                                <i class="fa-solid fa-phone-volume menu-icon"></i> RESPONSES
+                                <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error4</span>
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button"
+                                    class="nav-link"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-pills-justified-messages"
+                                    aria-controls="navs-pills-justified-messages"
+                                    aria-selected="false">
+                                <i class="fa-solid fa-phone-volume menu-icon"></i> RESPONSES
+                                <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error4</span>
+                            </button>
+                        }
+
+                    }
+
+                </li>
+                <li class="nav-item">
+
+                    @{
+                        var error6 = Model.students.Count();
+                        if (error6 == 0)
+                        {
+                            <button type="button"
+                                    class="nav-link bg-danger"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-pills-justified-students"
+                                    aria-controls="navs-pills-justified-students"
+                                    aria-selected="false">
+                                  <i class="fa-solid fa-circle-user menu-icon"></i> USERS
+                                <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error6</span>
+                            </button>
+                        }
+                        else
+                        {
+                <button type="button"
+                        class="nav-link"
+                        role="tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#navs-pills-justified-students"
+                        aria-controls="navs-pills-justified-students"
+                        aria-selected="false">
+                    <i class="fa-solid fa-circle-user menu-icon"></i> USERS
+                    <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error6</span>
+                </button>
+                        }
+
+                    }
+
+                </li>
+            </ul>
+            <!-- Hoverable Table rows -->
+            <div class="tab-content">
+                <div class=" tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
+                    <div class="table-responsive text-break" id="datatable_wrapper">
+                        <table class="table table-hover  " @*style="width:100%;"*@ id="datatable">
+                            <thead>
+                                <tr> <H4 class="text-capitalize text-center mt-2"> ALL AVAILABLE  TRAVEL SHEDULES</H4></tr>
+                                <tr>
+                                    <th>
+                                        STUDENT
+                                    </th>
+                                    <th>
+                                        TRAVEL DESCRIPTION
+                                    </th>
+                                    <th>
+                                        SET OFF TIME
+                                    </th>
+                                    <th>
+                                        FULL DAY
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach (var item in Model.events)
                                 {
-                                    <button class="btn btn-outline-success"> Fullday</button>
+                                    <tr class="">
+                                        <td style="width:10%;">
+                                            @Html.DisplayFor(modelItem => item.userid)
+                                        </td>
 
+                                        <td style="width:50%; word-wrap:break-word;">
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Start.Date)
+                                        </td>
+
+
+                                        <td>
+                                            @if (item.IsFullDay == true)
+                                            {
+                                                <button class="btn btn-outline-success"> Fullday</button>
+
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-outline-warning"> Given time</button>
+                                            }
+                                        </td>
+
+                                    </tr>
                                 }
-                                else
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
+                    <div class="table-responsive text-wrap">
+                        <tr> <H4 class="text-capitalize text-center mt-2"> ALL AVAILABLE  INQUIRIES</H4></tr>
+
+                        <table class="table table-hover  " style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        STUDENT
+                                    </th>
+                                    <th>
+                                        INQUIRY
+                                    </th>
+                                    <th>
+                                        DATE POSTED
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach (var item in Model.Inquiry)
                                 {
-                                    <button class="btn btn-outline-warning"> Given time</button>
+
+                                    <tr class="">
+                                        <td style="width:10%;">
+                                            @Html.DisplayFor(modelItem => item.UserId)
+                                        </td>
+
+                                        <td style="width:50%; word-wrap:break-word;">
+                                            @Html.DisplayFor(modelItem => item.inquirry)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Dateposteed)
+                                        </td>
+
+                                    </tr>
                                 }
-                            </td>
 
-                        </tr>
-                    }
+                            </tbody>
+                        </table>
 
-                </tbody>
-            </table>
+                    </div>
+                </div>
+
+                <div class=" tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
+                    <div class="table-responsive text-wrap">
+                        <table class="table table-hover  " style="width:100%">
+                            <thead>
+                                <tr> <H4 class="text-capitalize text-center mt-2"> ALL RESPONSES TO INQUIRIES</H4></tr>
+
+                                <tr>
+                                    <th>
+                                        INQUIRY
+                                    </th>
+                                    <th>
+                                        RESPONSE
+                                    </th>
+                                    <th>
+                                        DATE REPLIED
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach (var item in Model.Response)
+                                {
+
+                                    <tr class="">
+                                        <td style="width:30%;">
+                                            @Html.DisplayFor(modelItem => item.Inquiry.inquirry)
+                                        </td>
+
+                                        <td style="width:50%; word-wrap:break-word;">
+                                            @Html.DisplayFor(modelItem => item.Response1)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DatetimeOfReply)
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="navs-pills-justified-students" role="tabpanel">
+                    <div class="table-responsive text-wrap">
+                        <table class="table table-hover  " style="width:100%">
+                            <thead>
+                                <tr> <H4 class="text-capitalize text-center mt-2"> ALL STUDENTS</H4></tr>
+
+                                <tr>
+                                    <th>
+                                        USERNAME
+                                    </th>
+                                    <th>
+                                        EMAIL
+                                    </th>
+                                    <th>
+                                        Country
+                                    </th>
+
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach (var item in Model.students)
+                                {
+
+                                    <tr class="">
+                                        <td style="width:10%;">
+                                            @Html.DisplayFor(modelItem => item.UserName)
+                                        </td>
+
+                                        <td style=" word-wrap:break-word;">
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Country)
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        @{
+                            var error5 = Model.students.Count();
+                            if (error5 == 0)
+                            { <button type="button" class="btn btn-danger m-2" style="float: right;">
+                                    Results <span class="badge badge-light">O </span>
+
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-primary m-2" style="float: right;">
+                                    Results <span class="badge badge-light">@error5</span>
+
+                                </button>
+                            }
+
+
+                        }
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     </div>
 
-    <div class="card mb-4">
-        <div class="table-responsive text-wrap">
-            <tr> <H4 class="text-capitalize text-center mt-2"> ALL AVAILABLE  INQUIRIES</H4></tr>
 
-            <table class="table table-hover  " style="width:100%">
-                <thead>
-                    <tr>
-                        <th>
-                            STUDENT
-                        </th>
-                        <th>
-                            INQUIRY
-                        </th>
-                        <th>
-                            DATE POSTED
-                        </th>
-
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @foreach (var item in Model.Inquiry)
-                    {
-
-                        <tr class="">
-                            <td style="width:10%;">
-                                @Html.DisplayFor(modelItem => item.UserId)
-                            </td>
-
-                            <td style="width:50%; word-wrap:break-word;">
-                                @Html.DisplayFor(modelItem => item.inquirry)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Dateposteed)
-                            </td>
-
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="card mb-4">
-        <div class="table-responsive text-wrap">
-            <table class="table table-hover  " style="width:100%">
-                <thead>
-                    <tr> <H4 class="text-capitalize text-center mt-2"> ALL RESPONSES TO INQUIRIES</H4></tr>
-
-                    <tr>
-                        <th>
-                            INQUIRY
-                        </th>
-                        <th>
-                            RESPONSE
-                        </th>
-                        <th>
-                            DATE REPLIED
-                        </th>
-
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @foreach (var item in Model.Response)
-                    {
-
-                        <tr class="">
-                            <td style="width:30%;">
-                                @Html.DisplayFor(modelItem => item.Inquiry.inquirry)
-                            </td>
-
-                            <td style="width:50%; word-wrap:break-word;">
-                                @Html.DisplayFor(modelItem => item.Response1)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DatetimeOfReply)
-                            </td>
-
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card mb-4">
-        <div class="table-responsive text-wrap">
-            <table class="table table-hover  " style="width:100%">
-                <thead>
-                    <tr> <H4 class="text-capitalize text-center mt-2"> ALL STUDENTS</H4></tr>
-
-                    <tr>
-                        <th>
-                            USERNAME
-                        </th>
-                        <th>
-                            EMAIL
-                        </th>
-                        <th>
-                            Country
-                        </th>
-
-
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @foreach (var item in Model.students)
-                    {
-
-                        <tr class="">
-                            <td style="width:10%;">
-                                @Html.DisplayFor(modelItem => item.UserName)
-                            </td>
-
-                            <td style=" word-wrap:break-word;">
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Country)
-                            </td>
-
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-
+   
 </div>
-}
+    }
 
-else
-{
+    else
+    {
     <script>
         swal({
             title: "NOT AUTHORISED",
@@ -312,17 +451,17 @@ else
             icon: "error"
         });</script>
 
-}
+    }
 
 
 
 
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>

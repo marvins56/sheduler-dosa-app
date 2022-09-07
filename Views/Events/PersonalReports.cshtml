@@ -78,6 +78,25 @@
 
                                     </tbody>
                                 </table>
+                                @{
+                                    var error = Model.students.Count();
+                                    if (error == 0)
+                                    {
+                                        <button type="button" class="btn btn-danger m-2" style="float: right;">
+                                            Results <span class="badge badge-light">O </span>
+
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-primary m-2" style="float: right;">
+                                            Results <span class="badge badge-light">@error</span>
+
+                                        </button>
+                                    }
+
+
+                                }
                             </div>
                         </div>
                         <!-- /Account -->
@@ -142,6 +161,25 @@
 
                         </tbody>
                     </table>
+                    @{
+                        var error1 = Model.events.Count();
+                        if (error1 == 0)
+                        {
+                            <button type="button" class="btn btn-danger m-2" style="float: right;">
+                                Results <span class="badge badge-light">O </span>
+
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-primary m-2" style="float: right;">
+                                Results <span class="badge badge-light">@error1</span>
+
+                            </button>
+                        }
+
+
+                    }
                 </div>
             </div>
 
@@ -186,6 +224,24 @@
 
                         </tbody>
                     </table>
+                    @{
+                        var error2 = Model.Inquiry.Count();
+                        if (error2 == 0)
+                        { <button type="button" class="btn btn-danger m-2" style="float: right;">
+                                Results <span class="badge badge-light">O </span>
+
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-primary m-2" style="float: right;">
+                                Results <span class="badge badge-light">@error2</span>
+
+                            </button>
+                        }
+
+
+                    }
                 </div>
             </div>
 

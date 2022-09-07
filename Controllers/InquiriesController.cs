@@ -21,8 +21,6 @@ namespace sheduler.Controllers
     {
         private MyDosa_dbEntities1 db = new MyDosa_dbEntities1();
 
-        // GET: Inquiries
-        
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             try
@@ -78,32 +76,42 @@ namespace sheduler.Controllers
         }
         public ActionResult userResponse(int id)
         {
-           
             try
             {
-                var ROLE = Session["userroles"];
+                var userid = Session["userid"].ToString();
+                var userrolesz = db.Userroles.Where(a => a.AccessNo == userid).Select(a => a.Roleid).FirstOrDefault();
+                var actualrole = db.Roles.Where(a => a.Role_id == userrolesz).Select(a => a.Role1).FirstOrDefault();
                 var responseid = db.Responses.Where(a => a.Inquirery_id == id).FirstOrDefault();
                 var res = db.Responses.Where(a => a.Inquirery_id == id).Select(a => a.Response1).FirstOrDefault();
                 var date = db.Responses.Where(a => a.Inquirery_id == id).Select(a => a.DatetimeOfReply).FirstOrDefault();
+               
                 if (responseid == null)
                 {
                     TempData["nullvalue"] = "RESPONSE PENDING";
-                   
-
-                    if (ROLE.ToString() == "ADMINISTRATOR" || ROLE.ToString() == "SUPER ADMINISTRATOR")
-                    {
-                        return RedirectToAction("index");
-                    }
-                    else
+                    
+                  if(actualrole == null)
                     {
                         return RedirectToAction("myInquiries");
                     }
+                    else 
+                    {
+                        if((actualrole.ToString() == "ADMINISTRATOR" || actualrole.ToString() == "SUPER ADMINISTRATOR"))
+                        {
+                            return RedirectToAction("index");
+                        }
+                        //else
+                        //{
+                        //    return RedirectToAction("myInquiries");
+                        //}
+                       
+                    }
+                    
 
                 }
                 else
                 {
 
-                    if (ROLE.ToString() == "ADMINISTRATOR" || ROLE.ToString() == "SUPER ADMINISTRATOR")
+                    if (actualrole.ToString() == "ADMINISTRATOR" || actualrole.ToString() == "SUPER ADMINISTRATOR")
                     {
                         TempData["values"] = "RESPONSE: " + res + " On " + date;
                         return RedirectToAction("index");
@@ -232,7 +240,7 @@ namespace sheduler.Controllers
         {
             if (ModelState.IsValid)
             {
-                inquiry.UserId = "a90648";
+                inquiry.UserId = Session["userid"].ToString();
                 inquiry.Dateposteed = DateTime.Now;
                 db.Inquiries.Add(inquiry);
                 db.SaveChanges();

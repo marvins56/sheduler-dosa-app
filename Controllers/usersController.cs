@@ -395,35 +395,28 @@ namespace sheduler.Controllers
         public ActionResult verify(Student passcodes)
         {
             var accessno = db.Students.Where(a => a.AccessNumber == passcodes.AccessNumber).Select(a => a.AccessNumber).FirstOrDefault();
-            var email = db.Students.Where(a => a.Email == passcodes.Email).Select(a => a.AccessNumber).FirstOrDefault();
-            if (accessno != null)
+            //var email = db.Students.Where(a => a.Email == passcodes.Email).Select(a => a.AccessNumber).FirstOrDefault();
+            if (accessno != null && passcodes.Password != null)
             {
-                var userid = accessno;
-
-                var userrolesz = db.Userroles.Where(a => a.AccessNo == userid).Select(a => a.Roleid).FirstOrDefault();
-                var actualrole = db.Roles.Where(a => a.Role_id == userrolesz).Select(a => a.Role1).FirstOrDefault();
+                
                 try
                 {
-                    var Passcode = db.Students.Where(a => a.AccessNumber == userid).Select(a => a.Password).FirstOrDefault();
+                    var userid = accessno;
+
+                    //var userrolesz = db.Userroles.Where(a => a.AccessNo == userid).Select(a => a.Roleid).FirstOrDefault();
+                    //var actualrole = db.Roles.Where(a => a.Role_id == userrolesz).Select(a => a.Role1).FirstOrDefault();
+                    //Session["userroles"] = actualrole;
+                    var Passcode = db.Students.Where(a => a.AccessNumber == userid).FirstOrDefault();
                     if(Passcode != null)
                     {
                         var idz = db.Students.Where(a => a.AccessNumber == userid).Select(a => a.AccessNumber).FirstOrDefault();
-                        if (string.Compare(Crypto.Hash(passcodes.Password), Passcode) == 0)
+                        if (string.Compare(Crypto.Hash(passcodes.Password), Passcode.Password) == 0)
                         {
                             if (idz == userid)
                             {
                                 Session["userid"] = idz.ToString();
                                 //TempData["success"] = "verified";
-                                if (actualrole == "ADMINISTRATOR" || actualrole == "SUPER ADMINISTRATOR")
-                                {
-                                    Session["userroles"] = actualrole;
-                                    return RedirectToAction("Admin", "Users");
-                                }
-                                else
-                                {
-                                    Session["userroles"] = actualrole;
-                                    return RedirectToAction("index", "Home");
-                                }
+                                return RedirectToAction("Userprofile","users");
                             }
                             else
                             {
@@ -451,12 +444,66 @@ namespace sheduler.Controllers
                 TempData["error"] = "USER NOT FOUND";
             }
             
-            return View();
+            return RedirectToAction("SelfRegister");
+        }
+        public ActionResult Userprofile()
+        {
+            try
+            {
+                var userid = Session["userid"].ToString();
+                var userrolesz = db.Userroles.Where(a => a.AccessNo == userid).Select(a => a.Roleid).FirstOrDefault();
+                var actualrole = db.Roles.Where(a => a.Role_id == userrolesz).Select(a => a.Role1).FirstOrDefault();
+            if(actualrole != null)
+                {
+                    Session["userroles"] = actualrole;
+                    var role = Session["userroles"].ToString();
+                    if (role != null)
+                    {
+                        if (role == Session["userroles"].ToString())
+                        {
+
+                            if (role == "ADMINISTRATOR" || role == "SUPER ADMINISTRATOR")
+                            {
+
+                                return RedirectToAction("Admin", "Users");
+                            }
+                            else
+                            {
+                                Session["userroles"] = actualrole;
+                                return RedirectToAction("index", "Home");
+                            }
+
+                        }
+                        else
+                        {
+                            TempData["errror"] = "INVALID PASSWORD OR ACCESS NUMBER";
+                        }
+                    }
+                    else
+                    {
+                        Session["userroles"] = actualrole;
+                        return RedirectToAction("index", "Home");
+                    }
+                }
+                else
+                {
+                    Session["userroles"] = actualrole;
+                    return RedirectToAction("index", "Home");
+                }
+
+
+
+            }
+            catch(Exception E)
+            {
+                TempData["errror"] = E.Message;
+            }
+            return RedirectToAction("SelfRegister");
         }
         public ActionResult logout()
         {
             Session.Clear();
-            return RedirectToAction("login");
+            return RedirectToAction("SelfRegister");
         }
         protected override void Dispose(bool disposing)
         {

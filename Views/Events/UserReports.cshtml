@@ -9,7 +9,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row">
         <div class="col-md-12">
-          
+
             <div class="card  mb-3">
                 <div class="card-header">
                     <ul class="nav nav-pills flex-column flex-md-row mb-3">
@@ -18,7 +18,7 @@
                         </li>
 
                     </ul>
-                    
+
                 </div>
                 <div class="card-body ">
                     <h5 class="card-title">GENERATE USER REPORTS</h5>
@@ -26,49 +26,238 @@
                         @*<a href="@Url.Action("Extract_General_data","Events",new { }))" class="mb-5">
                             <span class="btn btn-primary  "> GENREATE REPORT</span>
                         </a>*@
-                       
-</div>
+
+                </div>
             </div>
-            <div class="card mb-4">
-                <P>
-                    <H4 class="text-uppercase text-center" style="margin-left:2px;">  Profile Details</H4>
 
-                    <hr class="my-0" />
-                    <div class="card-body">
+        </div>
+
+        <div >
+          
+            <div class="nav-align-top mb-4">
+                <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                    <li class="nav-item">
+                        @{
+                            var error2 = Model.students.Count();
+                            if (error2 == 0)
+                            { <button type="button"
+        class="nav-link  "
+        role="tab"
+        data-bs-toggle="tab"
+        data-bs-target="#navs-pills-justified-home"
+        aria-controls="navs-pills-justified-home"
+        aria-selected="true">
+    <i class="fa-solid fa-circle-user menu-icon"></i> USERS
+    <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error2</span>
+</button>
+                            }
+                            else
+                            {
+                    <button type="button"
+                            class="nav-link  "
+                            role="tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#navs-pills-justified-home"
+                            aria-controls="navs-pills-justified-home"
+                            aria-selected="true">
+                        <i class="fa-solid fa-circle-user menu-icon"></i> USERS
+                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error2</span>
+                    </button>
+                            }
+
+
+                        }
+                        
+                    </li>
+                    <li class="nav-item">
+                        @{
+                            var error3 = Model.events.Count();
+                            if (error3 == 0)
+                            { 
+<button type="button"
+        class="nav-link "
+        role="tab"
+        data-bs-toggle="tab"
+        data-bs-target="#navs-pills-justified-profile"
+        aria-controls="navs-pills-justified-profile"
+        aria-selected="false">
+    <i class="fa-solid fa-calendar-check menu-icon "></i> TRAVEL SHEDULES
+    <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error3</span>
+
+</button>
+                            }
+                            else
+                            {
+                    <button type="button"
+                            class="nav-link "
+                            role="tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#navs-pills-justified-profile"
+                            aria-controls="navs-pills-justified-profile"
+                            aria-selected="false">
+                        <i class="fa-solid fa-calendar-check menu-icon "></i> TRAVEL SHEDULES
+                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error3</span>
+
+                    </button>
+                            }
+                            
+                        }
+                        
+                    </li>
+                    <li class="nav-item">
+                        @{
+                            var error = Model.Inquiry.Count();
+                            if (error == 0)
+                            {
+                                <button type="button"
+                                        class="nav-link "
+                                        role="tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#navs-pills-justified-messages"
+                                        aria-controls="navs-pills-justified-messages"
+                                        aria-selected="false">
+                                    <i class="fa-solid fa-headset  menu-icon"></i> INQUIRIES
+                                    <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error</span>
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button"
+                                        class="nav-link "
+                                        role="tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#navs-pills-justified-messages"
+                                        aria-controls="navs-pills-justified-messages"
+                                        aria-selected="false">
+                                    <i class="fa-solid fa-headset  menu-icon"></i> INQUIRIES
+                                    <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger">@error</span>
+
+                                </button>
+
+                            }
+
+
+                        }
+
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
+                        <P>
+                            <H4 class="text-uppercase text-center" style="margin-left:2px;">  Profile Details</H4>
+
+                            <hr class="my-0" />
+                            <div class="card-body">
+                                <div class="table-responsive text-wrap">
+                                    <table class="table table-hover  ">
+                                        <thead>
+
+
+                                            <tr>
+                                                <th>
+                                                    USERNAME
+                                                </th>
+                                                <th>
+                                                    EMAIL
+                                                </th>
+                                                <th>
+                                                    Country
+                                                </th>
+
+
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                            @foreach (var item in Model.students)
+                                            {
+                                                <tr class="">
+                                                    <td style="width:10%;">
+                                                        @Html.DisplayFor(modelItem => item.UserName)
+                                                    </td>
+
+                                                    <td style=" word-wrap:break-word;">
+                                                        @Html.DisplayFor(modelItem => item.Email)
+                                                    </td>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Country)
+                                                    </td>
+
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                    @{
+                                        var error8 = Model.students.Count();
+                                        if (error8 == 0)
+                                        { <button type="button" class="btn btn-danger m-2" style="float: right;">
+                                                Results <span class="badge badge-light">error8 </span>
+
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn btn-primary m-2" style="float: right;">
+                                                Results <span class="badge badge-light">@error8</span>
+
+                                            </button>
+                                        }
+
+
+                                    }
+                                </div>
+                            </div>
+                            <!-- /Account -->
+                    </div>
+                    <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
                         <div class="table-responsive text-wrap">
-                            <table class="table table-hover  ">
+                            <table class="table table-hover  " style="width:100%">
                                 <thead>
-
-
+                                    <P> <H4 class="text-capitalize text-center" style="margin-left:2px;">  TRAVEL SHEDULES</H4>
                                     <tr>
                                         <th>
-                                            USERNAME
+                                            STUDENT
                                         </th>
                                         <th>
-                                            EMAIL
+                                            TRAVEL DESCRIPTION
                                         </th>
                                         <th>
-                                            Country
+                                            SET OFF TIME
                                         </th>
-
-
+                                        <th>
+                                            FULL DAY
+                                        </th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    @foreach (var item in Model.students)
+                                    @foreach (var item in Model.events)
                                     {
                                         <tr class="">
                                             <td style="width:10%;">
-                                                @Html.DisplayFor(modelItem => item.UserName)
+                                                @Html.DisplayFor(modelItem => item.userid)
                                             </td>
 
-                                            <td style=" word-wrap:break-word;">
-                                                @Html.DisplayFor(modelItem => item.Email)
+                                            <td style="width:50%; word-wrap:break-word;">
+                                                @Html.DisplayFor(modelItem => item.Description)
                                             </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Start.Date)
+                                            </td>
+
 
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Country)
+                                                @if (item.IsFullDay == true)
+                                                {
+                                                    <button class="btn btn-outline-success"> Fullday</button>
+
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-outline-warning"> Given time</button>
+                                                }
                                             </td>
 
                                         </tr>
@@ -76,164 +265,95 @@
 
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                    <!-- /Account -->
-            </div>
+                            @{
+                                var error10 = Model.events.Count();
+                                if (error10 == 0)
+                                { <button type="button" class="btn btn-danger m-2" style="float: right;">
+                                        Results <span class="badge badge-light">@error10 </span>
 
-
-        </div>
-    </div>
-
-    <!-- Hoverable Table rows -->
-    <div class="card mb-4">
-        <div class="table-responsive text-wrap">
-            <table class="table table-hover  " style="width:100%">
-                <thead>
-                <P> <H4 class="text-capitalize text-center" style="margin-left:2px;">  TRAVEL SHEDULES</H4>
-                <tr>
-                    <th>
-                        STUDENT
-                    </th>
-                    <th>
-                        TRAVEL DESCRIPTION
-                    </th>
-                    <th>
-                        SET OFF TIME
-                    </th>
-                    <th>
-                        FULL DAY
-                    </th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @foreach (var item in Model.events)
-                    {
-                        <tr class="">
-                            <td style="width:10%;">
-                                @Html.DisplayFor(modelItem => item.userid)
-                            </td>
-
-                            <td style="width:50%; word-wrap:break-word;">
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Start.Date)
-                            </td>
-
-
-                            <td>
-                                @if (item.IsFullDay == true)
-                                {
-                                    <button class="btn btn-outline-success"> Fullday</button>
-
+                                    </button>
                                 }
                                 else
                                 {
-                                    <button class="btn btn-outline-warning"> Given time</button>
+                                    <button type="button" class="btn btn-primary m-2" style="float: right;">
+                                        Results <span class="badge badge-light">@error10</span>
+
+                                    </button>
                                 }
-                            </td>
 
-                        </tr>
-                    }
 
-                </tbody>
-            </table>
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel" ">
+                        <div class="table-responsive text-wrap">
+
+
+                            <table class="table table-hover  " style="width:100%">
+                                <thead>
+                                    <P>
+                                        <H4 class="text-capitalize text-center" style="margin-left:2px;"> INQUIRIES</H4>
+
+                                        </th>
+                                    <tr>
+                                        <th>
+                                            STUDENT
+                                        </th>
+                                        <th>
+                                            INQUIRY
+                                        </th>
+                                        <th>
+                                            DATE POSTED
+                                        </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                    @foreach (var item in Model.Inquiry)
+                                    {
+
+                                        <tr class="">
+                                            <td style="width:10%;">
+                                                @Html.DisplayFor(modelItem => item.UserId)
+                                            </td>
+
+                                            <td style="width:50%; word-wrap:break-word;">
+                                                @Html.DisplayFor(modelItem => item.inquirry)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Dateposteed)
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                            @{
+                                var error7 = Model.Inquiry.Count();
+                                if (error7 == 0)
+                                { <button type="button" class="btn btn-danger m-2" style="float: right;">
+                                        Results <span class="badge badge-light">@error7 </span>
+
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-primary m-2" style="float: right;">
+                                        Results <span class="badge badge-light">@error7</span>
+
+                                    </button>
+                                }
+
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
-
-    <div class="card mb-4">
-        <div class="table-responsive text-wrap">
-           
-
-            <table class="table table-hover  " style="width:100%">
-                <thead>
-                    <P> <H4 class="text-capitalize text-center" style="margin-left:2px;"> INQUIRIES</H4>
-
-                </th>
-                    <tr>
-                        <th>
-                            STUDENT
-                        </th>
-                        <th>
-                            INQUIRY
-                        </th>
-                        <th>
-                            DATE POSTED
-                        </th>
-
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @foreach (var item in Model.Inquiry)
-                    {
-
-                        <tr class="">
-                            <td style="width:10%;">
-                                @Html.DisplayFor(modelItem => item.UserId)
-                            </td>
-
-                            <td style="width:50%; word-wrap:break-word;">
-                                @Html.DisplayFor(modelItem => item.inquirry)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Dateposteed)
-                            </td>
-
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    @*<div class="card mb-4">
-        <div class="table-responsive text-wrap">
-            <table class="table table-hover  " style="width:100%">
-                <thead>
-                    <tr> <H4 class="text-capitalize text-center"> @Session["userid"]'s RESPONSES TO INQUIRIES</H4></tr>
-
-                    <tr>
-                        <th>
-                            INQUIRY
-                        </th>
-                        <th>
-                            RESPONSE
-                        </th>
-                        <th>
-                            DATE REPLIED
-                        </th>
-
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @foreach (var item in Model.Response)
-                    {
-
-                        <tr class="">
-                            <td style="width:30%;">
-                                @Html.DisplayFor(modelItem => item.Inquiry)
-                            </td>
-
-                            <td style="width:50%; word-wrap:break-word;">
-                                @Html.DisplayFor(modelItem => item.Response1)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DatetimeOfReply)
-                            </td>
-
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
-        </div>
-    </div>*@
-
-
 </div>
 

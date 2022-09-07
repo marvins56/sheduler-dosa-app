@@ -40,7 +40,6 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
     <link href="~/Auth/register.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -150,8 +149,8 @@
 
                     <div class="form-group">
                         <label><i class="fa-solid fa-envelope-circle-check pl-2"></i> </label>
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "", Placeholder = "Email" } })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "", Placeholder = "Password",Type="password" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                     <a href="#">Forgot your password?</a>
                     <div class="form-group form-button">
