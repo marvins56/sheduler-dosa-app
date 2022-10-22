@@ -4,25 +4,33 @@
     ViewBag.Title = "lOGIN";
     Layout = null;
 }
-@if (TempData["logineror"] != null)
-{
-    <script>
-     swal({
-        title: "ERROR!",
-  text: "@TempData["logineror"]",
-  icon: "error"
-        });</script>
-}
+@*@if (TempData["logineror"] != null)
+    {
+        <script>
+         swal({
+            title: "ERROR!",
+      text: "@TempData["logineror"]",
+      icon: "error"
+            });</script>
+    }*@
 
 @if (TempData["error"] != null)
 {
-    <script>
-     swal({
-        title: "ERROR!",
-  text: "@TempData["error"]",
-  icon: "warning"
-        });</script>
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="..." />
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+        </div>
+        <div class="toast-body">@TempData["error"]</div>
+    </div>
+
 }
+
 @if (TempData["success"] != null)
 {
     <script>
@@ -37,23 +45,16 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="~/Content/loader.css" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">*@
+
     <link href="~/Auth/register.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
-        <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
-            <div class="uil-default-css">
-                <div class="loader">Loading...</div>
-                <div id="loader"></div>
-            </div>
-            <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
-        </div>
-        <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
-    </div>
+  
     <div class="main" style="height:500px; margin-top:-100px;">
 
         <div class="container" id="container">
@@ -63,7 +64,7 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    <h1>Create Account</h1>
+                    <h4>Create Account</h4>
 
                     <div class="form-group">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -149,7 +150,7 @@
 
                     <div class="form-group">
                         <label><i class="fa-solid fa-envelope-circle-check pl-2"></i> </label>
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "", Placeholder = "Password",Type="password" } })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "", Placeholder = "Password", Type = "password" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                     <a href="#">Forgot your password?</a>
@@ -176,21 +177,21 @@
         </div>
     </div>
 
-    <script>
-        var showLoader = function (text) {
-            $('#resultLoading').show();
-            $('#resultLoading').find('.loader-text').html(text);
-        };
+    @*<script>
+            var showLoader = function (text) {
+                $('#resultLoading').show();
+                $('#resultLoading').find('.loader-text').html(text);
+            };
 
-        jQuery(document).ready(function () {
-            jQuery(window).on("beforeunload ", function () {
-                showLoader('Loading, please wait...');
+            jQuery(document).ready(function () {
+                jQuery(window).on("beforeunload ", function () {
+                    showLoader('Loading, please wait...');
+                });
             });
-        });
 
-        $("#loader").fadeOut(1000);
+            $("#loader").fadeOut(1000);
 
-    </script>
+        </script>*@
     <script>
 
         const signUpButton = document.getElementById('signUp');
@@ -205,7 +206,10 @@
             container.classList.remove("right-panel-active");
         });
     </script>
+  
+
     @section Scripts {
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     }
 </body>

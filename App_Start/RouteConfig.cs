@@ -16,7 +16,7 @@ namespace sheduler
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Users", action = "selfRegister", id = UrlParameter.Optional }
+                defaults: new { controller = "Users", action = "SelfRegister", id = UrlParameter.Optional }
             );
         }
     }

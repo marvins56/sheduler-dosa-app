@@ -44,6 +44,7 @@ namespace sheduler.Controllers
                 var result = from s in db.Responses
                             
                              select s;
+                result = db.Responses.Include(r => r.Inquiry);
                 if (!String.IsNullOrEmpty(searchString))
                 {
                     result = result.Where(s => s.Response1.Contains(searchString)
@@ -67,7 +68,7 @@ namespace sheduler.Controllers
 
                 int pageSize = 6;
                 int pageNumber = (page ?? 1);
-                result = db.Responses.Include(r => r.Inquiry);
+               
                 return View(result.ToPagedList(pageNumber, pageSize));
             }
             catch (Exception E)
@@ -141,7 +142,7 @@ namespace sheduler.Controllers
                         TempData["error"] = "ERROR VALIDATING SENDER DETAILS";
                     }
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index","Inquiries");
                 }
 
             }catch(Exception e)

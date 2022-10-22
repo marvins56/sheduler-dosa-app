@@ -2,7 +2,7 @@
 
 @using PagedList.Mvc;
 @using PagedList;
-@{
+@{ 
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/adminlayout.cshtml";
 }
@@ -28,6 +28,7 @@
          icon: "error"
         });</script>
         }
+
         if (Session["userroles"].ToString() == "ADMINISTRATOR" || Session["userroles"].ToString() == "SUPER ADMINISTRATOR")
         {
             <div class="container-xxl flex-grow-1 container-p-y">
